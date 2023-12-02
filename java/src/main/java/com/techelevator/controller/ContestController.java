@@ -1,13 +1,12 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.ContestDao;
+import com.techelevator.dao.ParticipantDao;
 import com.techelevator.model.Contest;
+import com.techelevator.model.Participant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @PreAuthorize("isAuthenticated")
@@ -17,11 +16,20 @@ public class ContestController {
 
     @Autowired
     private ContestDao contestDao;
+    @Autowired
+    private ParticipantDao participantDao;
 
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/contests", method = RequestMethod.GET)
     public List<Contest> listAllContests() {
         return contestDao.fetchListOfContests();
+    }
+
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/contests/{id}", method = RequestMethod.GET)
+    public List<Participant> listParticipantByContestId(@PathVariable int id){
+        return participantDao.fetchListOfParticipantByContestId(id);
     }
 
 
