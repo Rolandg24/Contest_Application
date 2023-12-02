@@ -7,7 +7,7 @@ public class Contest {
     private int contestId;
     private String contestName;
     private String contestDescription;
-    private LocalDate dateAndTime;
+    private LocalDate dateAndTime; // todo local date doesn't transfer time
     private String contestLocation;
 
     // constructors
