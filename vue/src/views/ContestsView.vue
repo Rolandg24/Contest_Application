@@ -1,5 +1,8 @@
 <template>
+    <div>
+    <router-link v-bind:to="{name: 'NewContest'}">Add Contest</router-link>
     <contests-vue />
+</div>
 </template>
 
 <script>
