@@ -35,7 +35,7 @@ public class JdbcContestDao implements ContestDao{
         }
         return contestList;
     }
-
+    @Override
     public Contest createContest(Contest contest) {
         Contest contestToCreate = contest;
         String sql = "INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location)\n" +
