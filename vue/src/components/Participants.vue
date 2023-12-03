@@ -1,6 +1,6 @@
 <template>
-    <div>
-  <div class="participants" v-for="participant in participants" v-bind:key="participant.participantId">
+    <div class="ParticipantInfo">
+  <div class="ParticipantContainer" v-for="participant in participants" v-bind:key="participant.participantId">
     <h1>{{ participant.participantName }}</h1>
     <p>Description: {{ participant.participantDescription }}</p>
     <p>Member Count: {{ participant.memberCount }}</p>
@@ -29,6 +29,19 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.ParticipantInfo {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFF7D4;
+}
 
+.ParticipantContainer {
+
+    margin: 4px;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #FFD95A;
+}
 </style>

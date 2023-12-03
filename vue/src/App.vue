@@ -8,3 +8,21 @@
     <router-view />
   </div>
 </template>
+<style scoped>
+#nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#capstone-app {
+  background-color: #FFF7D4;
+}
+
+body {
+background-color: #FFF7D4;
+}
+
+
+
+</style>
