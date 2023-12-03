@@ -1,10 +1,15 @@
 <template>
 <div>
+  
   <div v-for="contest in contests" v-bind:key="contest.contestId">
     <h1>{{ contest.contestName }}</h1>
     <p>{{ contest.contestLocation }}</p>
     <p>{{ contest.dateAndTime }}</p>
+    <div>
+        <router-link v-bind:to="{ name: 'participants', params: {contestId: contest.contestId} }">Participants</router-link>
+    </div>
   </div>
+
 </div>
 </template>
 

@@ -10,7 +10,7 @@ export default{
         return axios.get('/contests');
     },
 
-    fetchParticipantsById() {
+    fetchParticipantsById(contestId) {
         return http.get(`/contests/${contestId}`);
     }
 }
