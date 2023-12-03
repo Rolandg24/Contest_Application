@@ -15,6 +15,6 @@ export default{
     },
 
     createNewContest(contest){
-        return http.post('/contests', contest)
+        return http.post('/contests', contest);
     }
 }

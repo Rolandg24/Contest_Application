@@ -41,10 +41,10 @@ export default {
         return {
 
             newContest: {
-                name: '',
-                description: '',
+                contestName: '',
+                contestDescription: '',
                 dateAndTime: '',
-                location: '',
+                contestLocation: '',
             }
 
 
@@ -56,11 +56,12 @@ export default {
     },
     methods: {
         submitForm() {
-            console.log(this.newContest);
+            console.log("button works");
             ContestsService.createNewContest(this.newContest)
                 .then(response => {
-                    if (response.status === 201) {
-                                               
+                    console.log('hello?')
+                    if (response.status == 201) {
+                        console.log('got response');                    
                         this.$router.push({ name: 'contests' })
                     }
                 }).catch(error => {
