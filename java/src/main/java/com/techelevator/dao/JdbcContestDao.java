@@ -35,6 +35,24 @@ public class JdbcContestDao implements ContestDao{
         }
         return contestList;
     }
+
+    public Contest createContest(Contest contest) {
+        Contest contestToCreate = contest;
+        String sql = "INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location)\n" +
+                "VALUES (?, ?, ?, ?) RETURNING contest_id;";
+
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, contest.getContestName(), contest.getContestDescription(), contest.getDateAndTime(), contest.getContestLocation());
+            if (result.next()) {
+                contestToCreate.setContestId(result.getInt("contest_id"));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database or Server", e);
+        }
+        return contestToCreate;
+
+    }
+
     private Contest mapRowToContest(SqlRowSet rowSet) {
         Contest contest = new Contest();
         contest.setContestId(rowSet.getInt("contest_id"));
