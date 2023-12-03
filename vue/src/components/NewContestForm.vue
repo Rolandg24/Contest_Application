@@ -3,14 +3,14 @@
         <!-- Name Field -->
         <div class="mb-3">
             <label for="inputName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="newContest.name">
+            <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="newContest.contestName">
         </div>
 
         <!-- Description Field -->
         <div class="mb-3">
             <label for="inputDescription" class="form-label">Description</label>
             <textarea class="form-control" id="inputDescription" rows="3" placeholder="Enter description"
-                v-model="newContest.description"></textarea>
+                v-model="newContest.contestDescription"></textarea>
         </div>
 
         <!-- Date and Time Field -->
@@ -24,7 +24,7 @@
         <div class="mb-3">
             <label for="inputLocation" class="form-label">Location</label>
             <input type="text" class="form-control" id="inputLocation" placeholder="Enter location"
-                v-model="newContest.location">
+                v-model="newContest.contestLocation">
         </div>
 
         <!-- Submit Button -->
