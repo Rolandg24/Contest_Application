@@ -11,7 +11,7 @@ export default{
     },
 
     fetchParticipantsById(contestId) {
-        return http.get(`/contests/${contestId}`);
+        return http.get(`/contests/${contestId}/participants`);
     },
 
     createNewContest(contest){

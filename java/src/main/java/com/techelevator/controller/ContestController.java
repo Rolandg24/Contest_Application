@@ -36,7 +36,7 @@ public class ContestController {
     }
 
     @PreAuthorize("permitAll")
-    @RequestMapping(path = "/contests/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/contests/{id}/participants", method = RequestMethod.GET)
     public List<Participant> listParticipantByContestId(@PathVariable int id){
         return participantDao.fetchListOfParticipantByContestId(id);
     }
