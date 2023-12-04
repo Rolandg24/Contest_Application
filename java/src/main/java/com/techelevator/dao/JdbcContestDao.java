@@ -75,6 +75,8 @@ public class JdbcContestDao implements ContestDao{
         return contest;
     }
 
+
+    //TODO clean up
     @Override
     public int deleteContest(int contestId) {
 
