@@ -9,6 +9,7 @@ import RegisterView from '../views/RegisterView.vue';
 import ContestsView from '../views/ContestsView.vue';
 import ParticipantsView from '../views/ParticipantsView.vue';
 import NewContestView from '../views/NewContestView.vue';
+import UpdateContestView from '../views/UpdateContestView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -71,6 +72,14 @@ const routes = [
     path: '/contests/newContest',
     name: 'NewContest',
     component: NewContestView,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/contests/:contestId/update',
+    name: 'UpdateContest',
+    component: UpdateContestView,
     meta: {
       requiresAuth: false
     }
