@@ -49,7 +49,7 @@ public class ContestController {
 
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/contests/{id}", method = RequestMethod.DELETE)
-    public boolean deleteContest(@PathVariable int id) {
+    public int deleteContest(@PathVariable int id) {
         return contestDao.deleteContest(id);
     }
 

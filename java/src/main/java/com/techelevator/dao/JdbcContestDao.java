@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Contest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -75,7 +76,7 @@ public class JdbcContestDao implements ContestDao{
     }
 
     @Override
-    public boolean deleteContest(int contestId) {
+    public int deleteContest(int contestId) {
 
         String sql = "START TRANSACTION; " +
                      "DELETE FROM participants WHERE contest_id = ?; " +
@@ -86,22 +87,25 @@ public class JdbcContestDao implements ContestDao{
 //        String sqlDeleteContest = "DELETE FROM contests WHERE contest_id = ?";
 //        int rowCountParticipants = 0;
 //        int rowCountContests = 0;
-        int rowCount = 0;
-        boolean isDeleted = false;
+//        int rowCount = 0;
+//        boolean isDeleted = false;
         try {
 //            rowCountParticipants = jdbcTemplate.update(sqlDeleteParticipants, contestId);
 //            rowCountContests = jdbcTemplate.update(sqlDeleteContest,contestId);
-            rowCount = jdbcTemplate.update(sql, contestId, contestId);
-            if (rowCount > 0) {
-                isDeleted = true;
-            }
+            return jdbcTemplate.update(sql, contestId, contestId);
+//            if (rowCount > 0) {
+//                isDeleted = true;
+//            }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
-        }
-        if (isDeleted == false) {
-            throw new DaoException("Error. Contest was not deleted");
-        }
-        return isDeleted;
+        
+        } catch (DataIntegrityViolationException e) {
+        throw new DaoException("Error deleting contest" + contestId, e);
+    }
+//        if (isDeleted == false) {
+//            throw new DaoException("Error. Contest was not deleted");
+//        }
+//        return isDeleted;
     }
 
     private Contest mapRowToContest(SqlRowSet rowSet) {

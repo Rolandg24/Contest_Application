@@ -12,7 +12,7 @@ public interface ContestDao {
 
     public Contest updateContest(Contest contest);
 
-    public boolean deleteContest(int contestId);
+    public int deleteContest(int contestId);
 
 
 }
