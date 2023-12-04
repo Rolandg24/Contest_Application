@@ -65,6 +65,11 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
         compareContests(UPDATED_CONTEST, returnedContest);
     }
 
+    @Test
+    public void delete_Contest_Deletes_Contest() {
+        Assert.fail();
+    }
+
     private void compareContests(Contest actual, Contest expected) {
         Assert.assertEquals(actual.getContestId(), expected.getContestId());
         Assert.assertEquals(actual.getContestName(), expected.getContestName());
