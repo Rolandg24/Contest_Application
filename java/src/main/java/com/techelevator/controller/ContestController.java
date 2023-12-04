@@ -28,6 +28,13 @@ public class ContestController {
         return contestDao.fetchListOfContests();
     }
     @PreAuthorize("permitAll")
+    @RequestMapping(path = "/contests/{id}", method = RequestMethod.GET)
+    public Contest FetchContestById(@PathVariable int id) {
+        return contestDao.fetchContestById(id);
+    }
+
+
+    @PreAuthorize("permitAll")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/contests", method = RequestMethod.POST)
     public Contest addNewContest(@RequestBody Contest contestToAdd) {

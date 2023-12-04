@@ -14,5 +14,7 @@ public interface ContestDao {
 
     public int deleteContest(int contestId);
 
+    public Contest fetchContestById(int id);
+
 
 }
