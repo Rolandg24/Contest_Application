@@ -20,6 +20,11 @@ export default{
 
     deleteContest(contestId){
         return http.delete(`/contests/${contestId}`);
+    },
+
+    fetchContestById(contestId){
+        return http.get(`/contests/${contestId}`);
     }
 
+    
 }

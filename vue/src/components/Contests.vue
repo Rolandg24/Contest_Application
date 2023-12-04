@@ -13,8 +13,7 @@
                 <a href="#">Preview Schedule</a> <!--TO DO DECIDE NEW WINDOW OR POPULATE INSIDE CONTAINER-->
             </div>
             <div>
-                <router-link
-                    v-bind:to="{ name: 'UpdateContest', params: { contestId: contest.contestId } }">Update</router-link>
+                <a href="#" v-on:click="$router.push({ name: 'UpdateContest', params: {contestId: contestId} })">Update</a>
             </div>
             <div>
                 <a href="#" v-on:click="deleteContest(contest.contestId)">Delete</a>
