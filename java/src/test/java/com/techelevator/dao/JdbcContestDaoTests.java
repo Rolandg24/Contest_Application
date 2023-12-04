@@ -19,6 +19,9 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
     private final Contest TEST_CONTEST = new Contest();
     private final Contest UPDATED_CONTEST = new Contest();
     private final int EXPECTED_ID = 1; //set to a contest id that exists
+    private final int ID_TO_FETCH = 5;
+    private final int EXPECTED_ID_FROM_FETCH = 5;
+
     @Before
     public void setup() {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -36,6 +39,7 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
         UPDATED_CONTEST.setContestName("UPDATED NAME");
         UPDATED_CONTEST.setDateAndTime(LocalDate.ofEpochDay(2025-05-05));
         UPDATED_CONTEST.setContestId(EXPECTED_ID);
+
     }
 
     @Test
@@ -43,7 +47,11 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
         List<Contest> returnedList = sut.fetchListOfContests();
         Assert.assertEquals(NUMBER_OF_CONTESTS, returnedList.size());
     }
-
+    @Test
+    public void fetch_contest_by_id(){
+        Contest returnedContest = sut.fetchContestById(ID_TO_FETCH);
+        Assert.assertEquals(EXPECTED_ID_FROM_FETCH, returnedContest.getContestId());
+    }
     @Test
     public void create_Contest_Creates_Contest() {
         Contest returnedContest = sut.createContest(TEST_CONTEST);

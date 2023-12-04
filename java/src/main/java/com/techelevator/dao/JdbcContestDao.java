@@ -38,6 +38,24 @@ public class JdbcContestDao implements ContestDao{
         }
         return contestList;
     }
+
+    @Override
+    public Contest fetchContestById(int id) {
+        Contest contest = null;
+
+        String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location " +
+                "FROM contests " +
+                "WHERE contest_id = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            if (results.next()) {
+                contest = mapRowToContest(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database or Server", e);
+        }
+        return contest;
+    }
     @Override
     public Contest createContest(Contest contest) {
         Contest contestToCreate = contest;
