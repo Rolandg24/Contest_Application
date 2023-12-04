@@ -17,10 +17,26 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
     //test variables
     private final int NUMBER_OF_CONTESTS = 25;
     private final Contest TEST_CONTEST = new Contest();
+    private final Contest UPDATED_CONTEST = new Contest();
+    //set to a contest id that exists
+    private final int EXPECTED_ID = 1;
     @Before
     public void setup() {
         jdbcTemplate = new JdbcTemplate(dataSource);
         sut = new JdbcContestDao(jdbcTemplate);
+
+        //set TEST_CONTEST properties
+        TEST_CONTEST.setContestDescription("TEST DESCRIPTION");
+        TEST_CONTEST.setContestLocation("TEST LOCATION");
+        TEST_CONTEST.setContestName("TEST NAME");
+        TEST_CONTEST.setDateAndTime(LocalDate.ofEpochDay(2025-05-05));
+
+        //set UPDATED_CONTEST properties and id to EXPECTED_ID
+        UPDATED_CONTEST.setContestDescription("UPDATED DESCRIPTION");
+        UPDATED_CONTEST.setContestLocation("UPDATED LOCATION");
+        UPDATED_CONTEST.setContestName("UPDATED NAME");
+        UPDATED_CONTEST.setDateAndTime(LocalDate.ofEpochDay(2025-05-05));
+        UPDATED_CONTEST.setContestId(EXPECTED_ID);
     }
 
     @Test
@@ -31,16 +47,23 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
 
     @Test
     public void create_Contest_Creates_Contest() {
-        TEST_CONTEST.setContestDescription("TEST DESCRIPTION");
-        TEST_CONTEST.setContestLocation("TEST LOCATION");
-        TEST_CONTEST.setContestName("TEST NAME");
-        TEST_CONTEST.setDateAndTime(LocalDate.ofEpochDay(2025-05-05));
-
         Contest returnedContest = sut.createContest(TEST_CONTEST);
         TEST_CONTEST.setContestId(returnedContest.getContestId());
         compareContests(returnedContest, TEST_CONTEST);
     }
 
+    @Test
+    public void update_Contest_Updates_Contest() {
+        //Change properties of TEST_CONTEST and set id to EXPECTED_ID
+        TEST_CONTEST.setContestDescription("UPDATED DESCRIPTION");
+        TEST_CONTEST.setContestLocation("UPDATED LOCATION");
+        TEST_CONTEST.setContestName("UPDATED NAME");
+        TEST_CONTEST.setContestId(EXPECTED_ID);
+
+        Contest returnedContest = sut.updateContest(TEST_CONTEST);
+        //compare returnedContest to UPDATED_CONTEST
+        compareContests(UPDATED_CONTEST, returnedContest);
+    }
 
     private void compareContests(Contest actual, Contest expected) {
         Assert.assertEquals(actual.getContestId(), expected.getContestId());
