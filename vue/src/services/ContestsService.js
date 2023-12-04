@@ -16,5 +16,9 @@ export default{
 
     createNewContest(contest){
         return http.post('/contests', contest);
+    },
+
+    deleteContest(contestId){
+        return http.delete(`/contests/${contestId}`);
     }
 }

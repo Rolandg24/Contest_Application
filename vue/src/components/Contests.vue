@@ -9,6 +9,17 @@
                 <router-link
                     v-bind:to="{ name: 'participants', params: { contestId: contest.contestId } }">Participants</router-link>
             </div>
+            <div>
+                <a href="#">Preview Schedule</a> <!--TO DO DECIDE NEW WINDOW OR POPULATE INSIDE CONTAINER-->
+            </div>
+            <div>
+                <a href="#">Update Contest</a>
+            </div>
+            <div>
+                <a href="#" v-on:click="deleteContest(contest.contestId)">Delete</a>
+            </div>
+
+
         </div>
 
     </div>
@@ -19,7 +30,7 @@ import ContestsService from '../services/ContestsService';
 export default {
     data() {
         return {
-            contests: []
+            contests: [],
         }
     },
 
@@ -29,6 +40,34 @@ export default {
 
             console.log(response.data)
         })
+    },
+    methods: {
+        deleteContest(contestId) {
+            console.log(contestId)
+            if (confirm("Are you sure you want to delete this message? This action cannot be undone.")) {
+                ContestsService.deleteContest(contestId)
+                    .then(response => {
+                        if (response.status === 200) {
+                            this.$router.push({ name: 'contests' });
+                        }
+                    })
+                    .catch(error => this.handleErrorResponse(error, "deleting"));
+            }
+        },
+        handleErrorResponse(error, verb) {
+            if (error.response) {
+                if (error.response.status == 404) {
+                    this.$router.push({ name: 'NotFoundView' });
+                } else {
+                    this.$store.commit('SET_NOTIFICATION',
+                        `Error ${verb} contest response received was "${error.response.statusText}".`);
+                }
+            } else if (error.request) {
+                this.$store.commit('SET_NOTIFICATION', `Error ${verb} contest. Server could not be reached.`);
+            } else {
+                this.$store.commit('SET_NOTIFICATION', `Error ${verb} contest. Request could not be created.`);
+            }
+        },
     }
 }
 </script>
@@ -48,6 +87,4 @@ export default {
     padding: 10px;
     background-color: #FFD95A;
 }
-
-
 </style>
