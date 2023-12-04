@@ -47,6 +47,11 @@ public class ContestController {
         return contestDao.updateContest(contestToUpdate);
     }
 
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/contests/{id}", method = RequestMethod.DELETE)
+    public boolean deleteContest(@PathVariable int id) {
+        return contestDao.deleteContest(id);
+    }
 
 
 }
