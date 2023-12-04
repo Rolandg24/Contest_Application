@@ -47,11 +47,6 @@ export default {
                 contestLocation: '',
             }
 
-
-
-
-
-
         }
     },
     methods: {
