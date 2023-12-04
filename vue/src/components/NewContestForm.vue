@@ -3,7 +3,8 @@
         <!-- Name Field -->
         <div class="mb-3">
             <label for="inputName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="newContest.contestName">
+            <input type="text" class="form-control" id="inputName" placeholder="Enter name"
+                v-model="newContest.contestName">
         </div>
 
         <!-- Description Field -->
@@ -41,42 +42,55 @@ export default {
         return {
 
             newContest: {
-                contestName: '',
-                contestDescription: '',
-                dateAndTime: '',
-                contestLocation: '',
-            }
+                contestName: this.contest.contestName,
+                contestDescription: this.contest.contestDescription,
+                dateAndTime: this.contest.dateAndTime,
+                contestLocation: this.contest.contestLocation,
+            },
+
 
         }
     },
     methods: {
         submitForm() {
-            console.log("button works");
-            ContestsService.createNewContest(this.newContest)
-                .then(response => {
-                    console.log('hello?')
-                    if (response.status == 201) {
-                        console.log('got response');                    
-                        this.$router.push({ name: 'contests' })
-                    }
-                }).catch(error => {
-                    this.handleErrorResponse(error);
+            if (this.newContest.contestId === 0) {
 
-                });
+                ContestsService.createNewContest(this.newContest)
+                    .then(response => {
+                        console.log('hello?')
+                        if (response.status == 201) {
+                            this.$router.push({ name: 'contests' })
+                        }
+                    }).catch(error => {
+                        this.handleErrorResponse(error);
 
+                    });
+
+            } else {
+
+                ContestsService.UpdateContest(this.newContest)
+                    .then(response => {
+                        if (response.status === 200) {
+                            this.$router.push({ name: 'contests' });
+                        }
+                    }).catch(error => this.handleErrorResponse(error, "updating"));
+            }
         },
-        handleErrorResponse(error) {
-            console.log(error);
+        handleErrorResponse(error, verb) {
             if (error.response) {
-                this.errorMsg = 'Error adding new contest. Error: ' + error.response.status;
-            }
-            else if (error.request) {
-                this.errorMsg = 'Error adding new contest. Error: server unavailable';
-            }
-            else {
-                this.errorMsg = 'shits broke';
+                if (error.response.status == 404) {
+                    this.$router.push({ name: 'NotFoundView' });
+                } else {
+                    this.$store.commit('SET_NOTIFICATION',
+                        `Error ${verb} contest. Response received was "${error.response.statusText}".`);
+                }
+            } else if (error.request) {
+                this.$store.commit('SET_NOTIFICATION', `Error ${verb} contest. Server could not be reached.`);
+            } else {
+                this.$store.commit('SET_NOTIFICATION', `Error ${verb} contest. Request could not be created.`);
             }
         }
+
     }
 }
 </script>

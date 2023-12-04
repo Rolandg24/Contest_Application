@@ -24,7 +24,12 @@ export default{
 
     fetchContestById(contestId){
         return http.get(`/contests/${contestId}`);
+    },
+
+    updateContest(contest){
+        return http.put(`/contest/${contest.contestId}`, contest);
     }
+    
 
     
 }

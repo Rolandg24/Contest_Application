@@ -1,13 +1,13 @@
 <template>
-  <update-contest-form v-bind:contest="contest" />
+  <new-contest-form v-bind:contest="contest" />
 </template>
 
 <script>
-import UpdateContestForm from '../components/UpdateContestForm.vue';
+import NewContestForm from '../components/NewContestForm.vue';
 import ContestsService from '../services/ContestsService';
 export default {
   components: {
-    UpdateContestForm
+    NewContestForm
   },
   data() {
     return {
