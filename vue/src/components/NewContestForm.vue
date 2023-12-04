@@ -68,7 +68,7 @@ export default {
 
             } else {
 
-                ContestsService.UpdateContest(this.newContest)
+                ContestsService.updateContest(this.newContest)
                     .then(response => {
                         if (response.status === 200) {
                             this.$router.push({ name: 'contests' });
