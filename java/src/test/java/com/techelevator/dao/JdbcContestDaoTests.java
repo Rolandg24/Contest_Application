@@ -18,8 +18,7 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
     private final int NUMBER_OF_CONTESTS = 25;
     private final Contest TEST_CONTEST = new Contest();
     private final Contest UPDATED_CONTEST = new Contest();
-    //set to a contest id that exists
-    private final int EXPECTED_ID = 1;
+    private final int EXPECTED_ID = 1; //set to a contest id that exists
     @Before
     public void setup() {
         jdbcTemplate = new JdbcTemplate(dataSource);

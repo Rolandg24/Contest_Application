@@ -24,8 +24,8 @@ public class JdbcContestDao implements ContestDao{
     @Override
     public List<Contest> fetchListOfContests() {
         List<Contest> contestList = new ArrayList<>();
-        String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location FROM contests";
-
+        String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location " +
+                     "FROM contests";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
@@ -40,11 +40,12 @@ public class JdbcContestDao implements ContestDao{
     @Override
     public Contest createContest(Contest contest) {
         Contest contestToCreate = contest;
-        String sql = "INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location)\n" +
-                "VALUES (?, ?, ?, ?) RETURNING contest_id;";
-
+        String sql = "INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location)" +
+                     "VALUES (?, ?, ?, ?) " +
+                     "RETURNING contest_id;";
         try {
-            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, contest.getContestName(), contest.getContestDescription(), contest.getDateAndTime(), contest.getContestLocation());
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, contest.getContestName(), contest.getContestDescription(),
+                                                            contest.getDateAndTime(), contest.getContestLocation());
             if (result.next()) {
                 contestToCreate.setContestId(result.getInt("contest_id"));
             }
@@ -57,8 +58,9 @@ public class JdbcContestDao implements ContestDao{
 
     @Override
     public Contest updateContest(Contest contest) {
-        String sql = "UPDATE contests SET contest_name = ?, contest_description = ?, contest_date_time = ?, contest_location = ?" +
-                "WHERE contest_id = ?";
+        String sql = "UPDATE contests " +
+                     "SET contest_name = ?, contest_description = ?, contest_date_time = ?, contest_location = ?" +
+                     "WHERE contest_id = ?";
         int rowCount = NOT_UPDATED;
         try {
         rowCount = jdbcTemplate.update(sql, contest.getContestName(), contest.getContestDescription(), contest.getDateAndTime(),
@@ -66,11 +68,9 @@ public class JdbcContestDao implements ContestDao{
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
-
         if (rowCount < UPDATED) {
             throw new DaoException("Error. Contest was not updated");
         }
-
         return contest;
     }
 
@@ -90,11 +90,9 @@ public class JdbcContestDao implements ContestDao{
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
-
         if (!isDeleted) {
             throw new DaoException("Error. Contest was not deleted");
         }
-
         return isDeleted;
     }
 

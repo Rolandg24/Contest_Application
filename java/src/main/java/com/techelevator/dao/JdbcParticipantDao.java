@@ -22,8 +22,9 @@ public class JdbcParticipantDao implements ParticipantDao {
     public List<Participant> fetchListOfParticipantByContestId(int contestId) {
         List<Participant> participants = new ArrayList<>();
 
-        String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id FROM participants\n" +
-                "WHERE contest_id = ?;";
+        String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id " +
+                     "FROM participants" +
+                     "WHERE contest_id = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, contestId);
             while (results.next()) {
@@ -33,7 +34,6 @@ public class JdbcParticipantDao implements ParticipantDao {
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
-
         return participants;
     }
     private Participant mapRowToParticipant(SqlRowSet rowSet) {

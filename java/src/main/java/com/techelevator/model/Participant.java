@@ -23,7 +23,7 @@ public class Participant {
         this.score = score;
         this.contestId = contestId;
     }
-//default
+    //default
     public Participant(){
 
     }
