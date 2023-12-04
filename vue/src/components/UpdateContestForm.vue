@@ -38,20 +38,15 @@ import ContestsService from '../services/ContestsService';
 export default {
     data() {
         return {
-
             newContest: {
                 contestName: '',
                 contestDescription: '',
                 dateAndTime: '',
                 contestLocation: '',
             }
-
-
-
-
-
-
-        }
+        //    contestId: this.$route.params.contestId,
+        //    contestToUpdate: this.$store.methods.grabContestFromStoreById(this.contestId)
+       }     
     },
     methods: {
         submitForm() {
@@ -81,6 +76,7 @@ export default {
                 this.errorMsg = 'shits broke';
             }
         }
+
     }
 }
 </script>

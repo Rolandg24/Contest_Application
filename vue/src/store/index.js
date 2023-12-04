@@ -29,6 +29,13 @@ export function createStore(currentToken, currentUser) {
         state.contests = data;
       }
     },
+    // methods: {
+    //   grabContestFromStoreById(contestId) {
+    //     return this.contests.filter((contest)=>{
+    //       return contest.contestId === contestId;
+    //     })
+    // }
+    // }
   });
   return store;
 }
