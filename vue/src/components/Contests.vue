@@ -1,7 +1,7 @@
 <template>
     <div class="ContestInfo">
 
-        <div class="ContestContainer" v-for="contest in contests" v-bind:key="contest.contestId">
+        <div class="ContestContainer" v-for="contest in $store.state.contests" v-bind:key="contest.contestId">
             <h1>{{ contest.contestName }}</h1>
             <p>{{ contest.contestLocation }}</p>
             <p>{{ contest.dateAndTime }}</p>
@@ -29,17 +29,13 @@
 import ContestsService from '../services/ContestsService';
 export default {
     data() {
-        return {
-            contests: [],
-        }
+        // return {
+        //     contests: [],
+        // }
     },
 
     created() {
-        ContestsService.fetchContests().then((response) => {
-            this.contests = response.data;
-
-            console.log(response.data)
-        })
+        this.fetchContests();
     },
     methods: {
         deleteContest(contestId) {
@@ -48,12 +44,28 @@ export default {
                 ContestsService.deleteContest(contestId)
                     .then(response => {
                         if (response.status === 200) {
+                            this.fetchContests();
                             this.$router.push({ name: 'contests' });
                         }
                     })
                     .catch(error => this.handleErrorResponse(error, "deleting"));
             }
         },
+        fetchContests(){
+            ContestsService.fetchContests()
+            .then(response=>{
+                this.$store.commit('SET_CONTESTS', response.data);
+            });
+        },
+
+
+
+
+
+
+
+
+
         handleErrorResponse(error, verb) {
             if (error.response) {
                 if (error.response.status == 404) {
@@ -68,6 +80,7 @@ export default {
                 this.$store.commit('SET_NOTIFICATION', `Error ${verb} contest. Request could not be created.`);
             }
         },
+
     }
 }
 </script>
