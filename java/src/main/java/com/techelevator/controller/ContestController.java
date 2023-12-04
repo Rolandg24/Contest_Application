@@ -41,7 +41,11 @@ public class ContestController {
         return participantDao.fetchListOfParticipantByContestId(id);
     }
 
-
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/contests/{id}", method = RequestMethod.PUT)
+    public Contest updateContest(@RequestBody Contest contestToUpdate) {
+        return contestDao.updateContest(contestToUpdate);
+    }
 
 
 

@@ -10,5 +10,9 @@ public interface ContestDao {
 
     public Contest createContest(Contest contest);
 
+    public Contest updateContest(Contest contest);
+
+    public boolean deleteContest(int contestId);
+
 
 }
