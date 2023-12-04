@@ -76,21 +76,29 @@ public class JdbcContestDao implements ContestDao{
 
     @Override
     public boolean deleteContest(int contestId) {
-        String sqlDeleteParticipants = "DELETE FROM participants WHERE contest_id = ?;";
-        String sqlDeleteContest = "DELETE FROM contests WHERE contest_id = ?";
-        int rowCountParticipants = 0;
-        int rowCountContests = 0;
+
+        String sql = "START TRANSACTION; " +
+                     "DELETE FROM participants WHERE contest_id = ?; " +
+                     "DELETE FROM contests WHERE contest_id = ?; " +
+                     "COMMIT;";
+
+//        String sqlDeleteParticipants = "DELETE FROM participants WHERE contest_id = ?;";
+//        String sqlDeleteContest = "DELETE FROM contests WHERE contest_id = ?";
+//        int rowCountParticipants = 0;
+//        int rowCountContests = 0;
+        int rowCount = 0;
         boolean isDeleted = false;
         try {
-            rowCountParticipants = jdbcTemplate.update(sqlDeleteParticipants, contestId);
-            rowCountContests = jdbcTemplate.update(sqlDeleteContest,contestId);
-            if (rowCountParticipants > 0 && rowCountContests > 0) {
+//            rowCountParticipants = jdbcTemplate.update(sqlDeleteParticipants, contestId);
+//            rowCountContests = jdbcTemplate.update(sqlDeleteContest,contestId);
+            rowCount = jdbcTemplate.update(sql, contestId, contestId);
+            if (rowCount > 0) {
                 isDeleted = true;
             }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
-        if (!isDeleted) {
+        if (isDeleted == false) {
             throw new DaoException("Error. Contest was not deleted");
         }
         return isDeleted;
