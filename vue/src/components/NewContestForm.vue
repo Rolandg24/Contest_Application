@@ -57,10 +57,16 @@
 import ContestsService from "../services/ContestsService";
 
 export default {
+    props: {
+        contest: {
+            type: Object, 
+            required: true
+        }
+    },
   data() {
     return {
-        contest: [],
       newContest: {
+        contestId: this.contest.contestId,
         contestName: this.contest.contestName,
         contestDescription: this.contest.contestDescription,
         dateAndTime: this.contest.dateAndTime,
