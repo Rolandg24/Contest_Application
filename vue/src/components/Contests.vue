@@ -28,12 +28,6 @@
 <script>
 import ContestsService from '../services/ContestsService';
 export default {
-    data() {
-        // return {
-        //     contests: [],
-        // }
-    },
-
     created() {
         this.fetchContests();
     },
@@ -57,15 +51,6 @@ export default {
                 this.$store.commit('SET_CONTESTS', response.data);
             });
         },
-
-
-
-
-
-
-
-
-
         handleErrorResponse(error, verb) {
             if (error.response) {
                 if (error.response.status == 404) {

@@ -37,12 +37,6 @@
 import ContestsService from "../services/ContestsService";
 
 export default {
-  props: {
-    // contest: {
-    //     type: Object, 
-    //     required: false
-    // }
-  },
   data() {
     return {
       contest: {},
@@ -53,13 +47,6 @@ export default {
         dateAndTime: '',
         contestLocation: '',
       }
-      // newContest: {
-      //   contestId: this.contest.contestId,
-      //   contestName: this.contest.contestName,
-      //   contestDescription: this.contest.contestDescription,
-      //   dateAndTime: this.contest.dateAndTime,
-      //   contestLocation: this.contest.contestLocation,
-      // },
     };
   },
   methods: {
@@ -67,6 +54,11 @@ export default {
       ContestsService.fetchContestById(id)
         .then(response => {
           this.contest = response.data;
+          this.newContest.contestName = this.contest.contestName;
+          this.newContest.contestDescription = this.contest.contestDescription;
+          this.newContest.dateAndTime = this.contest.dateAndTime;
+          this.newContest.contestLocation = this.contest.contestLocation;
+          
         })
     },
     submitForm() {
@@ -112,10 +104,12 @@ export default {
         );
       }
     },
-    created(){
+    
+  },
+  created(){
+        console.log('created');
       this.getContest(this.$route.params.contestId);
     }
-  }
 };
 </script>
 
