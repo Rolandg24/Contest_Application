@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Contest;
+import com.techelevator.model.ScheduleTimeSlot;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +22,7 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
     private final int EXPECTED_ID = 1; //set to a contest id that exists
     private final int ID_TO_FETCH = 5;
     private final int EXPECTED_ID_FROM_FETCH = 5;
+    private final int NUMBER_OF_SCHEDULE_TIME_SLOTS = 50;
 
     @Before
     public void setup() {
@@ -75,6 +77,12 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
     @Test
     public void delete_Contest_Deletes_Contest() {
         Assert.fail();
+    }
+
+    @Test
+    public void fetch_schedule_by_id_fetches_schedule() {
+        List<ScheduleTimeSlot> returnedList = sut.fetchScheduleById(EXPECTED_ID);
+        Assert.assertEquals(NUMBER_OF_SCHEDULE_TIME_SLOTS, returnedList.size());
     }
 
     private void compareContests(Contest actual, Contest expected) {
