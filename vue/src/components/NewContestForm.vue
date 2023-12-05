@@ -58,6 +58,7 @@ export default {
           this.newContest.contestDescription = this.contest.contestDescription;
           this.newContest.dateAndTime = this.contest.dateAndTime;
           this.newContest.contestLocation = this.contest.contestLocation;
+          this.newContest.contestId = this.contest.contestId;
           
         })
     },
@@ -73,7 +74,7 @@ export default {
             this.handleErrorResponse(error, "creating");
           });
       } else {
-        ContestsService.updateContest(this.newContest)
+        ContestsService.updateContest(this.newContest.contestId, this.newContest)
           .then((response) => {
             if (response.status == 200) {
               this.$router.push({ name: "contests" });
@@ -87,21 +88,24 @@ export default {
         if (error.response.status == 404) {
           this.$router.push({ name: "NotFoundView" });
         } else {
-          this.$store.commit(
-            "SET_NOTIFICATION",
-            `Error ${verb} contest. Response received was "${error.response.statusText}".`
-          );
+            console.log("ERROR RESPONSE: " + error.response);
+        //   this.$store.commit(
+        //     "SET_NOTIFICATION",
+        //     `Error ${verb} contest. Response received was "${error.response.statusText}".`
+        //   );
         }
       } else if (error.request) {
-        this.$store.commit(
-          "SET_NOTIFICATION",
-          `Error ${verb} contest. Server could not be reached.`
-        );
+        console.log("ERROR REQUEST: " + error.request);
+        // this.$store.commit(
+        //   "SET_NOTIFICATION",
+        //   `Error ${verb} contest. Server could not be reached.`
+        // );
       } else {
-        this.$store.commit(
-          "SET_NOTIFICATION",
-          `Error ${verb} contest. Request could not be created.`
-        );
+        console.log('error occurred');
+        // this.$store.commit(
+        //   "SET_NOTIFICATION",
+        //   `Error ${verb} contest. Request could not be created.`
+        // );
       }
     },
     

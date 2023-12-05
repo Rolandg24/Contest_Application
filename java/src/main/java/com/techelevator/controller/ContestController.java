@@ -49,7 +49,7 @@ public class ContestController {
     }
 
     @PreAuthorize("permitAll")
-    @RequestMapping(path = "/contests/{id}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/contests/{id}/update", method = RequestMethod.PUT)
     public Contest updateContest(@RequestBody Contest contestToUpdate) {
         return contestDao.updateContest(contestToUpdate);
     }

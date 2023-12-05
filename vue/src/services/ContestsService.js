@@ -26,8 +26,8 @@ export default{
         return http.get(`/contests/${contestId}`);
     },
 
-    updateContest(contest){
-        return http.put(`/contest/${contest.contestId}`, contest);
+    updateContest(id, contest){
+        return http.put(`/contest/${id}/update`, contest);
     }
     
 
