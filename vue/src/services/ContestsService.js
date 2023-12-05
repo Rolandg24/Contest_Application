@@ -28,6 +28,10 @@ export default{
 
     updateContest(id, contest){
         return http.put(`/contests/${id}/update`, contest);
+    },
+
+    fetchScheduleById(contestId){
+        return http.get(`/contests/${contestId}/schedule`);
     }
     
 

@@ -10,7 +10,7 @@
                     v-bind:to="{ name: 'participants', params: { contestId: contest.contestId } }">Participants</router-link>
             </div>
             <div>
-                <a href="#">Preview Schedule</a> <!--TO DO DECIDE NEW WINDOW OR POPULATE INSIDE CONTAINER-->
+                <a href="#" v-on:click="$router.push({ name: 'Schedule', params: {contestId: contest.contestId} })">Schedule</a> <!--TO DO DECIDE NEW WINDOW OR POPULATE INSIDE CONTAINER-->
             </div>
             <div>
                 <a href="#" v-on:click="$router.push({ name: 'UpdateContest', params: {contestId: contest.contestId} })">Update</a>

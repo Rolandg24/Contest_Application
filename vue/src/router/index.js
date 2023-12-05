@@ -10,6 +10,7 @@ import ContestsView from '../views/ContestsView.vue';
 import ParticipantsView from '../views/ParticipantsView.vue';
 import NewContestView from '../views/NewContestView.vue';
 import UpdateContestView from '../views/UpdateContestView.vue';
+import ScheduleView from '../views/ScheduleView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -84,6 +85,14 @@ const routes = [
       requiresAuth: false
     }
   },
+  {
+    path: '/contests/:contestId/schedule',
+    name: 'Schedule',
+    component: ScheduleView,
+    meta: {
+      requiresAuth: false
+    }
+  }
 ];
 
 // Create the router
