@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Contest;
+import com.techelevator.model.ScheduleTimeSlot;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcContestDao implements ContestDao{
+public class JdbcContestDao implements ContestDao {
 
     private final JdbcTemplate jdbcTemplate;
     private final int NOT_UPDATED = 0;
@@ -26,7 +27,7 @@ public class JdbcContestDao implements ContestDao{
     public List<Contest> fetchListOfContests() {
         List<Contest> contestList = new ArrayList<>();
         String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location " +
-                     "FROM contests";
+                "FROM contests";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
@@ -56,15 +57,17 @@ public class JdbcContestDao implements ContestDao{
         }
         return contest;
     }
+
+
     @Override
     public Contest createContest(Contest contest) {
         Contest contestToCreate = contest;
         String sql = "INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location)" +
-                     "VALUES (?, ?, ?, ?) " +
-                     "RETURNING contest_id;";
+                "VALUES (?, ?, ?, ?) " +
+                "RETURNING contest_id;";
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, contest.getContestName(), contest.getContestDescription(),
-                                                            contest.getDateAndTime(), contest.getContestLocation());
+                    contest.getDateAndTime(), contest.getContestLocation());
             if (result.next()) {
                 contestToCreate.setContestId(result.getInt("contest_id"));
             }
@@ -78,12 +81,12 @@ public class JdbcContestDao implements ContestDao{
     @Override
     public Contest updateContest(Contest contest) {
         String sql = "UPDATE contests " +
-                     "SET contest_name = ?, contest_description = ?, contest_date_time = ?, contest_location = ?" +
-                     "WHERE contest_id = ?";
+                "SET contest_name = ?, contest_description = ?, contest_date_time = ?, contest_location = ?" +
+                "WHERE contest_id = ?";
         int rowCount = NOT_UPDATED;
         try {
-        rowCount = jdbcTemplate.update(sql, contest.getContestName(), contest.getContestDescription(), contest.getDateAndTime(),
-                contest.getContestLocation(), contest.getContestId());
+            rowCount = jdbcTemplate.update(sql, contest.getContestName(), contest.getContestDescription(), contest.getDateAndTime(),
+                    contest.getContestLocation(), contest.getContestId());
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
@@ -99,9 +102,9 @@ public class JdbcContestDao implements ContestDao{
     public int deleteContest(int contestId) {
 
         String sql = "START TRANSACTION; " +
-                     "DELETE FROM participants WHERE contest_id = ?; " +
-                     "DELETE FROM contests WHERE contest_id = ?; " +
-                     "COMMIT;";
+                "DELETE FROM participants WHERE contest_id = ?; " +
+                "DELETE FROM contests WHERE contest_id = ?; " +
+                "COMMIT;";
 
 //        String sqlDeleteParticipants = "DELETE FROM participants WHERE contest_id = ?;";
 //        String sqlDeleteContest = "DELETE FROM contests WHERE contest_id = ?";
@@ -118,16 +121,59 @@ public class JdbcContestDao implements ContestDao{
 //            }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
-        
+
         } catch (DataIntegrityViolationException e) {
-        throw new DaoException("Error deleting contest" + contestId, e);
-    }
+            throw new DaoException("Error deleting contest" + contestId, e);
+        }
 //        if (isDeleted == false) {
 //            throw new DaoException("Error. Contest was not deleted");
 //        }
 //        return isDeleted;
     }
 
+
+    @Override
+    public List<ScheduleTimeSlot> fetchScheduleById(int contestId) {
+        List<ScheduleTimeSlot> schedule = new ArrayList<>();
+
+        String sql = "SELECT participants.participant_name, schedules.contest_id, schedules_participants.time_slot " +
+                "FROM participants " +
+                "JOIN schedules_participants ON participants.participant_id = schedules_participants.participant_id " +
+                "JOIN schedules ON schedules_participants.schedule_id = schedules.schedule_id " +
+                "WHERE schedules.contest_id = ?";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, contestId);
+            while (results.next()) {
+                ScheduleTimeSlot currentTimeSlot = new ScheduleTimeSlot();
+                currentTimeSlot.setName(results.getString("participant_name"));
+                currentTimeSlot.setContestId(results.getInt("contest_id"));
+                currentTimeSlot.setTimeSlot(results.getDate("time_slot").toLocalDate());
+                schedule.add(currentTimeSlot);
+            }
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database or Server", e);
+        }
+        return schedule;
+    }
+
+//    String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location " +
+//            "FROM contests " +
+//            "WHERE contest_id = ?";
+//        try {
+//        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+//        if (results.next()) {
+//            contest = mapRowToContest(results);
+//        }
+//    } catch (CannotGetJdbcConnectionException e) {
+//        throw new DaoException("Unable to connect to database or Server", e);
+//    }
+//        return contest;
+//}
+
+
+    //helper Method for Contest
     private Contest mapRowToContest(SqlRowSet rowSet) {
         Contest contest = new Contest();
         contest.setContestId(rowSet.getInt("contest_id"));

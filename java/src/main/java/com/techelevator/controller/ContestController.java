@@ -4,6 +4,7 @@ import com.techelevator.dao.ContestDao;
 import com.techelevator.dao.ParticipantDao;
 import com.techelevator.model.Contest;
 import com.techelevator.model.Participant;
+import com.techelevator.model.ScheduleTimeSlot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -58,6 +59,12 @@ public class ContestController {
     @RequestMapping(path = "/contests/{id}", method = RequestMethod.DELETE)
     public int deleteContest(@PathVariable int id) {
         return contestDao.deleteContest(id);
+    }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/contests/{id}/schedule", method = RequestMethod.GET)
+    public List<ScheduleTimeSlot> fetchScheduleById(@PathVariable int id) {
+        return contestDao.fetchScheduleById(id);
     }
 
 
