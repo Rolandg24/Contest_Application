@@ -1,4 +1,6 @@
 BEGIN TRANSACTION;
+DROP TABLE IF EXISTS schedules_participants;
+DROP TABLE IF EXISTS schedules;
 DROP TABLE IF EXISTS participants;
 DROP TABLE IF EXISTS contests;
 DROP TABLE IF EXISTS users;
@@ -29,5 +31,20 @@ CREATE TABLE participants (
 	CONSTRAINT PK_participant_id PRIMARY KEY (participant_id),
 	FOREIGN KEY (contest_id) REFERENCES contests(contest_id)
 );
+CREATE TABLE schedules (
+	schedule_id SERIAL,
+	contest_id INTEGER,
+	CONSTRAINT PK_schedule_id PRIMARY KEY (schedule_id),
+	FOREIGN KEY (contest_id) REFERENCES contests(contest_id)
+);
+CREATE TABLE schedules_participants (
+	schedule_id INTEGER,
+	participant_id INTEGER,
+	time_slot TIMESTAMPTZ,
+	CONSTRAINT PK_schedule_participant_time_slot_id PRIMARY KEY (schedule_id, participant_id,time_slot),
+	FOREIGN KEY (schedule_id) REFERENCES schedules(schedule_id),
+	FOREIGN KEY (participant_id) REFERENCES participants(participant_id)
+);
+
 
 COMMIT TRANSACTION;
