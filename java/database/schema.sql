@@ -38,10 +38,11 @@ CREATE TABLE schedules (
 	FOREIGN KEY (contest_id) REFERENCES contests(contest_id)
 );
 CREATE TABLE schedules_participants (
+	time_slot_id SERIAL,
 	schedule_id INTEGER,
 	participant_id INTEGER,
 	time_slot TIMESTAMPTZ,
-	CONSTRAINT PK_schedule_participant_time_slot_id PRIMARY KEY (schedule_id, participant_id,time_slot),
+	CONSTRAINT PK_time_slot_id PRIMARY KEY (time_slot_id),
 	FOREIGN KEY (schedule_id) REFERENCES schedules(schedule_id),
 	FOREIGN KEY (participant_id) REFERENCES participants(participant_id)
 );
