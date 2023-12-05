@@ -1,5 +1,4 @@
 <template>
-  <!-- <h1>i</h1> -->
   <form v-on:submit.prevent="submitForm">
     <!-- Name Field -->
     <div class="mb-3">
@@ -89,23 +88,23 @@ export default {
           this.$router.push({ name: "NotFoundView" });
         } else {
             console.log("ERROR RESPONSE: " + error.response);
-        //   this.$store.commit(
-        //     "SET_NOTIFICATION",
-        //     `Error ${verb} contest. Response received was "${error.response.statusText}".`
-        //   );
+          this.$store.commit(
+            "SET_NOTIFICATION",
+            `Error ${verb} contest. Response received was "${error.response.statusText}".`
+          );
         }
       } else if (error.request) {
         console.log("ERROR REQUEST: " + error.request);
-        // this.$store.commit(
-        //   "SET_NOTIFICATION",
-        //   `Error ${verb} contest. Server could not be reached.`
-        // );
+        this.$store.commit(
+          "SET_NOTIFICATION",
+          `Error ${verb} contest. Server could not be reached.`
+        );
       } else {
         console.log('error occurred');
-        // this.$store.commit(
-        //   "SET_NOTIFICATION",
-        //   `Error ${verb} contest. Request could not be created.`
-        // );
+        this.$store.commit(
+          "SET_NOTIFICATION",
+          `Error ${verb} contest. Request could not be created.`
+        );
       }
     },
     
