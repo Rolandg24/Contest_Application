@@ -83,6 +83,7 @@ VALUES
 ('Visionary Vanguards', 'At the forefront of innovation', 4, 75, 2),
 ('Tech Transformers II', 'Transforming tech landscapes', 7, 97, 2),
 ('Innovative Impact', 'Making an innovative impact', 5, 82, 2);
+('Innovative Testing Measures', 'Making an innovative impact', 5, 82, 4);
 
 INSERT INTO time_slots (contest_id, participant_id, time_slot)
 VALUES

@@ -1,7 +1,7 @@
 <template>
     <form v-on:submit.prevent="submitSchedule">
         <div class="ParticipantInfo">
-            <div class="ParticipantContainer" v-for="(participant, index) in participants"
+            <div class="ParticipantContainer" v-for="(participant) in participants"
                 v-bind:key="participant.participantId">
                 <p>{{ participant.participantName }}</p>
                 <!-- <p v-bind="scheduleTimeSlotObject.participantId">{{ participant.participantId }}</p> -->
@@ -53,10 +53,10 @@ export default {
             schedules.forEach(schedule => {
                 ContestsService.createSchedule(schedule, this.contestId)
                     .then(response => {
-                        // handle success
+                        this.$router.push({ name: "Schedule" });
                     })
                     .catch(error => {
-                        // handle error
+                        this.handleErrorResponse(error, "creating");
                     });
             });
 
