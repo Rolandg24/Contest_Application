@@ -102,6 +102,8 @@ public class JdbcContestDao implements ContestDao {
     public int deleteContest(int contestId) {
 
         String sql = "START TRANSACTION; " +
+                "DELETE FROM time_slots " +
+                "WHERE participant_id IN (SELECT participant_id FROM participants WHERE contest_id = 1); " +
                 "DELETE FROM participants WHERE contest_id = ?; " +
                 "DELETE FROM contests WHERE contest_id = ?; " +
                 "COMMIT;";
