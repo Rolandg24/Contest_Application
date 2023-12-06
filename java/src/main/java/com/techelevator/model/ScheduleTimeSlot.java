@@ -4,19 +4,32 @@ import java.time.LocalDate;
 
 //variables
 public class ScheduleTimeSlot {
-    private String name;
-    private String timeSlot;
+    private int timeSlotId;
     private int contestId;
+    private int participantId;
+    private String timeSlot;
+
 
     //constructors
-    public ScheduleTimeSlot(String name, String timeSlot, int contestId) {
-        this.name = name;
-        this.timeSlot = timeSlot;
+
+
+    public ScheduleTimeSlot(int timeSlotId, int contestId, int participantId, String timeSlot) {
+        this.timeSlotId = timeSlotId;
         this.contestId = contestId;
+        this.participantId = participantId;
+        this.timeSlot = timeSlot;
     }
 
-    public ScheduleTimeSlot (){
+    public ScheduleTimeSlot(){
 
+    }
+
+    public int getTimeSlotId() {
+        return timeSlotId;
+    }
+
+    public void setTimeSlotId(int timeSlotId) {
+        this.timeSlotId = timeSlotId;
     }
 
     public int getContestId() {
@@ -27,12 +40,12 @@ public class ScheduleTimeSlot {
         this.contestId = contestId;
     }
 
-    public String getName() {
-        return name;
+    public int getParticipantId() {
+        return participantId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setParticipantId(int participantId) {
+        this.participantId = participantId;
     }
 
     public String getTimeSlot() {

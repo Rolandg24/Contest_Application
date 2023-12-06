@@ -67,6 +67,18 @@ public class ContestController {
     public List<ScheduleTimeSlot> fetchScheduleById(@PathVariable int id) {
         return contestDao.fetchScheduleById(id);
     }
+    @PreAuthorize("permitAll")
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/contests/{id}/schedule", method = RequestMethod.POST)
+    public ScheduleTimeSlot addNewScheduleTimeSlot(@RequestBody ScheduleTimeSlot scheduleTimeSlotToAdd) {
 
+        return contestDao.createSchedule(scheduleTimeSlotToAdd);
+    }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/contests/{id}/schedule/update", method = RequestMethod.PUT)
+    public ScheduleTimeSlot updateScheduleTimeSlot(@RequestBody ScheduleTimeSlot scheduleTimeSlotToAdd) {
+        return contestDao.updateSchedule(scheduleTimeSlotToAdd);
+    }
 
 }

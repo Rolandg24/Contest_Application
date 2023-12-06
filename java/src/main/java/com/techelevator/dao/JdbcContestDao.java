@@ -81,7 +81,7 @@ public class JdbcContestDao implements ContestDao {
     @Override
     public Contest updateContest(Contest contest) {
         String sql = "UPDATE contests " +
-                "SET contest_name = ?, contest_description = ?, contest_date_time = ?, contest_location = ?" +
+                "SET contest_name = ?, contest_description = ?, contest_date_time = ?, contest_location = ? " +
                 "WHERE contest_id = ?";
         int rowCount = NOT_UPDATED;
         try {
@@ -136,19 +136,19 @@ public class JdbcContestDao implements ContestDao {
     public List<ScheduleTimeSlot> fetchScheduleById(int contestId) {
         List<ScheduleTimeSlot> schedule = new ArrayList<>();
 
-        String sql = "SELECT participants.participant_name, schedules.contest_id, schedules_participants.time_slot " +
+        String sql = "SELECT time_slots.time_slot_id, participants.participant_id, time_slots.time_slot " +
                 "FROM participants " +
-                "JOIN schedules_participants ON participants.participant_id = schedules_participants.participant_id " +
-                "JOIN schedules ON schedules_participants.schedule_id = schedules.schedule_id " +
-                "WHERE schedules.contest_id = ?";
+                "JOIN time_slots ON participants.participant_id = time_slots.participant_id " +
+                "WHERE time_slots.contest_id = ?";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, contestId);
             while (results.next()) {
                 ScheduleTimeSlot currentTimeSlot = new ScheduleTimeSlot();
-                currentTimeSlot.setName(results.getString("participant_name"));
-                currentTimeSlot.setContestId(results.getInt("contest_id"));
+                currentTimeSlot.setTimeSlotId((results.getInt("time_slot_id")));
+                currentTimeSlot.setContestId(contestId);
                 currentTimeSlot.setTimeSlot(results.getString("time_slot"));
+                currentTimeSlot.setParticipantId(results.getInt("participant_id"));
                 schedule.add(currentTimeSlot);
             }
 
@@ -160,54 +160,38 @@ public class JdbcContestDao implements ContestDao {
 
     @Override
     public ScheduleTimeSlot createSchedule(ScheduleTimeSlot scheduleTimeSlot) {
-        scheduleTimeSlot = new ScheduleTimeSlot();
-        String sql = "INSERT INTO schedules_participants (schedule_id, participant_id, time_slot)" +
+        ScheduleTimeSlot scheduleTimeSlotToUpdate = scheduleTimeSlot;
+        String sql = "INSERT INTO time_slots (contest_id, participant_id, time_slot)" +
                 "VALUES (?, ?, ?) " +
-                "RETURNING contest_id;";
+                "RETURNING time_slot_id;";
         try {
-            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, scheduleTimeSlot.get, contest.getContestDescription(),
-                    contest.getDateAndTime(), contest.getContestLocation());
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, scheduleTimeSlot.getContestId(), scheduleTimeSlot.getParticipantId(),
+                    scheduleTimeSlot.getTimeSlot());
             if (result.next()) {
-                contestToCreate.setContestId(result.getInt("contest_id"));
+                scheduleTimeSlotToUpdate.setTimeSlotId(result.getInt("time_slot_id"));
             }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
-        return contestToCreate;
+        return scheduleTimeSlotToUpdate;
     }
 
     @Override
     public ScheduleTimeSlot updateSchedule(ScheduleTimeSlot scheduleTimeSlot) {
-        String sql = "UPDATE contests " +
-                "SET contest_name = ?, contest_description = ?, contest_date_time = ?, contest_location = ?" +
-                "WHERE contest_id = ?";
+        String sql = "UPDATE time_slots " +
+                "SET contest_id = ?, participant_id = ?, time_slot = ? " +
+                "WHERE time_slot_id = ?";
         int rowCount = NOT_UPDATED;
         try {
-            rowCount = jdbcTemplate.update(sql, contest.getContestName(), contest.getContestDescription(), contest.getDateAndTime(),
-                    contest.getContestLocation(), contest.getContestId());
+            rowCount = jdbcTemplate.update(sql, scheduleTimeSlot.getContestId(), scheduleTimeSlot.getParticipantId(), scheduleTimeSlot.getTimeSlot(), scheduleTimeSlot.getTimeSlotId());
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
         if (rowCount < UPDATED) {
             throw new DaoException("Error. Contest was not updated");
         }
-        return contest;
+        return scheduleTimeSlot;
     }
-
-//    String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location " +
-//            "FROM contests " +
-//            "WHERE contest_id = ?";
-//        try {
-//        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-//        if (results.next()) {
-//            contest = mapRowToContest(results);
-//        }
-//    } catch (CannotGetJdbcConnectionException e) {
-//        throw new DaoException("Unable to connect to database or Server", e);
-//    }
-//        return contest;
-//}
-
 
     //helper Method for Contest
     private Contest mapRowToContest(SqlRowSet rowSet) {
@@ -219,6 +203,4 @@ public class JdbcContestDao implements ContestDao {
         contest.setContestLocation(rowSet.getString("contest_location"));
         return contest;
     }
-
-
 }

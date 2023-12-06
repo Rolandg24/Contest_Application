@@ -33,13 +33,13 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
         TEST_CONTEST.setContestDescription("TEST DESCRIPTION");
         TEST_CONTEST.setContestLocation("TEST LOCATION");
         TEST_CONTEST.setContestName("TEST NAME");
-        TEST_CONTEST.setDateAndTime(LocalDate.ofEpochDay(2025-05-05));
+        TEST_CONTEST.setDateAndTime("2025-05-05");
 
         //set UPDATED_CONTEST properties and id to EXPECTED_ID
         UPDATED_CONTEST.setContestDescription("UPDATED DESCRIPTION");
         UPDATED_CONTEST.setContestLocation("UPDATED LOCATION");
         UPDATED_CONTEST.setContestName("UPDATED NAME");
-        UPDATED_CONTEST.setDateAndTime(LocalDate.ofEpochDay(2025-05-05));
+        UPDATED_CONTEST.setDateAndTime("2025-05-05");
         UPDATED_CONTEST.setContestId(EXPECTED_ID);
 
     }
