@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .schedule-header {
     text-align: center; 
 }
