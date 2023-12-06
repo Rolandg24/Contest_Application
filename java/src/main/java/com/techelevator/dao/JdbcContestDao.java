@@ -103,7 +103,7 @@ public class JdbcContestDao implements ContestDao {
 
         String sql = "START TRANSACTION; " +
                 "DELETE FROM time_slots " +
-                "WHERE participant_id IN (SELECT participant_id FROM participants WHERE contest_id = 1); " +
+                "WHERE participant_id IN (SELECT participant_id FROM participants WHERE contest_id = ?); " +
                 "DELETE FROM participants WHERE contest_id = ?; " +
                 "DELETE FROM contests WHERE contest_id = ?; " +
                 "COMMIT;";
@@ -117,7 +117,7 @@ public class JdbcContestDao implements ContestDao {
         try {
 //            rowCountParticipants = jdbcTemplate.update(sqlDeleteParticipants, contestId);
 //            rowCountContests = jdbcTemplate.update(sqlDeleteContest,contestId);
-            return jdbcTemplate.update(sql, contestId, contestId);
+            return jdbcTemplate.update(sql, contestId, contestId, contestId);
 //            if (rowCount > 0) {
 //                isDeleted = true;
 //            }

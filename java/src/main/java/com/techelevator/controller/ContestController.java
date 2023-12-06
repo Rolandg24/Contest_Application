@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.ContestDao;
 import com.techelevator.dao.ParticipantDao;
 import com.techelevator.model.Contest;
+import com.techelevator.model.OverallScore;
 import com.techelevator.model.Participant;
 import com.techelevator.model.ScheduleTimeSlot;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class ContestController {
         return contestDao.fetchListOfContests();
     }
 
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/contests/{id}/overallScores", method = RequestMethod.GET)
+    public List<OverallScore> listAllOverallScores(int contestId) {
+        return participantDao.fetchListOfOverallScores(contestId);
+    }
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/contests/{id}", method = RequestMethod.GET)
     public Contest FetchContestById(@PathVariable int id) {

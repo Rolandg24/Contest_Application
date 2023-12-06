@@ -19,6 +19,7 @@ public class ScheduleTimeSlot {
         this.contestId = contestId;
         this.participantId = participantId;
         this.timeSlot = timeSlot;
+        this.participantName = participantName;
     }
 
     public ScheduleTimeSlot(){
