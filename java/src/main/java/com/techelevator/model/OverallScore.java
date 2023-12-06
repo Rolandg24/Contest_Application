@@ -6,16 +6,15 @@ public class OverallScore {
     private int contestId;
     private int participantId;
     private int overallScore;
-    private int participantName;
+    private String participantName;
 
-    public OverallScore(int overallScoreId, int contestId, int participantId, int overallScore, int participantName) {
+    public OverallScore(int overallScoreId, int contestId, int participantId, int overallScore, String participantName) {
         this.overallScoreId = overallScoreId;
         this.contestId = contestId;
         this.participantId = participantId;
         this.overallScore = overallScore;
         this.participantName = participantName;
     }
-
 
     public OverallScore() {
 
@@ -53,11 +52,11 @@ public class OverallScore {
         this.overallScore = overallScore;
     }
 
-    public int getParticipantName() {
+    public String getParticipantName() {
         return participantName;
     }
 
-    public void setParticipantName(int participantName) {
+    public void setParticipantName(String participantName) {
         this.participantName = participantName;
     }
 }

@@ -32,15 +32,14 @@ public class ContestController {
 
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/contests/{id}/overallScores", method = RequestMethod.GET)
-    public List<OverallScore> listAllOverallScores(int contestId) {
-        return participantDao.fetchListOfOverallScores(contestId);
+    public List<OverallScore> listAllOverallScores(@PathVariable int id) {
+        return participantDao.fetchListOfOverallScores(id);
     }
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/contests/{id}", method = RequestMethod.GET)
     public Contest FetchContestById(@PathVariable int id) {
         return contestDao.fetchContestById(id);
     }
-
 
     @PreAuthorize("permitAll")
     @ResponseStatus(HttpStatus.CREATED)

@@ -41,10 +41,11 @@ public class JdbcParticipantDao implements ParticipantDao {
     @Override
     public List<OverallScore> fetchListOfOverallScores(int contestId) {
         List<OverallScore> overallScores = new ArrayList<>();
-        String sql = "SELECT overall_scores.overall_score_id, overall_scores.contest_id, overall_scores.participant_id, overall_scores.overall_score, participant.participant_name " +
-                        "FROM overall_scores " +
-                        "JOIN participants ON participants.participant_id = overall_scores.participant_id" +
-                        "WHERE contest_id = ?;";
+        String sql = "SELECT overall_scores.overall_score_id, overall_scores.contest_id, overall_scores.participant_id, " +
+                "overall_scores.overall_score, participants.participant_name " +
+                "FROM overall_scores " +
+                "JOIN participants ON participants.participant_id = overall_scores.participant_id " +
+                "WHERE overall_scores.contest_id = ?";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, contestId);
@@ -75,7 +76,7 @@ public class JdbcParticipantDao implements ParticipantDao {
         score.setContestId(rowSet.getInt("contest_id"));
         score.setParticipantId(rowSet.getInt("participant_id"));
         score.setOverallScore(rowSet.getInt("overall_score"));
-        score.setParticipantName(rowSet.getInt("participant_name"));
+        score.setParticipantName(rowSet.getString("participant_name"));
         return score;
     }
 }
