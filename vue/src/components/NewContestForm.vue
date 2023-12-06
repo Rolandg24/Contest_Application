@@ -34,6 +34,7 @@
 
 <script>
 import ContestsService from "../services/ContestsService";
+import ErrorService from "../services/ErrorService";
 
 export default {
   data() {
@@ -79,35 +80,9 @@ export default {
               this.$router.push({ name: "contests" });
             }
           })
-          .catch((error) => this.handleErrorResponse(error, "updating"));
+          .catch((error) => ErrorService.handleErrorResponse(error, "updating"));
       }
     },
-    handleErrorResponse(error, verb) {
-      if (error.response) {
-        if (error.response.status == 404) {
-          this.$router.push({ name: "NotFoundView" });
-        } else {
-            console.log("ERROR RESPONSE: " + error.response);
-          this.$store.commit(
-            "SET_NOTIFICATION",
-            `Error ${verb} contest. Response received was "${error.response.statusText}".`
-          );
-        }
-      } else if (error.request) {
-        console.log("ERROR REQUEST: " + error.request);
-        this.$store.commit(
-          "SET_NOTIFICATION",
-          `Error ${verb} contest. Server could not be reached.`
-        );
-      } else {
-        console.log('error occurred');
-        this.$store.commit(
-          "SET_NOTIFICATION",
-          `Error ${verb} contest. Request could not be created.`
-        );
-      }
-    },
-    
   },
   created(){
         console.log('created');

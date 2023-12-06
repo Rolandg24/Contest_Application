@@ -34,6 +34,7 @@
 <script>
 
 import ContestsService from '../services/ContestsService';
+import ErrorService from '../services/ErrorService';
 
 export default {
     data() {
@@ -59,24 +60,10 @@ export default {
                         this.$router.push({ name: 'contests' })
                     }
                 }).catch(error => {
-                    this.handleErrorResponse(error);
+                    ErrorService.handleErrorResponse(error, 'created');
 
                 });
-
         },
-        handleErrorResponse(error) {
-            console.log(error);
-            if (error.response) {
-                this.errorMsg = 'Error adding new contest. Error: ' + error.response.status;
-            }
-            else if (error.request) {
-                this.errorMsg = 'Error adding new contest. Error: server unavailable';
-            }
-            else {
-                this.errorMsg = 'shits broke';
-            }
-        }
-
     }
 }
 </script>

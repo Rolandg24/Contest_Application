@@ -27,11 +27,17 @@
 
 <script>
 import ContestsService from '../services/ContestsService';
+import ErrorService from '../services/ErrorService';
 export default {
     created() {
         this.fetchContests();
     },
     methods: {
+        /**
+         * This function accepts an id of a contest and then
+         * calls the ContestService to delete the contest
+         * @param {number} contestId the id of the contest
+         */
         deleteContest(contestId) {
             console.log(contestId)
             if (confirm("Are you sure you want to delete this message? This action cannot be undone.")) {
@@ -42,7 +48,7 @@ export default {
                             this.$router.push({ name: 'contests' });
                         }
                     })
-                    .catch(error => this.handleErrorResponse(error, "deleting"));
+                    .catch(error => ContestsService.handleErrorResponse(error, "deleting"));
             }
         },
         fetchContests(){
@@ -51,21 +57,6 @@ export default {
                 this.$store.commit('SET_CONTESTS', response.data);
             });
         },
-        handleErrorResponse(error, verb) {
-            if (error.response) {
-                if (error.response.status == 404) {
-                    this.$router.push({ name: 'NotFoundView' });
-                } else {
-                    this.$store.commit('SET_NOTIFICATION',
-                        `Error ${verb} contest response received was "${error.response.statusText}".`);
-                }
-            } else if (error.request) {
-                this.$store.commit('SET_NOTIFICATION', `Error ${verb} contest. Server could not be reached.`);
-            } else {
-                this.$store.commit('SET_NOTIFICATION', `Error ${verb} contest. Request could not be created.`);
-            }
-        },
-
     }
 }
 </script>
