@@ -5,7 +5,7 @@
     </div>
   <div class = "schedule-container">
     <div v-for="schedule in schedule" v-bind:key="schedule.id">
-      <p>{{ schedule.name }} : {{ schedule.timeSlot }}</p>
+      <p>{{ schedule.participantName }} : {{ schedule.timeSlot }}</p>
 
     </div>
   </div>
