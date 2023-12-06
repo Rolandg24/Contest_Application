@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
+import com.techelevator.model.OverallScore;
 import com.techelevator.model.Participant;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -36,6 +37,27 @@ public class JdbcParticipantDao implements ParticipantDao {
         }
         return participants;
     }
+
+    @Override
+    public List<OverallScore> fetchListOfOverallScores(int contestId) {
+        List<OverallScore> overallScores = new ArrayList<>();
+        String sql = "SELECT overall_scores.overall_score_id, overall_scores.contest_id, overall_scores.participant_id, overall_scores.overall_score, participant.participant_name " +
+                        "FROM overall_scores " +
+                        "JOIN participants ON participants.participant_id = overall_scores.participant_id" +
+                        "WHERE contest_id = ?;";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, contestId);
+            while (results.next()) {
+                OverallScore tempScore = mapRowToScore(results);
+                overallScores.add(tempScore);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database or Server", e);
+        }
+        return overallScores;
+    }
+
     private Participant mapRowToParticipant(SqlRowSet rowSet) {
         Participant participant = new Participant();
         participant.setParticipantId(rowSet.getInt("participant_id"));
@@ -45,5 +67,15 @@ public class JdbcParticipantDao implements ParticipantDao {
         participant.setScore(rowSet.getDouble("score"));
         participant.setContestId(rowSet.getInt("contest_id"));
         return participant;
+    }
+
+    private OverallScore mapRowToScore(SqlRowSet rowSet) {
+        OverallScore score = new OverallScore();
+        score.setOverallScoreId(rowSet.getInt("overall_score_id"));
+        score.setContestId(rowSet.getInt("contest_id"));
+        score.setParticipantId(rowSet.getInt("participant_id"));
+        score.setOverallScore(rowSet.getInt("overall_score"));
+        score.setParticipantName(rowSet.getInt("participant_name"));
+        return score;
     }
 }
