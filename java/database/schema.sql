@@ -1,5 +1,6 @@
 BEGIN TRANSACTION;
 
+DROP TABLE IF EXISTS overall_scores;
 DROP TABLE IF EXISTS time_slots;
 DROP TABLE IF EXISTS participants;
 DROP TABLE IF EXISTS contests;
@@ -37,6 +38,16 @@ CREATE TABLE time_slots (
 	participant_id INTEGER,
 	time_slot varchar(200),
 	CONSTRAINT PK_time_slot_id PRIMARY KEY (time_slot_id),
+	FOREIGN KEY (contest_id) REFERENCES contests(contest_id),
+	FOREIGN KEY (participant_id) REFERENCES participants(participant_id)
+);
+
+CREATE TABLE overall_scores (
+	overall_score_id SERIAL,
+	contest_id INTEGER,
+	participant_id INTEGER,
+	overall_score INTEGER,
+	CONSTRAINT PK_overall_score_id PRIMARY KEY (overall_score_id),
 	FOREIGN KEY (contest_id) REFERENCES contests(contest_id),
 	FOREIGN KEY (participant_id) REFERENCES participants(participant_id)
 );
