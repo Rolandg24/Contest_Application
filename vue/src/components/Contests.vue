@@ -21,6 +21,9 @@
             <div>
                 <a href="#" v-on:click="deleteContest(contest.contestId)">Delete</a>
             </div>
+            <div>
+                <a href="#" v-on:click="$router.push({ name: 'OverallScores', params: {contestId: contest.contestId} })">Scores</a>
+            </div>
 
 
         </div>
