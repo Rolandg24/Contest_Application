@@ -72,8 +72,14 @@ export default{
      */
     fetchScheduleById(contestId){
         return http.get(`/contests/${contestId}/schedule`);
-    }
+    },
     
 
-    
+    createSchedule(schedule, contestId){
+        return http.post(`/contests/${contestId}/schedule`, schedule);
+    },
+
+    updateSchedule (schedule, contestId){
+        return http.put(`/contests/${contestId}/schedule/update`, schedule);
+    },
 }
