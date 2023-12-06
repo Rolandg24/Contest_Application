@@ -8,12 +8,13 @@ public class ScheduleTimeSlot {
     private int contestId;
     private int participantId;
     private String timeSlot;
+    private String participantName;
 
 
     //constructors
 
 
-    public ScheduleTimeSlot(int timeSlotId, int contestId, int participantId, String timeSlot) {
+    public ScheduleTimeSlot(int timeSlotId, int contestId, int participantId, String timeSlot, String participantName) {
         this.timeSlotId = timeSlotId;
         this.contestId = contestId;
         this.participantId = participantId;
@@ -54,5 +55,13 @@ public class ScheduleTimeSlot {
 
     public void setTimeSlot(String timeSlot) {
         this.timeSlot = timeSlot;
+    }
+
+    public String getParticipantName() {
+        return participantName;
+    }
+
+    public void setParticipantName(String participantName) {
+        this.participantName = participantName;
     }
 }

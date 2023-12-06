@@ -136,7 +136,7 @@ public class JdbcContestDao implements ContestDao {
     public List<ScheduleTimeSlot> fetchScheduleById(int contestId) {
         List<ScheduleTimeSlot> schedule = new ArrayList<>();
 
-        String sql = "SELECT time_slots.time_slot_id, participants.participant_id, time_slots.time_slot " +
+        String sql = "SELECT time_slots.time_slot_id, participants.participant_id, time_slots.time_slot, participants.participant_name " +
                 "FROM participants " +
                 "JOIN time_slots ON participants.participant_id = time_slots.participant_id " +
                 "WHERE time_slots.contest_id = ?";
@@ -149,6 +149,7 @@ public class JdbcContestDao implements ContestDao {
                 currentTimeSlot.setContestId(contestId);
                 currentTimeSlot.setTimeSlot(results.getString("time_slot"));
                 currentTimeSlot.setParticipantId(results.getInt("participant_id"));
+                currentTimeSlot.setParticipantName((results.getString("participant_name")));
                 schedule.add(currentTimeSlot);
             }
 
