@@ -48,7 +48,7 @@ export default {
                             this.$router.push({ name: 'contests' });
                         }
                     })
-                    .catch(error => ContestsService.handleErrorResponse(error, "deleting"));
+                    .catch(error => ErrorService.handleErrorResponse(error, "deleting"));
             }
         },
         fetchContests(){
