@@ -41,3 +41,4 @@ CREATE TABLE time_slots (
 	FOREIGN KEY (participant_id) REFERENCES participants(participant_id)
 );
 COMMIT TRANSACTION;
+ROLLBACK
