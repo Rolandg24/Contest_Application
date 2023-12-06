@@ -7,7 +7,7 @@
 
 <script>
 
-import ContestsVue from '../components/Contests.vue'
+import ContestsVue from '../components/Contests.vue';
 import ContestsService from '../services/ContestsService';
 export default {
     components: {

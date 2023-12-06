@@ -13,6 +13,9 @@
                 <a href="#" v-on:click="$router.push({ name: 'Schedule', params: {contestId: contest.contestId} })">Schedule</a> <!--TO DO DECIDE NEW WINDOW OR POPULATE INSIDE CONTAINER-->
             </div>
             <div>
+                <a href="#" v-on:click="$router.push({name: 'AddSchedule', params: {contestId: contest.contestId}})">Add Schedule</a>
+            </div>
+            <div>
                 <a href="#" v-on:click="$router.push({ name: 'UpdateContest', params: {contestId: contest.contestId} })">Update</a>
             </div>
             <div>
