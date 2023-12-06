@@ -84,35 +84,7 @@ VALUES
 ('Tech Transformers II', 'Transforming tech landscapes', 7, 97, 2),
 ('Innovative Impact', 'Making an innovative impact', 5, 82, 2);
 
-INSERT INTO schedules (schedule_id, contest_id) 
-VALUES
-(1,1),
-(2,2),
-(3,3),
-(4,4),
-(5,5),
-(6,6),
-(7,7),
-(8, 8),
-(9, 9),
-(10, 10),
-(11, 11),
-(12, 12),
-(13, 13),
-(14, 14),
-(15, 15),
-(16, 16),
-(17, 17),
-(18, 18),
-(19, 19),
-(20, 20),
-(21, 21),
-(22, 22),
-(23, 23),
-(24, 24),
-(25, 25);
-
-INSERT INTO schedules_participants (schedule_id, participant_id, time_slot)
+INSERT INTO time_slots (contest_id, participant_id, time_slot)
 VALUES
 (1, 14, '2023-12-05 08:00:00'),
 (1, 24, '2023-12-05 08:15:00'),

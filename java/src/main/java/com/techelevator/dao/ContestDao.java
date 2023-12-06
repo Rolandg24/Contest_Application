@@ -23,7 +23,9 @@ public interface ContestDao {
     //schedule
     public List<ScheduleTimeSlot> fetchScheduleById(int contestId);
 
+    public ScheduleTimeSlot createSchedule(ScheduleTimeSlot scheduleTimeSlot);
 
+    public ScheduleTimeSlot updateSchedule(ScheduleTimeSlot scheduleTimeSlot);
 
 
 }

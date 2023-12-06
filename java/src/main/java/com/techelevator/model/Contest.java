@@ -7,11 +7,11 @@ public class Contest {
     private int contestId;
     private String contestName;
     private String contestDescription;
-    private LocalDate dateAndTime; // todo local date doesn't transfer time
+    private String dateAndTime;
     private String contestLocation;
 
     // constructors
-    public Contest(int contestId, String contestName, String contestDescription, LocalDate dateAndTime, String contestLocation) {
+    public Contest(int contestId, String contestName, String contestDescription, String dateAndTime, String contestLocation) {
         this.contestId = contestId;
         this.contestName = contestName;
         this.contestDescription = contestDescription;
@@ -50,11 +50,11 @@ public class Contest {
         this.contestDescription = contestDescription;
     }
 
-    public LocalDate getDateAndTime() {
+    public String getDateAndTime() {
         return dateAndTime;
     }
 
-    public void setDateAndTime(LocalDate dateAndTime) {
+    public void setDateAndTime(String dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 

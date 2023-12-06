@@ -5,11 +5,11 @@ import java.time.LocalDate;
 //variables
 public class ScheduleTimeSlot {
     private String name;
-    private LocalDate timeSlot;
+    private String timeSlot;
     private int contestId;
 
     //constructors
-    public ScheduleTimeSlot(String name, LocalDate timeSlot, int contestId) {
+    public ScheduleTimeSlot(String name, String timeSlot, int contestId) {
         this.name = name;
         this.timeSlot = timeSlot;
         this.contestId = contestId;
@@ -35,11 +35,11 @@ public class ScheduleTimeSlot {
         this.name = name;
     }
 
-    public LocalDate getTimeSlot() {
+    public String getTimeSlot() {
         return timeSlot;
     }
 
-    public void setTimeSlot(LocalDate timeSlot) {
+    public void setTimeSlot(String timeSlot) {
         this.timeSlot = timeSlot;
     }
 }
