@@ -74,11 +74,24 @@ export default{
         return http.get(`/contests/${contestId}/schedule`);
     },
     
-
+    /**
+     * This function takes in a schedule object and a contest id and creates a 
+     * schedule for the contest with the specified id.
+     * @param {object} schedule 
+     * @param {number} contestId 
+     * @returns the created schedule
+     */
     createSchedule(schedule, contestId){
         return http.post(`/contests/${contestId}/schedule`, schedule);
     },
 
+    /**
+     * This function take in a schedule object and a contest id and updates
+     * the schedule for the contest with the specified id.
+     * @param {object} schedule 
+     * @param {number} contestId 
+     * @returns the updated schedule
+     */
     updateSchedule (schedule, contestId){
         return http.put(`/contests/${contestId}/schedule/update`, schedule);
     },

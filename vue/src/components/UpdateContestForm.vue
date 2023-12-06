@@ -1,5 +1,4 @@
 <template>
-    <!-- <h1>HELLO</h1> -->
     <form v-on:submit.prevent="submitForm">
       
         <div class="mb-3">

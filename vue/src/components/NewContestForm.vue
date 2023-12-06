@@ -71,7 +71,7 @@ export default {
             }
           })
           .catch((error) => {
-            this.handleErrorResponse(error, "creating");
+            ErrorService.handleErrorResponse(error, "creating");
           });
       } else {
         ContestsService.updateContest(this.newContest.contestId, this.newContest)

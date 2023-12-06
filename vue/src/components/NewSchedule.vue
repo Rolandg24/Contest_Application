@@ -41,6 +41,7 @@ export default {
     },
     methods: {
         submitSchedule() {
+            // create an array of schedules using data from each participant
             let schedules = this.participants.map(participant => {
                 return {
                     contestId: this.contestId,
@@ -48,45 +49,19 @@ export default {
                     timeSlot: participant.timeSlot
                 };
             });
-
-            // Handle schedules submission
             schedules.forEach(schedule => {
                 ContestsService.createSchedule(schedule, this.contestId)
                     .then(response => {
                         this.$router.push({ name: "Schedule" });
                     })
                     .catch(error => {
-                        this.handleErrorResponse(error, "creating");
+                        ErrorService.handleErrorResponse(error, "creating");
                     });
             });
 
             // Optionally, redirect or update UI after all schedules are submitted
         },
     },
-    // methods: {
-        // submitSchedule() {
-        //     if (this.newContest.contestId == 0) {
-        //         ContestsService.createNewContest(this.newContest)
-        //             .then((response) => {
-        //                 if (response.status == 201) {
-        //                     this.$router.push({ name: "contests" });
-        //                 }
-        //             })
-        //             .catch((error) => {
-        //                 this.handleErrorResponse(error, "creating");
-        //             });
-        //     } else {
-        //         ContestsService.updateContest(this.newContest.contestId, this.newContest)
-        //             .then((response) => {
-        //                 if (response.status == 200) {
-        //                     this.$router.push({ name: "contests" });
-        //                 }
-        //             })
-        //             .catch((error) => ErrorService.handleErrorResponse(error, "updating"));
-        //     }
-        // },
-    // }
-
 }
 </script>
 
