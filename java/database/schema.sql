@@ -17,7 +17,7 @@ CREATE TABLE contests (
 	contest_id SERIAL,
 	contest_name varchar(100) NOT NULL,
 	contest_description varchar(300),
-	contest_date_time TIMESTAMPTZ NOT NULL,
+	contest_date_time varchar(500) NOT NULL,
 	contest_location varchar(200) NOT NULL,
 	CONSTRAINT PK_contest_id PRIMARY KEY (contest_id)
 );
@@ -41,7 +41,7 @@ CREATE TABLE schedules_participants (
 	time_slot_id SERIAL,
 	schedule_id INTEGER,
 	participant_id INTEGER,
-	time_slot TIMESTAMPTZ,
+	time_slot varchar(200),
 	CONSTRAINT PK_time_slot_id PRIMARY KEY (time_slot_id),
 	FOREIGN KEY (schedule_id) REFERENCES schedules(schedule_id),
 	FOREIGN KEY (participant_id) REFERENCES participants(participant_id)
