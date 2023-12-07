@@ -13,6 +13,10 @@ export default{
      */
     fetchOverallScoresByContestId(contestId){
         return http.get(`/contests/${contestId}/overallScores`);
+    },
+
+    createNewScore(newScore){
+
     }
 
 }
