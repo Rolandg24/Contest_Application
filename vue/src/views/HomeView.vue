@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <h1>Competitor</h1>
+    <h1>GATHERLY</h1>
   </div>
   <div class="main-body">
     
