@@ -21,7 +21,7 @@ export default {
 
 #capstone-app {
   background-color: whitesmoke;
-  
+  min-height: 100vh;
 }
 
 body {
