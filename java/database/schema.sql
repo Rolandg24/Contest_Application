@@ -4,7 +4,14 @@ DROP TABLE IF EXISTS overall_scores;
 DROP TABLE IF EXISTS time_slots;
 DROP TABLE IF EXISTS participants;
 DROP TABLE IF EXISTS contests;
+DROP TABLE IF EXISTS contest_categories;
 DROP TABLE IF EXISTS users;
+
+CREATE TABLE contest_categories (
+	category_id SERIAL,
+	category_name varchar(200),
+	CONSTRAINT PK_category_id PRIMARY KEY (category_id)
+);
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -20,7 +27,9 @@ CREATE TABLE contests (
 	contest_description varchar(300),
 	contest_date_time varchar(500) NOT NULL,
 	contest_location varchar(200) NOT NULL,
-	CONSTRAINT PK_contest_id PRIMARY KEY (contest_id)
+	category_id INTEGER, 
+	CONSTRAINT PK_contest_id PRIMARY KEY (contest_id),
+	FOREIGN KEY (category_id) REFERENCES contest_categories(category_id)
 );
 CREATE TABLE participants (
 	participant_id SERIAL,
@@ -51,4 +60,6 @@ CREATE TABLE overall_scores (
 	FOREIGN KEY (contest_id) REFERENCES contests(contest_id),
 	FOREIGN KEY (participant_id) REFERENCES participants(participant_id)
 );
+
+
 COMMIT TRANSACTION;

@@ -9,14 +9,16 @@ public class Contest {
     private String contestDescription;
     private String dateAndTime;
     private String contestLocation;
+    private String contestCategoryName;
 
     // constructors
-    public Contest(int contestId, String contestName, String contestDescription, String dateAndTime, String contestLocation) {
+    public Contest(int contestId, String contestName, String contestDescription, String dateAndTime, String contestLocation, String contestCategoryName) {
         this.contestId = contestId;
         this.contestName = contestName;
         this.contestDescription = contestDescription;
         this.dateAndTime = dateAndTime;
         this.contestLocation = contestLocation;
+        this.contestCategoryName = contestCategoryName;
     }
 
     public Contest (){
@@ -64,5 +66,13 @@ public class Contest {
 
     public void setContestLocation(String contestLocation) {
         this.contestLocation = contestLocation;
+    }
+
+    public String getContestCategoryName() {
+        return contestCategoryName;
+    }
+
+    public void setContestCategoryName(String contestCategoryName) {
+        this.contestCategoryName = contestCategoryName;
     }
 }
