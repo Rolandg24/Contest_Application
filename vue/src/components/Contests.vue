@@ -152,7 +152,7 @@ export default {
   margin: 4px;
   border-radius: 5px;
   padding: 10px;
-  background-color: #ffd95a;
+  background-color: #009ee2;
 }
 
 .btn-container {

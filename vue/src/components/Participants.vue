@@ -43,9 +43,6 @@ export default {
                 { value: "", text: "" },
                 { value: "Name", text: "Name" },
                 { value: "Description", text: "Description" },
-                { value: "Category", text: "Category" },
-                { value: "League", text: "League" },
-                { value: "Age Group", text: "Age Group" },
                 { value: "Member Count", text: "Member Count" },
               ],
         }
