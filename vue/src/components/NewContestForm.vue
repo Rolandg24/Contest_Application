@@ -27,6 +27,13 @@
         v-model="newContest.contestLocation" />
     </div>
 
+    <!-- Category Field -->
+    <div class="mb-3">
+      <label for="inputLocation" class="form-label">Category</label>
+      <input type="text" class="form-control" id="inputLocation" placeholder="Enter Category"
+        v-model="newContest.contestCategoryName" />
+    </div>
+
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
@@ -46,6 +53,7 @@ export default {
         contestDescription: '',
         dateAndTime: '',
         contestLocation: '',
+        contestCategoryName: ''
       }
     };
   },
@@ -59,6 +67,7 @@ export default {
           this.newContest.dateAndTime = this.contest.dateAndTime;
           this.newContest.contestLocation = this.contest.contestLocation;
           this.newContest.contestId = this.contest.contestId;
+          this.newContest.contestCategoryName = this.contest.contestCategoryName;
           
         })
     },
