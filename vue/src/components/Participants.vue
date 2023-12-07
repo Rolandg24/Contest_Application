@@ -13,6 +13,7 @@
 </div> -->
 
 <!-- IMAGE ON SIDE TEMPLATE --> 
+<div class="ParticipantContainer">
 <div id="participant-card" class="card mb-3" style="max-width: 540px;"  v-for="participant in participants" v-bind:key="participant.participantId">
   <div class="row g-0">
     <div class="col-md-4">
@@ -27,7 +28,7 @@
     </div>
   </div>
 </div>
-
+</div>
 <!-- ORIGINAL -->
 <!-- <div class="ParticipantInfo">
   <div class="ParticipantContainer" v-for="participant in participants" v-bind:key="participant.participantId">
@@ -62,18 +63,18 @@ export default {
 
 <style scoped>
 .ParticipantInfo {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
-    background-color: #FFF7D4;
+    background-color: white;
 }
 
 .ParticipantContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     margin: 4px;
     border-radius: 5px;
     padding: 10px;
-    background-color: #FFD95A;
+    background-color:white;
 }
 
 #participant-card {

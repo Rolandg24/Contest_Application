@@ -16,11 +16,11 @@
 }
 
 #capstone-app {
-  background-color: #FFF7D4;
+  background-color: whitesmoke;
 }
 
 body {
-background-color: #FFF7D4;
+background-color: whitesmoke;
 }
 
 
