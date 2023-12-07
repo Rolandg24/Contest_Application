@@ -1,7 +1,6 @@
 <template>
   <div class="header">
     <h1>Competitor</h1>
-    <img class="Logo" src="../assets/1st_Draft_Logo.png" alt="Draft Logo of Man Climbing Mountain">
   </div>
   <div class="main-body">
     
@@ -46,10 +45,10 @@ export default {
   font-weight: bold;
 }
 
-.footer {
+/* .footer {
   background-color: #009EE2;
   font-family: Lato, sans-serif;
-}
+} */
 </style>
 
 

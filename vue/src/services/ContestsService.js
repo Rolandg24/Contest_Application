@@ -95,4 +95,5 @@ export default{
     updateSchedule (schedule, contestId){
         return http.put(`/contests/${contestId}/schedule/update`, schedule);
     },
+
 }
