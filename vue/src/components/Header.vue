@@ -1,6 +1,7 @@
 <template>
     <div id="nav">
         <div class="left-links">
+            <img class="logo" src="../assets/Gatherly_Logo.png" alt="Logo">
             <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
             <router-link class="nav-link" v-bind:to="{ name: 'contests' }">Contests</router-link>
         </div>
@@ -32,6 +33,7 @@
     font-family: 'Lato', sans-serif;
     font-size: 1.5em;
     font-weight: bold; 
+    align-items: center;
     /* flex: 0 1 auto;  */
     margin-right: auto; 
     /* pushes it towards the left */
@@ -39,9 +41,16 @@
 
 .right-links { 
     font-family: 'Lato', sans-serif;
+    align-items: center;
     /* flex: 0 1 auto;
     text-align: right; */
      font-size: 1.5em;
     font-weight: bold; 
+}
+
+.logo {
+    max-width: 20%;
+    border-radius: 7px;
+    margin-right: .5%;
 }
 </style>
