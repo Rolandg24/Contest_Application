@@ -1,7 +1,7 @@
 <template>
   <div class="OverallScores">
     <div class="OverallScores-container">
-      <h1>CONTEST NAME</h1>
+      <h1>{{ contest.contestName }}</h1>
       <table class="table">
         <thead>
           <tr>
@@ -9,10 +9,10 @@
             <th scope="col">Score</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Team Alpha</td>
-            <td>98</td>
+        <tbody v-for="score in scores" v-bind:key="score.id">
+          <tr >
+            <td>{{ score.participantName }}</td>
+            <td>{{ score.overallScore }}</td>
           </tr>
         </tbody>
       </table>
@@ -23,10 +23,23 @@
 
 <script>
 import ContestsService from "../services/ContestsService";
+import ScoresService from "../services/ScoresService";
 
 export default {
   data() {
-    return {};
+    return {
+      contestId: this.$route.params.contestId,
+      scores: [],
+      contest: {},
+    };
+  },
+  created() {
+    ContestsService.fetchContestById(this.contestId).then((response) => {
+      this.contest = response.data;
+    });
+    ScoresService.fetchOverallScoresByContestId(this.contestId).then((response) => {
+      this.scores = response.data;
+    });
   },
 };
 </script>
