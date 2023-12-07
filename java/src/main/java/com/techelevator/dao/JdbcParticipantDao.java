@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
+import com.techelevator.model.Contest;
 import com.techelevator.model.OverallScore;
 import com.techelevator.model.Participant;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -57,6 +58,24 @@ public class JdbcParticipantDao implements ParticipantDao {
             throw new DaoException("Unable to connect to database or Server", e);
         }
         return overallScores;
+    }
+
+    @Override
+    public OverallScore createOverallScore(OverallScore overallScore) {
+        OverallScore overallScoreToCreate = overallScore;
+        String sql = "INSERT INTO overall_scores (contest_id, participant_id, overall_score)" +
+                "VALUES (?, ?, ?) " +
+                "RETURNING overall_score_id;";
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, overallScoreToCreate.getContestId(), overallScoreToCreate.getParticipantId(),
+                    overallScoreToCreate.getOverallScore());
+            if (result.next()) {
+                overallScoreToCreate.setOverallScoreId(result.getInt("overall_score_id"));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database or Server", e);
+        }
+        return overallScoreToCreate;
     }
 
     private Participant mapRowToParticipant(SqlRowSet rowSet) {

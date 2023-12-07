@@ -43,6 +43,14 @@ public class ContestController {
 
     @PreAuthorize("permitAll")
     @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/contests/{id}/addOverallScores", method = RequestMethod.POST)
+    public OverallScore addNewOverallScore(@PathVariable int id, @RequestBody OverallScore overallScore) {
+
+        return participantDao.createOverallScore(overallScore);
+    }
+
+    @PreAuthorize("permitAll")
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/contests", method = RequestMethod.POST)
     public Contest addNewContest(@RequestBody Contest contestToAdd) {
 
