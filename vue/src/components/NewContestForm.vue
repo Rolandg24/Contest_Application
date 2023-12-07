@@ -1,5 +1,6 @@
 <template>
-  <form v-on:submit.prevent="submitForm">
+  <h1 class="new-contest-title">Add New Contest</h1>
+  <form class="new-contest-form" v-on:submit.prevent="submitForm">
     <!-- Name Field -->
     <div class="mb-3">
       <label for="inputName" class="form-label">Name</label>
@@ -100,4 +101,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.new-contest-form {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.new-contest-title {
+  text-align: center;
+}
+
+</style>
