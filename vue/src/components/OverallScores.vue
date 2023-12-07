@@ -5,14 +5,12 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Place</th>
             <th scope="col">Name</th>
             <th scope="col">Score</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row">1</th>
             <td>Team Alpha</td>
             <td>98</td>
           </tr>
