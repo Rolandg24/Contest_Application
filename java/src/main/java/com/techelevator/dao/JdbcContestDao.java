@@ -24,10 +24,11 @@ public class JdbcContestDao implements ContestDao {
     }
 
     @Override
-    public List<Contest> fetchListOfContests() {
+    public List<Contest> fetchListOfContests() { // AJH: updated to add category name
         List<Contest> contestList = new ArrayList<>();
-        String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location " +
-                "FROM contests";
+        String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location, contest_categories.category_name " +
+                "FROM contests " +
+                "JOIN contest_categories on contests.category_id = contest_categories.category_id";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
@@ -41,11 +42,12 @@ public class JdbcContestDao implements ContestDao {
     }
 
     @Override
-    public Contest fetchContestById(int id) {
+    public Contest fetchContestById(int id) { // AJH: updated to add category name
         Contest contest = null;
 
-        String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location " +
+        String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location, contest_categories.category_name " +
                 "FROM contests " +
+                "JOIN contest_categories on contests.category_id = contest_categories.category_id " +
                 "WHERE contest_id = ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
@@ -60,14 +62,14 @@ public class JdbcContestDao implements ContestDao {
 
 
     @Override
-    public Contest createContest(Contest contest) {
+    public Contest createContest(Contest contest) { // AJH: updated to add category name
         Contest contestToCreate = contest;
-        String sql = "INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location)" +
-                "VALUES (?, ?, ?, ?) " +
-                "RETURNING contest_id;";
+        String sql = "INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location, category_id) " +
+                "VALUES (?, ?, ?, ?,(SELECT category_id FROM contest_categories WHERE category_name = ?)) " +
+                "RETURNING contest_id";
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, contest.getContestName(), contest.getContestDescription(),
-                    contest.getDateAndTime(), contest.getContestLocation());
+                    contest.getDateAndTime(), contest.getContestLocation(), contest.getContestCategoryName());
             if (result.next()) {
                 contestToCreate.setContestId(result.getInt("contest_id"));
             }
@@ -79,14 +81,14 @@ public class JdbcContestDao implements ContestDao {
     }
 
     @Override
-    public Contest updateContest(Contest contest) {
+    public Contest updateContest(Contest contest) { // AJH: updated to add category name
         String sql = "UPDATE contests " +
-                "SET contest_name = ?, contest_description = ?, contest_date_time = ?, contest_location = ? " +
+                "SET contest_name = ?, contest_description = ?, contest_date_time = ?, contest_location = ?, category_id = (SELECT category_id FROM contest_categories WHERE category_name = ?) " +
                 "WHERE contest_id = ?";
         int rowCount = NOT_UPDATED;
         try {
             rowCount = jdbcTemplate.update(sql, contest.getContestName(), contest.getContestDescription(), contest.getDateAndTime(),
-                    contest.getContestLocation(), contest.getContestId());
+                    contest.getContestLocation(),  contest.getContestCategoryName(), contest.getContestId());
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
@@ -99,7 +101,7 @@ public class JdbcContestDao implements ContestDao {
 
     //TODO clean up
     @Override
-    public int deleteContest(int contestId) {
+    public int deleteContest(int contestId) { // AJH: no adjustments needed for adding category to contest
 
         String sql = "START TRANSACTION; " +
                 "DELETE FROM time_slots " +
@@ -204,6 +206,7 @@ public class JdbcContestDao implements ContestDao {
         contest.setContestDescription(rowSet.getString("contest_description"));
         contest.setDateAndTime(rowSet.getString("contest_date_time"));
         contest.setContestLocation(rowSet.getString("contest_location"));
+        contest.setContestCategoryName(rowSet.getString("category_name"));
         return contest;
     }
 }
