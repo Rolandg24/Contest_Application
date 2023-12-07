@@ -1,6 +1,5 @@
 <template>
 <!--SEARCH BAR-->
-
 <form class="d-flex" role="search">
   <div class="form-group">
           <label for="salary">Filter by:</label>
@@ -10,6 +9,7 @@
         </div>
         <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="participantFilter">
 </form>
+
 <!-- IMAGE ON SIDE TEMPLATE --> 
 <div class="ParticipantContainer">
 <div id="participant-card" class="card mb-3" style="max-width: 540px;"  v-for="participant in filteredParticipants" v-bind:key="participant.participantId">

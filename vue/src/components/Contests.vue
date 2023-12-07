@@ -1,11 +1,26 @@
 <template>
+
+  <!--SEARCH BAR-->
+<form class="d-flex" role="search">
+  <div class="form-group">
+          <label for="salary">Filter by:</label>
+          <select v-model="selectedValue">
+            <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
+          </select>
+        </div>
+        <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="contestFilter">
+</form>
+
+<router-link v-bind:to="{ name: 'NewContest' }">Add Contest</router-link>
+
   <div class="ContestInfo">
     
-    <div class="card" style="width: 18rem" v-for="contest in $store.state.contests"
+    <div class="card" style="width: 18rem" v-for="contest in filteredContests"
       v-bind:key="contest.contestId">
       <img src="../assets/1st_Draft_Logo.png" class="card-img-top" alt="placeholder" />
       <div class="card-body">
         <h5 class="card-title">{{ contest.contestName }}</h5>
+        <p class="card-text">{{ contest.contestCategoryName }}</p>
         <p class="card-text">{{ contest.contestLocation }}</p>
         <p class="card-text">{{ contest.dateAndTime }}</p>
         <div class="btn-container">
@@ -28,6 +43,44 @@
 import ContestsService from "../services/ContestsService";
 import ErrorService from "../services/ErrorService";
 export default {
+  data(){
+        return {
+            contests: [],
+            contestFilter: '',
+            selectedValue: '',
+            options: [
+                { value: "", text: "" },
+                { value: "Name", text: "Name" },
+                { value: "Date", text: "Date" },
+                { value: "Location", text: "Location" },
+                { value: "Category", text: "Category" },
+              ],
+        }
+    },
+    computed: {
+      filteredContests() {
+        const contests = this.contests;
+        return contests.filter((contest) => {
+          if (this.selectedValue == 'Name') {
+          return this.contestFilter == ""
+            ? true
+            : contest.contestName.includes(this.contestFilter);
+          }  else if(this.selectedValue == 'Date') {
+          return this.contestFilter == ""
+            ? true
+            : contest.dateAndTime.includes(this.contestFilter);
+          } else if (this.selectedValue == 'Location') {
+          return this.contestFilter == ""
+            ? true
+            : contest.contestLocation.includes(this.contestFilter);
+          } else if (this.selectedValue == 'Category') {
+          return this.contestFilter == ""
+            ? true
+            : contest.contestCategoryName.includes(this.contestFilter);
+          }else { return true}
+        });
+      },
+    },
   created() {
     this.fetchContests();
   },
@@ -59,6 +112,7 @@ export default {
     fetchContests() {
       ContestsService.fetchContests().then((response) => {
         this.$store.commit("SET_CONTESTS", response.data);
+        this.contests = response.data;
       });
     },
   },
