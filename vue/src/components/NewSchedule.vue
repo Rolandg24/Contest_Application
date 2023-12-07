@@ -1,16 +1,15 @@
 <template>
-    <form v-on:submit.prevent="submitSchedule">
-        <div class="ParticipantInfo">
-            <div class="ParticipantContainer" v-for="(participant) in participants"
+    <h1 class="add-schedule-title">Add Schedule</h1>
+    <form class="participant-info" v-on:submit.prevent="submitSchedule">
+            <div class="participant-container" v-for="(participant) in participants"
                 v-bind:key="participant.participantId">
                 <p>{{ participant.participantName }}</p>
-                <!-- <p v-bind="scheduleTimeSlotObject.participantId">{{ participant.participantId }}</p> -->
-                <input type="text" class="form-control" id="inputLocation" placeholder="Enter time slot"
-                    v-model="participant.timeSlot" />
+                <input type="time" class="form-control" id="inputLocation" v-model="participant.timeSlot" />
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        
     </form>
+
 </template>
 
 <script>
@@ -68,7 +67,27 @@ export default {
 
 
 <style scoped>
-.participant-container {
-    display: flex;
+.participant-info{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.participant-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+}
+
+.participant-container > P {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.add-schedule-title {
+    text-align: center;
+}
+
+.form-control {
+    max-width: 125px;
 }
 </style>

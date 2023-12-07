@@ -53,9 +53,8 @@ export default {
 .OverallScores-container {
   background-color: whitesmoke;
   text-align: center;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 1%;
-  border-radius: 5px;
+  margin-left: 30%;
+  margin-right: 30%;
+  padding-top: 1%;
 }
 </style>

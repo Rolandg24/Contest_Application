@@ -21,10 +21,12 @@ export default {
 
 #capstone-app {
   background-color: whitesmoke;
+  
 }
 
 body {
 background-color: whitesmoke;
+
 }
 
 
