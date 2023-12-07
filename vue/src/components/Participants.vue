@@ -80,7 +80,4 @@ export default {
     margin-left: 10%;
 }
 
-img {
-    /* max-height: 200px; */
-}
 </style>
