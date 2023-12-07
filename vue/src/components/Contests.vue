@@ -12,6 +12,12 @@
             <a href="#" class="btn btn-primary">Details</a>
             <a href="#" class="btn btn-primary">Register</a>
         </div>
+            <div class="link-container">
+                <router-link v-bind:to="{ name: 'participants', params: { contestId: contest.contestId }}">Participants</router-link>
+                <a href="#" v-on:click="$router.push({ name: 'Schedule',params: { contestId: contest.contestId }})">Schedule</a>
+                <a href="#" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})">Add Schedule</a>
+                <a href="#" v-on:click="deleteContest(contest.contestId)">Delete</a>
+            </div>
       </div>
     </div>
 
@@ -151,5 +157,10 @@ export default {
 .btn-container {
     display: flex;
     justify-content: space-between;
+}
+
+.link-container {
+    display: flex;
+    flex-direction: column;
 }
 </style>
