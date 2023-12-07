@@ -1,20 +1,18 @@
 <template>
+<!--SEARCH BAR-->
 
-<!-- IMAGE ON TOP TEMPLATE -->    
-<!-- <div class="ParticipantContainer" >
-    <div id="participant-card" class="card mb-3" v-for="participant in participants" v-bind:key="participant.participantId">
-    <img src="../assets/1st_Draft_Logo.png" class="card-img-top" alt="placeholder">
-    <div class="card-body">
-        <h5 class="card-title">{{ participant.participantName }}</h5>
-        <p class="card-text">Description: {{ participant.participantDescription }}</p>
-        <p class="card-text"><small class="text-body-secondary">Member Count: {{ participant.memberCount }}</small></p>
-    </div>
-    </div>
-</div> -->
-
+<form class="d-flex" role="search">
+  <div class="form-group">
+          <label for="salary">Filter by:</label>
+          <select v-model="selectedValue">
+            <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
+          </select>
+        </div>
+        <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="participantFilter">
+</form>
 <!-- IMAGE ON SIDE TEMPLATE --> 
 <div class="ParticipantContainer">
-<div id="participant-card" class="card mb-3" style="max-width: 540px;"  v-for="participant in participants" v-bind:key="participant.participantId">
+<div id="participant-card" class="card mb-3" style="max-width: 540px;"  v-for="participant in filteredParticipants" v-bind:key="participant.participantId">
   <div class="row g-0">
     <div class="col-md-4">
       <img src="../assets/1st_Draft_Logo.png" class="img-fluid rounded-start" alt="placeholder">
@@ -29,14 +27,6 @@
   </div>
 </div>
 </div>
-<!-- ORIGINAL -->
-<!-- <div class="ParticipantInfo">
-  <div class="ParticipantContainer" v-for="participant in participants" v-bind:key="participant.participantId">
-    <h1>{{ participant.participantName }}</h1>
-    <p>Description: {{ participant.participantDescription }}</p>
-    <p>Member Count: {{ participant.memberCount }}</p>
-  </div>
-</div> -->
 
 </template>
 
@@ -46,10 +36,40 @@ export default {
     data(){
         return {
             contestId: this.$route.params.contestId,
-            participants: []
+            participants: [],
+            participantFilter: '',
+            selectedValue: '',
+            options: [
+                { value: "", text: "" },
+                { value: "Name", text: "Name" },
+                { value: "Description", text: "Description" },
+                { value: "Category", text: "Category" },
+                { value: "League", text: "League" },
+                { value: "Age Group", text: "Age Group" },
+                { value: "Member Count", text: "Member Count" },
+              ],
         }
     },
-
+    computed: {
+      filteredParticipants() {
+      const participants = this.participants;
+      return participants.filter((participant) => {
+        if (this.selectedValue == 'Name') {
+        return this.participantFilter == ""
+          ? true
+          : participant.participantName.includes(this.participantFilter);
+        }  else if(this.selectedValue == 'Member Count') {
+        return this.participantFilter == ""
+          ? true
+          : participant.memberCount === parseInt(this.participantFilter, 10);
+        } else if (this.selectedValue == 'Description') {
+        return this.participantFilter == ""
+          ? true
+          : participant.participantDescription.includes(this.participantFilter);
+        } else { return true}
+      });
+    },
+    },
     created(){
         ContestsService.fetchParticipantsById(this.contestId).then((response) => {
             this.participants=response.data;

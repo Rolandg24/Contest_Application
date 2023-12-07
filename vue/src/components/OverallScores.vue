@@ -2,6 +2,7 @@
   <div class="OverallScores">
     <div class="OverallScores-container">
       <h1>{{ contest.contestName }}</h1>
+      <a href="#" v-on:click="$router.push({ name: 'AddScore',params: { contestId: contest.contestId }})">Add Score</a>
       <table class="table">
         <thead>
           <tr>
