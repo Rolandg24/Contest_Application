@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">{{ participant.participantName }}</h5>
+        <h4 class="card-title">{{ participant.participantName }}</h4>
         <p class="card-text">Description: {{ participant.participantDescription }}</p>
         <p class="card-text"><small class="text-body-secondary">Member Count: {{ participant.memberCount }}</small></p>
       </div>
@@ -82,7 +82,7 @@ export default {
 .ParticipantInfo {
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: whitesmoke;
 }
 
 .ParticipantContainer {
@@ -91,15 +91,29 @@ export default {
     margin: 4px;
     border-radius: 5px;
     padding: 10px;
-    background-color:white;
+    background-color:whitesmoke;
 }
 
 #participant-card {
-    margin-left: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .ParticipantContainer {
   background: whitesmoke;
 }
 
+.d-flex{
+  padding-top: 15px;
+  background: whitesmoke;
+
+}
+
+.form-group {
+  padding-left: 15px;
+}
+.card{
+
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
 </style>
