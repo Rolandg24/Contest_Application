@@ -20,78 +20,7 @@
                 <a href="#" v-on:click="deleteContest(contest.contestId)">Delete</a>
             </div>
       </div>
-    </div>
-
-    <!-- <div
-      class="ContestContainer"
-      v-for="contest in $store.state.contests"
-      v-bind:key="contest.contestId"
-    >
-      <h1>{{ contest.contestName }}</h1>
-      <p>{{ contest.contestLocation }}</p>
-      <p>{{ contest.dateAndTime }}</p>
-      <div>
-        <router-link
-          v-bind:to="{
-            name: 'participants',
-            params: { contestId: contest.contestId },
-          }"
-          >Participants</router-link
-        >
-      </div>
-      <div>
-        <a
-          href="#"
-          v-on:click="
-            $router.push({
-              name: 'Schedule',
-              params: { contestId: contest.contestId },
-            })
-          "
-          >Schedule</a
-        >
-       
-      </div>
-      <div>
-        <a
-          href="#"
-          v-on:click="
-            $router.push({
-              name: 'AddSchedule',
-              params: { contestId: contest.contestId },
-            })
-          "
-          >Add Schedule</a
-        >
-      </div>
-      <div>
-        <a
-          href="#"
-          v-on:click="
-            $router.push({
-              name: 'UpdateContest',
-              params: { contestId: contest.contestId },
-            })
-          "
-          >Update</a
-        >
-      </div>
-      <div>
-        <a href="#" v-on:click="deleteContest(contest.contestId)">Delete</a>
-      </div>
-      <div>
-        <a
-          href="#"
-          v-on:click="
-            $router.push({
-              name: 'OverallScores',
-              params: { contestId: contest.contestId },
-            })
-          "
-          >Scores</a
-        >
-      </div>
-    </div> -->
+    </div>  
   </div>
 </template>
 

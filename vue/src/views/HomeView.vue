@@ -1,8 +1,16 @@
 <template>
-  <div class="home">
+  <div class="header">
+    <h1>Competitor</h1>
     <img class="Logo" src="../assets/1st_Draft_Logo.png" alt="Draft Logo of Man Climbing Mountain">
-    <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+  </div>
+  <div class="main-body">
+    
+  </div>
+  <div class="footer"><p>You must be authenticated to see this</p></div>
+  <div class="home">
+
+   
+    
   </div>
 </template>
 
@@ -11,7 +19,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+
+
 .Logo {
   display: block;
   margin-left: auto;
@@ -22,4 +33,23 @@ export default {
 .home {
   text-align: center;
 }
+
+.header{
+  background-color: #0064AC;
+  font-family: Lato, sans-serif;
+  font-weight: bold;
+}
+
+.main-body {
+  background-color: whitesmoke;
+  font-family: Lato, sans-serif;
+  font-weight: bold;
+}
+
+.footer {
+  background-color: #009EE2;
+  font-family: Lato, sans-serif;
+}
 </style>
+
+

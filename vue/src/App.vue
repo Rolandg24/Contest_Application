@@ -1,13 +1,17 @@
 <template>
+  <HeaderView/>
   <div id="capstone-app">
-    <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
-      <router-link v-bind:to="{ name: 'contests' }">Contests</router-link>&nbsp;|&nbsp;
-    </div>
     <router-view />
   </div>
 </template>
+<script>
+import HeaderView from './views/HeaderView.vue';
+export default {
+  components: {
+    HeaderView
+  }
+}
+</script>
 <style scoped>
 #nav {
   display: flex;
