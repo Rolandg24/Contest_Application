@@ -1,6 +1,5 @@
 <template>
     <div class="ContestInfo">
-
         <div class="ContestContainer" v-for="contest in $store.state.contests" v-bind:key="contest.contestId">
             <h1>{{ contest.contestName }}</h1>
             <p>{{ contest.contestLocation }}</p>
@@ -24,10 +23,7 @@
             <div>
                 <a href="#" v-on:click="$router.push({ name: 'OverallScores', params: {contestId: contest.contestId} })">Scores</a>
             </div>
-
-
         </div>
-
     </div>
 </template>
 
@@ -69,9 +65,13 @@ export default {
 
 <style>
 .ContestInfo {
+
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    /* display: grid;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     background-color: #FFF7D4;
 }
 
