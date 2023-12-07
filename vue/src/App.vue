@@ -20,7 +20,7 @@ export default {
 }
 
 #capstone-app {
-  background-color: whitesmoke;
+  background-image: url(../assets/1st_Draft_Logo.png);
   min-height: 100vh;
 }
 
