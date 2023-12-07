@@ -13,7 +13,8 @@
 </form>
 </div>
 <div class="btn btn-primary" id="add-contest">
-<a href="#" v-bind:to="{ name: 'NewContest' }" class="btn btn-primary">Add Contest</a>
+  <router-link :to="{ name: 'NewContest' }" class="btn btn-primary">Add Contest</router-link>
+
 </div>
 
   <div class="ContestInfo">
@@ -165,7 +166,7 @@ export default {
   margin-bottom: 10px;
 }
 
-.card {
-
+body {
+  background-color: whitesmoke;
 }
 </style>

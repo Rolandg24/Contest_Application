@@ -116,4 +116,13 @@ export default {
 
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
+
+.card:hover {
+    background-color: #a9e2fa; /* Color change on hover */
+    transform: scale(1.03); /* Slightly enlarges the row */
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1); /* Adds a subtle shadow for depth */
+}
+
+
 </style>
+
