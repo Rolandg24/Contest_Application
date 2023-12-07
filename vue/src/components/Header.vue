@@ -1,7 +1,7 @@
 <template>
     <div id="nav">
         <div class="left-links">
-            <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+            <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|
             <router-link v-bind:to="{ name: 'contests' }">Contests</router-link>
         </div>
         <div class="right-links">
