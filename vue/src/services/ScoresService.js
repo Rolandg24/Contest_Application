@@ -15,8 +15,15 @@ export default{
         return http.get(`/contests/${contestId}/overallScores`);
     },
 
-    createNewScore(newScore){
-
+    /**
+     * This function takes in a contest id and a new score object and creates
+     * a new score for the contest of the given contest id.
+     * @param {number} contestId 
+     * @param {Object} newScore 
+     * @returns the new score
+     */
+    createNewScore(contestId, newScore){
+        return http.post(`/contests/${contestId}/addOverallScores`, newScore);
     }
 
 }
