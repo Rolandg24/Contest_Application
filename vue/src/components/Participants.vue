@@ -98,4 +98,8 @@ export default {
     margin-left: 10%;
 }
 
+.ParticipantContainer {
+  background: whitesmoke;
+}
+
 </style>

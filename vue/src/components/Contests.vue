@@ -1,6 +1,7 @@
 <template>
 
   <!--SEARCH BAR-->
+<div class="filter-container">
 <form class="d-flex" role="search">
   <div class="form-group">
           <label for="salary">Filter by:</label>
@@ -10,19 +11,20 @@
         </div>
         <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="contestFilter">
 </form>
-
-<router-link v-bind:to="{ name: 'NewContest' }">Add Contest</router-link>
+</div>
+<div class="btn btn-primary" id="add-contest">
+<a href="#" v-bind:to="{ name: 'NewContest' }" class="btn btn-primary">Add Contest</a>
+</div>
 
   <div class="ContestInfo">
     
-    <div class="card" style="width: 18rem" v-for="contest in filteredContests"
+    <div class="card" style="width: 25rem" v-for="contest in filteredContests"
       v-bind:key="contest.contestId">
       <img src="../assets/1st_Draft_Logo.png" class="card-img-top" alt="placeholder" />
       <div class="card-body">
-        <h5 class="card-title">{{ contest.contestName }}</h5>
-        <p class="card-text">{{ contest.contestCategoryName }}</p>
-        <p class="card-text">{{ contest.contestLocation }}</p>
-        <p class="card-text">{{ contest.dateAndTime }}</p>
+        <h3 class="card-title text-center" >{{ contest.contestName }}</h3>
+        <h5 class="card-text text-center">Category: {{ contest.contestCategoryName }}</h5>
+        <p class="card-text">Location: {{ contest.contestLocation }} <br>Date: {{ contest.dateAndTime }}</p>
         <div class="btn-container">
             <a href="#" class="btn btn-primary">Details</a>
             <a href="#" class="btn btn-primary">Register</a>
@@ -123,12 +125,12 @@ export default {
 .ContestInfo {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  gap: 30px;
   justify-content: center;
   align-items: center;
-  margin-left: 15%;
-  margin-right: 15%;
-  background-color: #fff7d4;
+  margin-left: 20%;
+  margin-right: 20%;
+  background-color: whitesmoke;
 }
 
 .ContestContainer {
@@ -146,5 +148,24 @@ export default {
 .link-container {
     display: flex;
     flex-direction: column;
+}
+
+.filter-container {
+  padding-top: 1%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+#add-contest {
+  display: block;
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card {
+
 }
 </style>
