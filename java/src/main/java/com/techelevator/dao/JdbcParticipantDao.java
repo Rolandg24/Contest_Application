@@ -45,7 +45,8 @@ public class JdbcParticipantDao implements ParticipantDao {
                 "overall_scores.overall_score, participants.participant_name " +
                 "FROM overall_scores " +
                 "JOIN participants ON participants.participant_id = overall_scores.participant_id " +
-                "WHERE overall_scores.contest_id = ?";
+                "WHERE overall_scores.contest_id = ? " +
+                "ORDER BY overall_score DESC";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, contestId);
