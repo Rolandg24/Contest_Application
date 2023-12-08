@@ -97,8 +97,8 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
     @Test // todo
     public void delete_Contest_Deletes_Contest() {
         sut.deleteContest(2);
-        Assert.assertEquals(null,sut.fetchContestById(2));
-        Assert.assertEquals(null,but.fetchListOfParticipantByContestId(2));
+        Assert.assertEquals(0,sut.fetchContestById(2));
+        Assert.assertEquals(0,but.fetchListOfParticipantByContestId(2));
     }
 
     @Test
