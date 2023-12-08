@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,12 +14,15 @@ import java.util.List;
 public class JdbcContestDaoTests  extends BaseDaoTests {
 
     private JdbcContestDao sut;
+    private JdbcParticipantDao but;
     private JdbcTemplate jdbcTemplate;
 
     //test variables
     private final int NUMBER_OF_CONTESTS = 25;
     private final Contest TEST_CONTEST = new Contest();
     private final Contest UPDATED_CONTEST = new Contest();
+    private final ScheduleTimeSlot TEST_TIME_SLOT = new ScheduleTimeSlot();
+    private final ScheduleTimeSlot UPDATED_TIME_SLOT = new ScheduleTimeSlot();
     private final int EXPECTED_ID = 1; //set to a contest id that exists
     private final int ID_TO_FETCH = 5;
     private final int EXPECTED_ID_FROM_FETCH = 5;
@@ -28,6 +32,9 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
     public void setup() {
         jdbcTemplate = new JdbcTemplate(dataSource);
         sut = new JdbcContestDao(jdbcTemplate);
+
+        jdbcTemplate = new JdbcTemplate(dataSource);
+        but = new JdbcParticipantDao(jdbcTemplate);
 
         //set TEST_CONTEST properties
         TEST_CONTEST.setContestDescription("TEST DESCRIPTION");
@@ -41,6 +48,19 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
         UPDATED_CONTEST.setContestName("UPDATED NAME");
         UPDATED_CONTEST.setDateAndTime("2025-05-05");
         UPDATED_CONTEST.setContestId(EXPECTED_ID);
+
+        //set TEST_SCHEDULE properties
+        TEST_TIME_SLOT.setContestId(5);
+        TEST_TIME_SLOT.setParticipantId(3);
+        TEST_TIME_SLOT.setTimeSlot("11:00 AM");
+        TEST_TIME_SLOT.setParticipantName("JOHN DOE");
+
+        //set UPDATED_CONTEST properties and id to EXPECTED_ID
+        UPDATED_TIME_SLOT.setContestId(3);
+        UPDATED_TIME_SLOT.setParticipantId(4);
+        UPDATED_TIME_SLOT.setTimeSlot("9:00 AM");
+        UPDATED_TIME_SLOT.setParticipantName("JANE DOE");
+        UPDATED_TIME_SLOT.setTimeSlotId(1);
 
     }
 
@@ -74,9 +94,11 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
         compareContests(UPDATED_CONTEST, returnedContest);
     }
 
-    @Test
+    @Test // todo
     public void delete_Contest_Deletes_Contest() {
-        Assert.fail();
+        sut.deleteContest(2);
+        Assert.assertEquals(null,sut.fetchContestById(2));
+        Assert.assertEquals(null,but.fetchListOfParticipantByContestId(2));
     }
 
     @Test
@@ -85,6 +107,29 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
         Assert.assertEquals(NUMBER_OF_SCHEDULE_TIME_SLOTS, returnedList.size());
     }
 
+    @Test
+    public void create_schedule_creates_schedule(){
+        ScheduleTimeSlot returnedTimeSlot = sut.createSchedule(TEST_TIME_SLOT);
+        TEST_TIME_SLOT.setContestId(returnedTimeSlot.getContestId());
+        compareScheduleTimeSlots(returnedTimeSlot, TEST_TIME_SLOT);
+    }
+    @Test
+    public void update_schedule_updates_schedule(){
+        //Change properties of TEST_TIME_SLOT and set id to EXPECTED_ID
+        UPDATED_TIME_SLOT.setContestId(3);
+        UPDATED_TIME_SLOT.setParticipantId(4);
+        UPDATED_TIME_SLOT.setTimeSlot("9:00 AM");
+        UPDATED_TIME_SLOT.setParticipantName("JANE DOE");
+        UPDATED_TIME_SLOT.setTimeSlotId(1);
+
+
+        ScheduleTimeSlot returnedTimeslot = sut.updateSchedule(UPDATED_TIME_SLOT);
+        //compare returnedContest to UPDATED_TIME_SLOT
+        compareScheduleTimeSlots(UPDATED_TIME_SLOT, returnedTimeslot);
+    }
+
+
+
     private void compareContests(Contest actual, Contest expected) {
         Assert.assertEquals(actual.getContestId(), expected.getContestId());
         Assert.assertEquals(actual.getContestName(), expected.getContestName());
@@ -92,4 +137,10 @@ public class JdbcContestDaoTests  extends BaseDaoTests {
         Assert.assertEquals(actual.getContestLocation(), expected.getContestLocation());
     }
 
+    private void compareScheduleTimeSlots(ScheduleTimeSlot actual, ScheduleTimeSlot expected) {
+        Assert.assertEquals(actual.getContestId(), expected.getContestId());
+        Assert.assertEquals(actual.getParticipantId(), expected.getParticipantId());
+        Assert.assertEquals(actual.getTimeSlot(), expected.getTimeSlot());
+        Assert.assertEquals(actual.getParticipantName(), expected.getParticipantName());
+    }
 }
