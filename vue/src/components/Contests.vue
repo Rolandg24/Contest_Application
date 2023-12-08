@@ -134,6 +134,11 @@ export default {
   background-color: whitesmoke;
 }
 
+.card:hover{
+  box-shadow: 10px 20px 30px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  transform: scale(1.03);
+}
+
 .ContestContainer {
   margin: 4px;
   border-radius: 5px;

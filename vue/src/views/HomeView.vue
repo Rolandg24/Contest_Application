@@ -1,15 +1,17 @@
 <template>
   <div class="header">
-    <h1>GATHERLY</h1>
+    <p>breadcrumb placeholder</p>
   </div>
   <div class="main-body">
-    <img class="home-page-banner" src="../assets/1st_Draft_HomePic.png" alt="home page image">
+    
+    <figure id="logo-container" class="figure">
+      <img id="logo" src="../assets/Gatherly_Logo.png" class="rounded mx-auto d-block" alt="...">
+      <figcaption class="figure-caption text-center">Awesome catchphrase!</figcaption>
+    </figure>
+
   </div>
   <div class="footer"><p>You must be authenticated to see this</p></div>
-  <div class="home">
-
-   
-    
+  <div class="home">  
   </div>
 </template>
 
@@ -20,12 +22,7 @@ export default {
 
 <style scoped>
 
-
-
-.Logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+#logo {
   width: 50%
 }
 
@@ -40,7 +37,28 @@ export default {
 }
 
 .main-body {
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  background-image: url('../assets/1st_Draft_HomePic.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  font-family: Lato, sans-serif;
+  font-weight: bold;
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.figure-caption{
+  color: white;
   font-family: Lato, sans-serif;
   font-weight: bold;
 }

@@ -18,10 +18,13 @@ export default {
   justify-content: center;
   align-items: center;
 }
+html {
+  background-image: url("./assets/Draft_HomePic.png");
+
+}
 
 #capstone-app {
-  background-image: url(../assets/1st_Draft_Logo.png);
-  min-height: 100vh;
+
 }
 
 body {
