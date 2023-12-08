@@ -1,7 +1,10 @@
 <template>
     <div id="nav">
+        
         <div class="left-links">
-            <img class="logo" src="../assets/Gatherly_Logo.png" alt="Logo">
+            <router-link  v-bind:to="{ name: 'home' }">
+                <img class="logo" src="../assets/Gatherly_Logo.png" alt="Logo">
+            </router-link>
             <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
             <router-link class="nav-link" v-bind:to="{ name: 'contests' }">Contests</router-link>
         </div>
