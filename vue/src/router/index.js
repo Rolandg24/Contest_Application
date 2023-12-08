@@ -14,6 +14,7 @@ import ScheduleView from '../views/ScheduleView.vue';
 import NewScheduleView from '../views/NewScheduleView.vue';
 import OverallScoresView from '../views/OverallScoresView.vue';
 import AddScoreView from '../views/AddScoreView.vue';
+import ContestDetailsView from '../views/ContestDetailsView.vue'
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -116,6 +117,14 @@ const routes = [
     path: '/contests/:contestId/addScore',
     name: 'AddScore',
     component: AddScoreView,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/contests/:contestId/contestDetails',
+    name: 'ContestDetails',
+    component: ContestDetailsView,
     meta: {
       requiresAuth: false
     }
