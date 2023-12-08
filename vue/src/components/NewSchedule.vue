@@ -1,4 +1,5 @@
 <template>
+<div class="add-schedule-container">
     <h1 class="add-schedule-title">Add Schedule</h1>
     <form class="participant-info" v-on:submit.prevent="submitSchedule">
             <div class="participant-container" v-for="(participant) in participants"
@@ -6,10 +7,11 @@
                 <p>{{ participant.participantName }}</p>
                 <input type="time" class="form-control" id="inputLocation" v-model="participant.timeSlot" />
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        
+            <div class="d-flex justify-content-center pt-2 pb-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
     </form>
-
+</div>
 </template>
 
 <script>
@@ -89,5 +91,9 @@ export default {
 
 .form-control {
     max-width: 125px;
+}
+
+.add-schedule-container{
+    font-family: Lato, sans-serif;
 }
 </style>
