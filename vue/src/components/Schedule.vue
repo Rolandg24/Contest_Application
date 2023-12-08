@@ -88,7 +88,7 @@ th, td {
 
 th {
     background-color: #009ee2;
-    color: whitesmoke;
+    color: white;
     font-weight: bold;
     font-family: 'Lato', sans-serif;
 }
@@ -110,4 +110,5 @@ tr:hover {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     font-family: 'Lato', sans-serif;
     /* Adds a subtle shadow for depth */
-}</style>
+}
+</style>
