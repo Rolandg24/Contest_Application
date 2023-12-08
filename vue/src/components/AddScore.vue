@@ -1,21 +1,25 @@
 <template>
+<div class="add-score-container">
   <h1>Add Score</h1>
   <form v-on:submit.prevent="submitScore">
   <div class="form-group" >
-        <label for="salary">Participant:</label>
-        <select v-model="newScore.participantId">
-            <option v-for="participant in participants" v-bind:value="participant.participantId" v-bind:key="participant.participantId">
-                {{participant.participantId}} : {{ participant.participantName }}
-            </option>
-        </select>
-        <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Score</span>
-            <input type="text" v-model="newScore.overallScore" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        <div class="score-input-container">
+            <select v-model="newScore.participantId">
+                <option value="" disabled selected>Pick Participant</option>
+                <option v-for="participant in participants" v-bind:value="participant.participantId" v-bind:key="participant.participantId">
+                    {{participant.participantId}} : {{ participant.participantName }}
+                </option>
+            </select>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Score</span>
+                <input type="text" v-model="newScore.overallScore" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
         </div>
-        <a href="#" v-on:click="submitScore">Submit</a>
+            <a href="#" class="btn btn-primary" v-on:click="submitScore">Submit</a>
+        
     </div>
 </form>
-
+</div>
 </template>
 
 <script>
@@ -61,5 +65,15 @@ export default {
 </script>
 
 <style>
+.add-score-container {
+    font-family: Lato, sans-serif; 
+    text-align: center;
+}
 
+.score-input-container {
+    display: flex;
+    align-items: baseline;
+    margin-left: 30%;
+    margin-right: 30%;
+}
 </style>

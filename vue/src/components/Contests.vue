@@ -4,9 +4,9 @@
 <div class="filter-container">
 <form class="d-flex" role="search">
   <div class="form-group">
-          <label for="salary">Filter by:</label>
+          <label class="filter-label" for="filter">Filter by:</label>
           <select v-model="selectedValue">
-            <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
+            <option class="option" v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
           </select>
         </div>
         <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="contestFilter">
@@ -27,7 +27,7 @@
         <h5 class="card-text text-center">Category: {{ contest.contestCategoryName }}</h5>
         <p class="card-text">Location: {{ contest.contestLocation }} <br>Date: {{ contest.dateAndTime }}</p>
         <div class="btn-container">
-            <a href="#" class="btn btn-primary">Details</a>
+            <a href="#" v-on:click="sendToDetailsView(contest.contestId)" class="btn btn-primary">Details</a>
             <a href="#" class="btn btn-primary">Register</a>
         </div>
             <div class="link-container">
@@ -118,12 +118,16 @@ export default {
         this.contests = response.data;
       });
     },
+    sendToDetailsView(contestId) {
+      this.$router.push({name: 'ContestDetails', params: {contestId}})
+    }
   },
 };
 </script>
 
 <style>
 .ContestInfo {
+  font-family: Lato, sans-serif;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
@@ -131,7 +135,6 @@ export default {
   align-items: center;
   margin-left: 20%;
   margin-right: 20%;
-  background-color: whitesmoke;
 }
 
 .card:hover{
@@ -172,6 +175,14 @@ export default {
 }
 
 body {
-  background-color: whitesmoke;
+  background-color: white;
+}
+
+.filter-label {
+  font-family: Lato, sans-serif;
+}
+
+.options {
+  font-family: Lato, sans-serif;
 }
 </style>

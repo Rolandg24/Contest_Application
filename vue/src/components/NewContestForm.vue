@@ -25,7 +25,7 @@
     <div class="mb-3">
       <label for="inputLocation" class="form-label">Location</label>
       <input type="text" class="form-control" id="inputLocation" placeholder="Enter location"
-        v-model="newContest.contestLocation" />
+        v-model="newContest.contestLocation"/>
     </div>
 
     <!-- Category Field -->
@@ -36,7 +36,10 @@
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="btn-container">
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="reset" class="btn btn-primary">Reset</button>
+    </div>
   </form>
 </template>
 
@@ -103,12 +106,23 @@ export default {
 
 <style scoped>
 .new-contest-form {
+  font-family: Lato, sans-serif;
   margin-left: 15%;
   margin-right: 15%;
 }
 
 .new-contest-title {
+  font-family: Lato, sans-serif;
   text-align: center;
 }
 
+.btn-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.btn-container button {
+  margin-right: 8px;
+}
 </style>
