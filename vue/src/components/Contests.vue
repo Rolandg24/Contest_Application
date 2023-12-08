@@ -4,9 +4,9 @@
 <div class="filter-container">
 <form class="d-flex" role="search">
   <div class="form-group">
-          <label for="salary">Filter by:</label>
+          <label class="filter-label" for="filter">Filter by:</label>
           <select v-model="selectedValue">
-            <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
+            <option class="option" v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
           </select>
         </div>
         <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="contestFilter">
@@ -124,6 +124,7 @@ export default {
 
 <style>
 .ContestInfo {
+  font-family: Lato, sans-serif;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
@@ -131,7 +132,6 @@ export default {
   align-items: center;
   margin-left: 20%;
   margin-right: 20%;
-  background-color: whitesmoke;
 }
 
 .card:hover{
@@ -172,6 +172,14 @@ export default {
 }
 
 body {
-  background-color: whitesmoke;
+  background-color: white;
+}
+
+.filter-label {
+  font-family: Lato, sans-serif;
+}
+
+.options {
+  font-family: Lato, sans-serif;
 }
 </style>
