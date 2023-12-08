@@ -27,7 +27,7 @@
         <h5 class="card-text text-center">Category: {{ contest.contestCategoryName }}</h5>
         <p class="card-text">Location: {{ contest.contestLocation }} <br>Date: {{ contest.dateAndTime }}</p>
         <div class="btn-container">
-            <a href="#" class="btn btn-primary">Details</a>
+            <a href="#" v-on:click="sendToDetailsView(contest.contestId)" class="btn btn-primary">Details</a>
             <a href="#" class="btn btn-primary">Register</a>
         </div>
             <div class="link-container">
@@ -118,6 +118,9 @@ export default {
         this.contests = response.data;
       });
     },
+    sendToDetailsView(contestId) {
+      this.$router.push({name: 'ContestDetails', params: {contestId}})
+    }
   },
 };
 </script>
