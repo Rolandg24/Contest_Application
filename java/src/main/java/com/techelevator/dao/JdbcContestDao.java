@@ -143,7 +143,8 @@ public class JdbcContestDao implements ContestDao {
         String sql = "SELECT time_slots.time_slot_id, participants.participant_id, time_slots.time_slot, participants.participant_name " +
                 "FROM participants " +
                 "JOIN time_slots ON participants.participant_id = time_slots.participant_id " +
-                "WHERE time_slots.contest_id = ?";
+                "WHERE time_slots.contest_id = ? " +
+                "ORDER BY time_slots.time_slot;";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, contestId);

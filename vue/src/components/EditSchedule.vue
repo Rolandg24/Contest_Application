@@ -23,26 +23,27 @@ export default {
             participants: [],
         }
     },
-    // methods: {
-    //     updateSchedule(){
-    //         let schedules = this.participants.map(participant => {
-    //             return {
-    //                 contestId: this.contestId,
-    //                 participantId: participant.participantId,
-    //                 timeSlot: participant.timeSlot
-    //             };
-    //         });
-    //         schedules.forEach(schedule => {
-    //             ContestsService.updateSchedule(schedule, this.contestId)
-    //                 .then(response => {
-    //                     this.$router.push({ name: "Schedule" });
-    //                 })
-    //                 .catch(error => {
-    //                     ErrorService.handleErrorResponse(error, "updating");
-    //                 });
-    //         });
-    //     }
-    // },
+    methods: {
+        updateSchedule(){
+            let schedules = this.schedule.map(timeSlot => {
+                return {
+                    contestId: timeSlot.contestId,
+                    participantId: timeSlot.participantId,
+                    timeSlot: timeSlot.timeSlot,
+                    timeSlotId: timeSlot.timeSlotId
+                };
+            });
+            schedules.forEach(schedule => {
+                ContestsService.updateSchedule(schedule, this.contestId)
+                    .then(response => {
+                        this.$router.push({ name: "Schedule" });
+                    })
+                    .catch(error => {
+                        ErrorService.handleErrorResponse(error, "updating");
+                    });
+            });
+        }
+    },
     created() {
         ContestsService.fetchScheduleById(this.contestId).then((response) => {
             this.schedule = response.data;
