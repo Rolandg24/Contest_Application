@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Part;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
@@ -92,6 +93,25 @@ public class ContestController {
     @RequestMapping(path = "/contests/{id}/schedule/update", method = RequestMethod.PUT)
     public ScheduleTimeSlot updateScheduleTimeSlot(@RequestBody ScheduleTimeSlot scheduleTimeSlotToAdd) {
         return contestDao.updateSchedule(scheduleTimeSlotToAdd);
+    }
+    // participants
+    @PreAuthorize("permitAll")
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/contests/{contestId}/participants/add", method = RequestMethod.POST)
+    public Participant addNewParticipant(@RequestBody Participant participantToAdd, @PathVariable int contestId) {
+        return participantDao.createNewParticipant(participantToAdd);
+    }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/participants/{id}", method = RequestMethod.PUT)
+    public Participant updateParticipant(@RequestBody Participant participantToUpdate) {
+        return participantDao.updateParticipant(participantToUpdate);
+    }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/participants/{id}", method = RequestMethod.DELETE)
+    public int deleteParticipant(@PathVariable int id) {
+        return participantDao.deleteParticipant(id);
     }
 
 }

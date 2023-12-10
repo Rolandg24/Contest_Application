@@ -4,6 +4,7 @@ import com.techelevator.exception.DaoException;
 import com.techelevator.model.Contest;
 import com.techelevator.model.OverallScore;
 import com.techelevator.model.Participant;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -37,6 +38,59 @@ public class JdbcParticipantDao implements ParticipantDao {
             throw new DaoException("Unable to connect to database or Server", e);
         }
         return participants;
+    }
+
+    @Override
+    public Participant createNewParticipant(Participant participant) {
+        Participant participantToCreate = participant;
+        String sql = "INSERT INTO participants (participant_name, participant_description, member_count, score, contest_id) " +
+                "VALUES (?, ?, ?, ?, ?) " +
+                "RETURNING participant_id";
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, participantToCreate.getParticipantName(), participantToCreate.getParticipantDescription(),
+                    participantToCreate.getMemberCount(), participantToCreate.getScore(), participantToCreate.getContestId());
+            if (result.next()) {
+                participantToCreate.setParticipantId(result.getInt("participant_id"));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database or Server", e);
+        }
+        return participantToCreate;
+    }
+
+    @Override
+    public Participant updateParticipant(Participant participant) {
+        String sql = "UPDATE participants " +
+                "SET participant_name = ?, participant_description = ?, member_count = ?, score = ?, contest_id = ?" +
+                "WHERE participant_id = ?";
+        int rowCount = 0;
+        try {
+            rowCount = jdbcTemplate.update(sql, participant.getParticipantName(), participant.getParticipantDescription(),
+                    participant.getMemberCount(), participant.getScore(), participant.getContestId(), participant.getParticipantId());
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database or Server", e);
+        }
+        if (rowCount < 1) {
+            throw new DaoException("Error. Contest was not updated");
+        }
+        return participant;
+    }
+
+    @Override
+    public int deleteParticipant(int participantId) {
+
+        String sql = "START TRANSACTION; " +
+                "DELETE FROM time_slots WHERE participant_id = ?; " +
+                "DELETE FROM participants WHERE participant_id = ?; " +
+                "COMMIT;";
+
+        try {
+            return jdbcTemplate.update(sql, participantId, participantId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database or Server", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Error deleting contest" + participantId, e);
+        }
     }
 
     @Override
@@ -78,6 +132,7 @@ public class JdbcParticipantDao implements ParticipantDao {
         }
         return overallScoreToCreate;
     }
+
 
     private Participant mapRowToParticipant(SqlRowSet rowSet) {
         Participant participant = new Participant();
