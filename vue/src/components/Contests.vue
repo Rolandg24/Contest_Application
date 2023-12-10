@@ -35,6 +35,7 @@
                 <router-link v-bind:to="{ name: 'participants', params: { contestId: contest.contestId }}">Participants</router-link>
                 <a href="#" v-on:click="$router.push({ name: 'Schedule',params: { contestId: contest.contestId }})">Schedule</a>
                 <a href="#" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})">Add Schedule</a>
+                <router-link :to="{ name: 'UpdateContest', params: { contestId: contest.contestId } }" class="btn btn-primary">Edit Contest</router-link>
                 <a href="#" v-on:click="deleteContest(contest.contestId)">Delete</a>
             </div>
       </div>

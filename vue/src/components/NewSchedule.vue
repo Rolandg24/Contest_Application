@@ -28,7 +28,9 @@ export default {
                 contestId: this.contestId,
                 participantId: '',
                 timeSlot: '',
-            }
+            },
+            //to check if schedule exists
+            schedule: []
         }
     },
 
@@ -37,11 +39,16 @@ export default {
             this.participants = response.data;
 
             console.log(response.data)
+        });
+        ContestsService.fetchScheduleById(this.contestId).then((response) => {
+            this.schedule = response.data;
         })
 
     },
     methods: {
         submitSchedule() {
+            //check if schedule already exists
+            if (this.schedule.length === 0) {
             // create an array of schedules using data from each participant
             let schedules = this.participants.map(participant => {
                 return {
@@ -59,7 +66,24 @@ export default {
                         ErrorService.handleErrorResponse(error, "creating");
                     });
             });
-
+        } else {
+            let schedules = this.participants.map(participant => {
+                return {
+                    contestId: this.contestId,
+                    participantId: participant.participantId,
+                    timeSlot: participant.timeSlot
+                };
+            });
+            schedules.forEach(schedule => {
+                ContestsService.updateSchedule(schedule, this.contestId)
+                    .then(response => {
+                        this.$router.push({ name: "Schedule" });
+                    })
+                    .catch(error => {
+                        ErrorService.handleErrorResponse(error, "updating");
+                    });
+            });
+        }
             // Optionally, redirect or update UI after all schedules are submitted
         },
     },
