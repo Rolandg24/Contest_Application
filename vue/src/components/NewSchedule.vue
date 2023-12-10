@@ -23,9 +23,9 @@ export default {
         return {
             contestId: this.$route.params.contestId,
             participants: [],
-            scheduleList: [],
+            // scheduleList: [],
             scheduleTimeSlotObject: {
-                contestId: this.contestId,
+                contestId: this.$route.params.contestId,
                 participantId: '',
                 timeSlot: '',
             },

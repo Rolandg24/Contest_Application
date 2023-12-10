@@ -2,6 +2,7 @@
     <div class="schedule-header">
         <h1>{{ this.contest.contestName }}</h1>
         <h4>{{ this.contest.dateAndTime }}</h4>
+        <router-link :to="{ name: 'EditSchedule', params: { contestId: contest.contestId } }" class="btn btn-primary">Edit</router-link>
     </div>
     <div class="schedule-container">
         <table>

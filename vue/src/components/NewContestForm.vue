@@ -16,7 +16,7 @@
 
     <!-- Date and Time Field -->
     <div class="mb-3">
-      <label for="inputLocation" class="form-label">Date and Time</label>
+      <label for="inputLocation" class="form-label">Date</label>
       <input type="date" class="form-control" id="inputLocation" placeholder="Enter date"
         v-model="newContest.dateAndTime" />
     </div>
