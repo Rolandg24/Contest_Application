@@ -16,6 +16,7 @@ import OverallScoresView from '../views/OverallScoresView.vue';
 import AddScoreView from '../views/AddScoreView.vue';
 import ContestDetailsView from '../views/ContestDetailsView.vue';
 import EditScheduleView from '../views/EditScheduleView.vue';
+import AddParticipantView from '../views/AddParticipantView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -138,7 +139,15 @@ const routes = [
       requiresAuth: false
     }
   },
-
+  {
+    path: '/contests/:contestId/participants/add',
+    name: 'AddParticipant',
+    component: AddParticipantView,
+    meta: {
+      requiresAuth: false,
+      breadcrumb: 'Add Participant'
+    }
+  },
 ];
 
 // Create the router

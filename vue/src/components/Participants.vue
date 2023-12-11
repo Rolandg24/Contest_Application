@@ -9,7 +9,10 @@
         </div>
         <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="participantFilter">
 </form>
+<div class="btn btn-primary" id="add-participant">
+  <router-link :to="{ name: 'AddParticipant' }" class="btn btn-primary">Add Participant</router-link>
 
+</div>
 <!-- IMAGE ON SIDE TEMPLATE --> 
 <div class="ParticipantContainer">
 <div id="participant-card" class="card mb-3" style="max-width: 540px;"  v-for="participant in filteredParticipants" v-bind:key="participant.participantId">
@@ -82,7 +85,7 @@ export default {
 .ParticipantInfo {
     justify-content: center;
     align-items: center;
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 .ParticipantContainer {
@@ -91,21 +94,16 @@ export default {
     margin: 4px;
     border-radius: 5px;
     padding: 10px;
-    background-color:whitesmoke;
+    background-color:white;
 }
 
 #participant-card {
     margin-left: 5%;
     margin-right: 5%;
 }
-
-.ParticipantContainer {
-  background: whitesmoke;
-}
-
 .d-flex{
   padding-top: 15px;
-  background: whitesmoke;
+  background: white;
 
 }
 
@@ -123,6 +121,14 @@ export default {
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1); /* Adds a subtle shadow for depth */
 }
 
+#add-participant {
+  display: block;
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 </style>
 
