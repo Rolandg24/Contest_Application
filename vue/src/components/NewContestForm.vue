@@ -1,12 +1,16 @@
 <template>
   <h1 class="new-contest-title">Add New Contest</h1>
   <form class="new-contest-form" v-on:submit.prevent="submitForm">
+
     <!-- Name Field -->
     <div class="mb-3">
       <label for="inputName" class="form-label">Name</label>
       <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="newContest.contestName" />
     </div>
-
+    <div class="mb-3">
+      <label class="form-label" for="customFile">Contest Photo</label>
+      <input type="file" class="form-control" id="customFile" />
+    </div>
     <!-- Description Field -->
     <div class="mb-3">
       <label for="inputDescription" class="form-label">Description</label>
@@ -25,7 +29,7 @@
     <div class="mb-3">
       <label for="inputLocation" class="form-label">Location</label>
       <input type="text" class="form-control" id="inputLocation" placeholder="Enter location"
-        v-model="newContest.contestLocation"/>
+        v-model="newContest.contestLocation" />
     </div>
 
     <!-- Category Field -->
@@ -72,7 +76,7 @@ export default {
           this.newContest.contestLocation = this.contest.contestLocation;
           this.newContest.contestId = this.contest.contestId;
           this.newContest.contestCategoryName = this.contest.contestCategoryName;
-          
+
         })
     },
     submitForm() {
@@ -97,10 +101,10 @@ export default {
       }
     },
   },
-  created(){
-        console.log('created');
-      this.getContest(this.$route.params.contestId);
-    }
+  created() {
+    console.log('created');
+    this.getContest(this.$route.params.contestId);
+  }
 };
 </script>
 
