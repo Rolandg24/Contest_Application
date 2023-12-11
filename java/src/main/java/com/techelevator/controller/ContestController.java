@@ -114,4 +114,9 @@ public class ContestController {
         return participantDao.deleteParticipant(id);
     }
 
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/participants/{id}", method = RequestMethod.GET)
+    public Participant fetchParticipantById(@PathVariable int id) {
+        return participantDao.fetchParticipantById(id);
+    }
 }

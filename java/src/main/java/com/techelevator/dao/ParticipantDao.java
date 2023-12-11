@@ -17,5 +17,7 @@ public interface ParticipantDao {
 
     public Participant updateParticipant(Participant participant);
 
-    public int deleteParticipant(int ParticipantId);
+    public int deleteParticipant(int participantId);
+
+    public Participant fetchParticipantById(int participantId);
 }
