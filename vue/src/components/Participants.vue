@@ -26,6 +26,10 @@
         <p class="card-text">Description: {{ participant.participantDescription }}</p>
         <p class="card-text"><small class="text-body-secondary">Member Count: {{ participant.memberCount }}</small></p>
       </div>
+      <div class="edit-delete-btns">
+        <router-link class="btn btn-primary" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}">Edit</router-link>
+        <button class="btn btn-primary" @click="deleteParticipant(participant.participantId)">Delete</button>
+      </div>
     </div>
   </div>
 </div>
@@ -35,6 +39,7 @@
 
 <script>
 import ContestsService from '../services/ContestsService';
+import ParticipantsService from '../services/ParticipantsService';
 export default {
     data(){
         return {
@@ -48,7 +53,14 @@ export default {
                 { value: "Description", text: "Description" },
                 { value: "Member Count", text: "Member Count" },
               ],
+            selectedParticipantId: '',
         }
+    },
+    methods: {
+      deleteParticipant(id) {
+        ParticipantsService.deleteParticipantById(id);
+
+      }
     },
     computed: {
       filteredParticipants() {
@@ -128,6 +140,12 @@ export default {
   margin-right: auto;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.edit-delete-btns{
+  display: flex;
+  gap: 5px;
+  margin-bottom: 5px;;
 }
 
 </style>

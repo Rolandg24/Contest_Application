@@ -1,6 +1,6 @@
 <template>
- <div>
- <h1 class="new-contest-title">Add New Participant</h1>
+   <div>
+ <h1 class="new-contest-title">Edit Participant</h1>
   <form class="new-contest-form" v-on:submit.prevent="addParticipant">
     <!-- Name Field -->
     <div class="mb-3">
@@ -47,7 +47,8 @@ export default {
     data(){
         return {
             newParticipant: {contestId:this.$route.params.contestId },
-            contestId: this.$route.params.contestId
+            contestId: this.$route.params.contestId,
+            participantId: this.$route.params.participantId
         }
     },
     methods: {
@@ -63,6 +64,11 @@ export default {
                 });
         }
     },
+    created() {
+        ParticipantsService.fetchParticipantById(this.participantId).then((response) => {
+            this.newParticipant = response.data;
+        })
+    }
 
 }
 </script>
