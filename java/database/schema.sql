@@ -24,7 +24,7 @@ CREATE TABLE users (
 CREATE TABLE contests (
 	contest_id SERIAL,
 	contest_name varchar(100) NOT NULL,
-	contest_description varchar(300),
+	contest_description varchar(3000),
 	contest_date_time varchar(500) NOT NULL,
 	contest_location varchar(200) NOT NULL,
 	category_id INTEGER,
