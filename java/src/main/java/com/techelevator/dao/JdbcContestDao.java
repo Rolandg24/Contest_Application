@@ -8,9 +8,9 @@ import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
-import java.util.Map;
+//import com.cloudinary.Cloudinary;
+//import com.cloudinary.utils.ObjectUtils;
+//import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +74,7 @@ public class JdbcContestDao implements ContestDao {
                     contest.getDateAndTime(), contest.getContestLocation(), contest.getContestCategoryName(), contest.getContestImageUrl());
             if (result.next()) {
                 contestToCreate.setContestId(result.getInt("contest_id"));
-                sendImgUrlToCloudinary(contestToCreate.getContestImageUrl(),contestToCreate.getContestId());
+//                sendImgUrlToCloudinary(contestToCreate.getContestImageUrl(),contestToCreate.getContestId());
             }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
@@ -95,7 +95,7 @@ public class JdbcContestDao implements ContestDao {
         try {
             rowCount = jdbcTemplate.update(sql, contest.getContestName(), contest.getContestDescription(), contest.getDateAndTime(),
                     contest.getContestLocation(),  contest.getContestCategoryName(),  contest.getContestImageUrl(), contest.getContestId());
-            sendImgUrlToCloudinary(contest.getContestImageUrl(),contest.getContestId());
+//            sendImgUrlToCloudinary(contest.getContestImageUrl(),contest.getContestId());
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
@@ -207,23 +207,23 @@ public class JdbcContestDao implements ContestDao {
     }
 
 
-    private boolean sendImgUrlToCloudinary(String url, int contestId) {
-        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", "dmptbrbof",
-                "api_key", "757429462643496",
-                "api_secret", "LMbxAg8q-y4aUSSpU05ZDYNPvM0"));
-
-        try {
-            Map uploadResult = cloudinary.uploader().upload(
-                    url,
-                    ObjectUtils.asMap("public_id", String.valueOf(contestId)));
-            System.out.println(uploadResult);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+//    private boolean sendImgUrlToCloudinary(String url, int contestId) {
+//        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+//                "cloud_name", "dmptbrbof",
+//                "api_key", "757429462643496",
+//                "api_secret", "LMbxAg8q-y4aUSSpU05ZDYNPvM0"));
+//
+//        try {
+//            Map uploadResult = cloudinary.uploader().upload(
+//                    url,
+//                    ObjectUtils.asMap("public_id", String.valueOf(contestId)));
+//            System.out.println(uploadResult);
+//            return true;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
     //helper Method for Contest
     private Contest mapRowToContest(SqlRowSet rowSet) {
         Contest contest = new Contest();

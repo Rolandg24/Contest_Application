@@ -7,10 +7,21 @@
       <label for="inputName" class="form-label">Name</label>
       <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="newContest.contestName" />
     </div>
-    <div class="mb-3">
+
+    <!-- <div class="mb-3">
+      
+      <button @click="openUploadWidget">Upload Image</button>
+      
       <label class="form-label" for="customFile">Contest Photo</label>
       <input type="file" class="form-control" id="customFile" />
-    </div>
+    </div> -->
+    
+    <div class="mb-3">
+    <button @click="openUploadWidget($event)">Upload Image</button>
+    <!-- Display the uploaded image -->
+    <img v-if="newContest.contestImageUrl" :src="newContest.contestImageUrl" alt="Uploaded Image" />
+  </div>
+    
     <!-- Description Field -->
     <div class="mb-3">
       <label for="inputDescription" class="form-label">Description</label>
@@ -61,7 +72,8 @@ export default {
         contestDescription: '',
         dateAndTime: '',
         contestLocation: '',
-        contestCategoryName: ''
+        contestCategoryName: '',
+        contestImageUrl: ''
       }
     };
   },
@@ -76,8 +88,23 @@ export default {
           this.newContest.contestLocation = this.contest.contestLocation;
           this.newContest.contestId = this.contest.contestId;
           this.newContest.contestCategoryName = this.contest.contestCategoryName;
+          this.newContest.contestImageUrl = this.contest.contestImageUrl;
 
         })
+    },
+    openUploadWidget(event) {
+      event.preventDefault();
+      const myWidget = cloudinary.createUploadWidget({
+        cloudName: 'dmptbrbof', // Replace with your cloud name
+        uploadPreset: 'bo89ohnn' // Replace with your upload preset
+      }, (error, result) => {
+        if (!error && result && result.event === "success") {
+          console.log('Done! Here is the image info: ', result.info);
+          this.newContest.contestImageUrl = result.info.url; // Store the image URL
+        }
+      });
+
+      myWidget.open();
     },
     submitForm() {
       if (this.newContest.contestId == 0) {
@@ -100,6 +127,7 @@ export default {
           .catch((error) => ErrorService.handleErrorResponse(error, "updating"));
       }
     },
+
   },
   created() {
     console.log('created');
