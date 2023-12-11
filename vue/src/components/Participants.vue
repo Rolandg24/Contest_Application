@@ -40,6 +40,8 @@
 <script>
 import ContestsService from '../services/ContestsService';
 import ParticipantsService from '../services/ParticipantsService';
+import ErrorService from '../services/ErrorService';
+
 export default {
     data(){
         return {
@@ -58,7 +60,16 @@ export default {
     },
     methods: {
       deleteParticipant(id) {
-        ParticipantsService.deleteParticipantById(id);
+        ParticipantsService.deleteParticipantById(id)
+        .then((response) => {
+            if (response.status === 200) {
+              this.fetchParticipants();
+              this.$router.push({ name: "participants" });
+            }
+          })
+          .catch((error) =>
+            ErrorService.handleErrorResponse(error, "deleting")
+          );
 
       },
       fetchParticipants() {
