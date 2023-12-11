@@ -9,8 +9,8 @@
         </div>
         <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="participantFilter">
 </form>
-<div class="btn btn-primary" id="add-participant">
-  <router-link :to="{ name: 'AddParticipant' }" class="btn btn-primary">Add Participant</router-link>
+<div class="btn btn-primary" id="add-participant"  v-if="$store.state.token !== ''">
+  <router-link :to="{ name: 'AddParticipant' }" class="btn btn-primary" >Add Participant</router-link>
 
 </div>
 <!-- IMAGE ON SIDE TEMPLATE --> 

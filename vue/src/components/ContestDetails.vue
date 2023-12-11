@@ -16,33 +16,23 @@
         <!-- Location Section -->
         <div class="location">
             <h2>{{ contest.contestLocation }}</h2>
-            <p>Event location details...</p>
             <!-- Map would go here -->
         </div>
 
         <!-- Description Edit Section -->
         <div class="description">
-            <textarea v-model="contest.description"></textarea>
-            <button @click="saveDescription">Save</button>
+            <h4>{{ contest.contestDescription }}</h4>
         </div>
         <br>
         <br>
         <!-- Navigation Links Section -->
         <div class="link-container">
             <div class="container text-center">
-                <div class="row row-cols-4">
-                    <div class="col"><router-link
-                            :to="{ name: 'OverallScores', params: { contestId: contest.contestId } }">Scores</router-link>
-                    </div>
-                    <div class="col"><router-link
-                            :to="{ name: 'participants', params: { contestId: contest.contestId } }">Participants</router-link>
-                    </div>
-                    <div class="col"><router-link
-                            :to="{ name: 'Schedule', params: { contestId: contest.contestId } }">Schedule</router-link>
-                    </div>
-                    <div class="col"><router-link
-                            :to="{ name: 'AddSchedule', params: { contestId: contest.contestId } }">Add
-                            Schedule</router-link></div>
+                <div class="btns">
+                    <button class="btn btn-primary" v-on:click=" $router.push({ name: 'OverallScores', params: { contestId: contest.contestId }})">Scores</button> 
+                    <button class="btn btn-primary" v-on:click=" $router.push({ name: 'participants', params: { contestId: contest.contestId }})">Participants</button>  
+                    <button class="btn btn-primary" v-on:click=" $router.push({ name: 'Schedule', params: { contestId: contest.contestId }})">Schedule</button>
+                    <button class="btn btn-primary" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" v-if="$store.state.token !== ''">Add Schedule</button>
                 </div>
             </div>
         </div>
@@ -96,10 +86,12 @@ export default {
 <style>
 .contest-details {
     font-family: Arial, sans-serif;
-    max-width: 800px;
+    max-width: 30%;
+    max-height: 10%;
     margin: auto;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .header {
@@ -156,5 +148,11 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 4px;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
 }
 </style>

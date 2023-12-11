@@ -2,7 +2,7 @@
   <div class="OverallScores">
     <div class="OverallScores-container">
       <h1>{{ contest.contestName }} Overall Scores</h1>
-      <a href="#" class="btn btn-primary" v-on:click="$router.push({ name: 'AddScore',params: { contestId: contest.contestId }})">Add Score</a>
+      <a href="#" class="btn btn-primary" v-on:click="$router.push({ name: 'AddScore',params: { contestId: contest.contestId }})" v-if="$store.state.token !== ''">Add Score</a>
       <!-- <table>
         <thead>
           <tr class="table-headers">

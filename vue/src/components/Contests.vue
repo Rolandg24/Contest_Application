@@ -12,7 +12,7 @@
         <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="contestFilter">
 </form>
 </div>
-<div class="btn btn-primary" id="add-contest">
+<div class="btn btn-primary" id="add-contest"  v-if="$store.state.token !== ''">
   <router-link :to="{ name: 'NewContest' }" class="btn btn-primary">Add Contest</router-link>
 
 </div>
@@ -28,12 +28,11 @@
         <p class="card-text">Location: {{ contest.contestLocation }} <br>Date: {{ contest.dateAndTime }}</p>
         <div class="btn-container">
             <a href="#" v-on:click="sendToDetailsView(contest.contestId)" class="btn btn-primary">Details</a>
-            <a href="#" class="btn btn-primary">Register</a>
         </div>
             <div class="link-container">
-                <a href="#" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" class="btn btn-primary">Add Schedule</a>
-                <router-link :to="{ name: 'UpdateContest', params: { contestId: contest.contestId } }" class="btn btn-primary">Edit Contest</router-link>
-                <a href="#" v-on:click="deleteContest(contest.contestId)" class="btn btn-primary">Delete</a>
+                <a href="#" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" class="btn btn-primary" v-if="$store.state.token !== ''">Add Schedule</a>
+                <router-link :to="{ name: 'UpdateContest', params: { contestId: contest.contestId } }" class="btn btn-primary" v-if="$store.state.token !== ''">Edit Contest</router-link>
+                <a href="#" v-on:click="deleteContest(contest.contestId)" class="btn btn-primary" v-if="$store.state.token !== ''">Delete</a>
             </div>
       </div>
     </div>  
