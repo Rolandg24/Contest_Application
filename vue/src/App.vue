@@ -1,14 +1,17 @@
 <template>
   <HeaderView/>
+  <!-- <breadcrumb-view /> -->
   <div id="capstone-app">
     <router-view />
   </div>
 </template>
 <script>
 import HeaderView from './views/HeaderView.vue';
+import BreadcrumbView from './views/BreadcrumbView.vue';
 export default {
   components: {
-    HeaderView
+    HeaderView,
+    // BreadcrumbView
   }
 }
 </script>

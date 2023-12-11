@@ -1,12 +1,10 @@
 <template>
   <div class="header">
-    <p>breadcrumb placeholder</p>
   </div>
   <div class="main-body">
     
     <figure id="logo-container" class="figure">
       <img id="logo" src="../assets/Gatherly_Logo.png" class="rounded mx-auto d-block" alt="...">
-      <figcaption class="figure-caption text-center">Awesome catchphrase!</figcaption>
     </figure>
 
   </div>

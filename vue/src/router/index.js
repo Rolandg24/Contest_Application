@@ -31,7 +31,8 @@ const routes = [
     name: 'home',
     component: HomeView,
     meta: {
-      requiresAuth: false // turn this back on
+      requiresAuth: false, // turn this back on
+      breadcrumb: 'Home'
     }
   },
   {
@@ -39,7 +40,8 @@ const routes = [
     name: "login",
     component: LoginView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Login'
     }
   },
   {
@@ -47,7 +49,8 @@ const routes = [
     name: "logout",
     component: LogoutView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Logout'
     }
   },
   {
@@ -55,7 +58,8 @@ const routes = [
     name: "register",
     component: RegisterView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Register'
     }
   },
   {
@@ -63,7 +67,8 @@ const routes = [
     name: 'contests',
     component: ContestsView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Contests'
     }
   },
   {
@@ -71,7 +76,8 @@ const routes = [
     name: 'participants',
     component: ParticipantsView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Participants'
     }
   },
   {
@@ -79,7 +85,8 @@ const routes = [
     name: 'NewContest',
     component: NewContestView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'New Contest'
     }
   },
   {
@@ -87,7 +94,8 @@ const routes = [
     name: 'UpdateContest',
     component: UpdateContestView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Update Contest'
     }
   },
   {
@@ -95,7 +103,8 @@ const routes = [
     name: 'Schedule',
     component: ScheduleView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Schedule'
     }
   },
   {
@@ -103,7 +112,8 @@ const routes = [
     name: 'AddSchedule',
     component: NewScheduleView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Add Schedule'
     }
   },
   {
@@ -111,7 +121,8 @@ const routes = [
     name: 'OverallScores',
     component: OverallScoresView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Scores'
     }
   },
   {
@@ -119,7 +130,8 @@ const routes = [
     name: 'AddScore',
     component: AddScoreView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Add Score'
     }
   },
   {
@@ -127,7 +139,8 @@ const routes = [
     name: 'ContestDetails',
     component: ContestDetailsView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Contest Details'
     }
   },
   {
@@ -135,7 +148,8 @@ const routes = [
     name: 'EditSchedule',
     component: EditScheduleView,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      breadcrumb: 'Edit Schedule'
     }
   },
 
