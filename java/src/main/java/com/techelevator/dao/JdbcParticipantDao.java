@@ -94,6 +94,24 @@ public class JdbcParticipantDao implements ParticipantDao {
     }
 
     @Override
+    public Participant fetchParticipantById(int participantId) {
+        Participant participant = null;
+
+        String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id " +
+                "FROM participants " +
+                "WHERE participant_id = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, participantId);
+            if (results.next()) {
+                participant = mapRowToParticipant(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database or Server", e);
+        }
+        return participant;
+    }
+
+    @Override
     public List<OverallScore> fetchListOfOverallScores(int contestId) {
         List<OverallScore> overallScores = new ArrayList<>();
         String sql = "SELECT overall_scores.overall_score_id, overall_scores.contest_id, overall_scores.participant_id, " +
