@@ -19,7 +19,7 @@ export default{
      * @returns participant
      */
     fetchParticipantById(participantId, contestId) {
-        return axios.post(`/contests/${contestId}/participants/${participantId}`);
+        return axios.get(`/participants/${participantId}`);
     },
 
     /**
@@ -31,6 +31,10 @@ export default{
      */
     deleteParticipantById(participantId) {
         return axios.delete(`/participants/${participantId}`);
+    },
+
+    updateParticipantById(participant) {
+        return axios.put(`/participants/${participant.participantId}`, participant);
     }
 
 }

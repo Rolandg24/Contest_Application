@@ -81,11 +81,12 @@ public class JdbcParticipantDao implements ParticipantDao {
 
         String sql = "START TRANSACTION; " +
                 "DELETE FROM time_slots WHERE participant_id = ?; " +
+                "DELETE FROM overall_scores WHERE participant_id = ?;; " +
                 "DELETE FROM participants WHERE participant_id = ?; " +
                 "COMMIT;";
 
         try {
-            return jdbcTemplate.update(sql, participantId, participantId);
+            return jdbcTemplate.update(sql, participantId, participantId, participantId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         } catch (DataIntegrityViolationException e) {

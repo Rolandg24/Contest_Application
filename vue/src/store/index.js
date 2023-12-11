@@ -6,7 +6,8 @@ export function createStore(currentToken, currentUser) {
     state: {
       token: currentToken || '',
       user: currentUser || {},
-      contests:[]
+      contests:[],
+      participants: []
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -27,6 +28,9 @@ export function createStore(currentToken, currentUser) {
       },
       SET_CONTESTS(state, data) {
         state.contests = data;
+      },
+       SET_PARTICIPANTS(state, data) {
+        state.participants = data;
       }
     },
   });

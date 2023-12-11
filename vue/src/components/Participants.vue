@@ -60,7 +60,13 @@ export default {
       deleteParticipant(id) {
         ParticipantsService.deleteParticipantById(id);
 
-      }
+      },
+      fetchParticipants() {
+      ContestsService.fetchParticipantsById(this.$route.params.contestId).then((response) => {
+        this.$store.commit("SET_PARTICIPANTS", response.data);
+        this.participants = response.data;
+      });
+    },
     },
     computed: {
       filteredParticipants() {
@@ -83,11 +89,12 @@ export default {
     },
     },
     created(){
-        ContestsService.fetchParticipantsById(this.contestId).then((response) => {
-            this.participants=response.data;
+        // ContestsService.fetchParticipantsById(this.contestId).then((response) => {
+        //     this.participants=response.data;
 
-            console.log(response.data)
-        })
+        //     console.log(response.data)
+        // })
+        this.fetchParticipants();
         
     }
 }

@@ -1,7 +1,7 @@
 <template>
    <div>
  <h1 class="new-contest-title">Edit Participant</h1>
-  <form class="new-contest-form" v-on:submit.prevent="addParticipant">
+  <form class="new-contest-form" v-on:submit.prevent="updateParticipant">
     <!-- Name Field -->
     <div class="mb-3">
       <label for="inputName" class="form-label">Name</label>
@@ -46,26 +46,34 @@ export default {
 
     data(){
         return {
-            newParticipant: {contestId:this.$route.params.contestId },
+            newParticipant: {
+                participantId: '',
+                participantName: '',
+                participantDescription: '',
+                memberCount: '',
+                score: '',
+                contestId: '',
+            },
             contestId: this.$route.params.contestId,
             participantId: this.$route.params.participantId
         }
     },
     methods: {
-        addParticipant(){
-            ParticipantsService.addParticipant(this.newParticipant, this.contestId)
+        updateParticipant(){
+            ParticipantsService.updateParticipantById(this.newParticipant)
             .then((response) => {
-                    if (response.status == 201) {
-                        this.$router.push({ name: "participants" });
+                    if (response.status == 200) {
+                        console.log('git to router');
+                        this.$router.push({ name: 'participants'});
                     }
                 })
                 .catch((error) => {
-                    ErrorService.handleErrorResponse(error, "creating");
+                    ErrorService.handleErrorResponse(error, "updating");
                 });
         }
     },
     created() {
-        ParticipantsService.fetchParticipantById(this.participantId).then((response) => {
+        ParticipantsService.fetchParticipantById(this.$route.params.participantId).then((response) => {
             this.newParticipant = response.data;
         })
     }
