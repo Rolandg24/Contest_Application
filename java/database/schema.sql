@@ -27,7 +27,8 @@ CREATE TABLE contests (
 	contest_description varchar(300),
 	contest_date_time varchar(500) NOT NULL,
 	contest_location varchar(200) NOT NULL,
-	category_id INTEGER, 
+	category_id INTEGER,
+	image_url varchar (1000),
 	CONSTRAINT PK_contest_id PRIMARY KEY (contest_id),
 	FOREIGN KEY (category_id) REFERENCES contest_categories(category_id)
 );

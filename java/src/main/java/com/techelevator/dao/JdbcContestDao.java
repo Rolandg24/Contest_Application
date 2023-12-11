@@ -8,7 +8,9 @@ import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class JdbcContestDao implements ContestDao {
     @Override
     public List<Contest> fetchListOfContests() { // AJH: updated to add category name
         List<Contest> contestList = new ArrayList<>();
-        String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location, contest_categories.category_name " +
+        String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location, contest_categories.category_name, image_url " +
                 "FROM contests " +
                 "JOIN contest_categories on contests.category_id = contest_categories.category_id";
         try {
@@ -45,7 +47,7 @@ public class JdbcContestDao implements ContestDao {
     public Contest fetchContestById(int id) { // AJH: updated to add category name
         Contest contest = null;
 
-        String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location, contest_categories.category_name " +
+        String sql = "SELECT contest_id, contest_name, contest_description, contest_date_time, contest_location, contest_categories.category_name, image_url " +
                 "FROM contests " +
                 "JOIN contest_categories on contests.category_id = contest_categories.category_id " +
                 "WHERE contest_id = ?";
@@ -64,31 +66,36 @@ public class JdbcContestDao implements ContestDao {
     @Override
     public Contest createContest(Contest contest) { // AJH: updated to add category name
         Contest contestToCreate = contest;
-        String sql = "INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location, category_id) " +
-                "VALUES (?, ?, ?, ?,(SELECT category_id FROM contest_categories WHERE category_name = ?)) " +
+        String sql = "INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location, category_id, image_url) " +
+                "VALUES (?, ?, ?, ?,(SELECT category_id FROM contest_categories WHERE category_name = ?), ?) " +
                 "RETURNING contest_id";
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, contest.getContestName(), contest.getContestDescription(),
-                    contest.getDateAndTime(), contest.getContestLocation(), contest.getContestCategoryName());
+                    contest.getDateAndTime(), contest.getContestLocation(), contest.getContestCategoryName(), contest.getContestImageUrl());
             if (result.next()) {
                 contestToCreate.setContestId(result.getInt("contest_id"));
+                sendImgUrlToCloudinary(contestToCreate.getContestImageUrl(),contestToCreate.getContestId());
             }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
         return contestToCreate;
 
+
+
     }
 
     @Override
     public Contest updateContest(Contest contest) { // AJH: updated to add category name
         String sql = "UPDATE contests " +
-                "SET contest_name = ?, contest_description = ?, contest_date_time = ?, contest_location = ?, category_id = (SELECT category_id FROM contest_categories WHERE category_name = ?) " +
+                "SET contest_name = ?, contest_description = ?, contest_date_time = ?, contest_location = ?, " +
+                "category_id = (SELECT category_id FROM contest_categories WHERE category_name = ?), image_url = ? " +
                 "WHERE contest_id = ?";
         int rowCount = NOT_UPDATED;
         try {
             rowCount = jdbcTemplate.update(sql, contest.getContestName(), contest.getContestDescription(), contest.getDateAndTime(),
-                    contest.getContestLocation(),  contest.getContestCategoryName(), contest.getContestId());
+                    contest.getContestLocation(),  contest.getContestCategoryName(),  contest.getContestImageUrl(), contest.getContestId());
+            sendImgUrlToCloudinary(contest.getContestImageUrl(),contest.getContestId());
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
@@ -199,6 +206,24 @@ public class JdbcContestDao implements ContestDao {
         return scheduleTimeSlot;
     }
 
+
+    private boolean sendImgUrlToCloudinary(String url, int contestId) {
+        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "dmptbrbof",
+                "api_key", "757429462643496",
+                "api_secret", "LMbxAg8q-y4aUSSpU05ZDYNPvM0"));
+
+        try {
+            Map uploadResult = cloudinary.uploader().upload(
+                    url,
+                    ObjectUtils.asMap("public_id", String.valueOf(contestId)));
+            System.out.println(uploadResult);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     //helper Method for Contest
     private Contest mapRowToContest(SqlRowSet rowSet) {
         Contest contest = new Contest();
@@ -208,6 +233,7 @@ public class JdbcContestDao implements ContestDao {
         contest.setDateAndTime(rowSet.getString("contest_date_time"));
         contest.setContestLocation(rowSet.getString("contest_location"));
         contest.setContestCategoryName(rowSet.getString("category_name"));
+        contest.setContestImageUrl(rowSet.getString("image_url"));
         return contest;
     }
 }

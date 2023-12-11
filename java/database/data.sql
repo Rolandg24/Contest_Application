@@ -10,9 +10,11 @@ VALUES
 ('Coding'),
 ('Startup Pitches');
 
+INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location, category_id, image_url) 
+VALUES 
+('Global AI Summit', 'Conference on advancements in artificial intelligence.', '2024-04-10', 'Boston Tech Park, MA', 1, 'https://res.cloudinary.com/dmptbrbof/image/upload/v1702319172/contest_img_xnlwxc.webp');
 INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location, category_id) 
 VALUES 
-('Global AI Summit', 'Conference on advancements in artificial intelligence.', '2024-04-10', 'Boston Tech Park, MA', 1),
 ('StartUp PitchFest', 'Event for startups to pitch to potential investors.', '2024-04-22', 'San Francisco Startup Hub, CA', 2),
 ('Eco Innovation Conference', 'Focus on sustainable technologies and green innovation.', '2024-05-05', 'Denver Green Center, CO', 3),
 ('Mobile Tech Expo', 'Exhibition of the latest in mobile technology.', '2024-05-20', 'Seattle Tech Fairgrounds, WA', 4),
