@@ -17,9 +17,9 @@
     </div> -->
     
     <div class="mb-3">
-    <button @click="openUploadWidget($event)">Upload Image</button>
+    <button @click="defineWidget($event)">Upload Image</button>
     <!-- Display the uploaded image -->
-    <img v-if="newContest.contestImageUrl" :src="newContest.contestImageUrl" alt="Uploaded Image" />
+    <img id = "uploadedimage" v-if="newContest.contestImageUrl" :src="newContest.contestImageUrl" alt="Uploaded Image" />
   </div>
     
     <!-- Description Field -->
@@ -74,7 +74,9 @@ export default {
         contestLocation: '',
         contestCategoryName: '',
         contestImageUrl: ''
-      }
+      },
+      myWidget: {},
+
     };
   },
   methods: {
@@ -92,37 +94,26 @@ export default {
 
         })
     },
-    openUploadWidget() {
+  
+    defineWidget(event) {
       event.preventDefault();
-      const widget = window.cloudinary.createUploadWidget(
+      const cloudName = "dmptbrbof";
+      const uploadPreset = "bo89ohnn";
+      this.myWidget = window.cloudinary.createUploadWidget(
         {
-          cloud_name: "dmptbrbof", 
-          upload_preset: "bo89ohnn"
+          cloudName: cloudName,
+          uploadPreset: uploadPreset,
+          // ... other options
         },
         (error, result) => {
           if (!error && result && result.event === "success") {
-            console.log("Done uploading ....". result.info);
-              //  document
-              // .getElementById("uploadedimage")
-              // .setAttribute("src", result.info.secure_url);
+            console.log("Done! Here is the image info: ", result.info);
+            this.newContest.contestImageUrl = result.info.secure_url;
           }
         }
       ).open();
     },
-    // openUploadWidget(event) {
-    //   event.preventDefault();
-    //   const myWidget = cloudinary.createUploadWidget({
-    //     cloudName: 'dmptbrbof', // Replace with your cloud name
-    //     uploadPreset: 'bo89ohnn' // Replace with your upload preset
-    //   }, (error, result) => {
-    //     if (!error && result && result.event === "success") {
-    //       console.log('Done! Here is the image info: ', result.info);
-    //       this.newContest.contestImageUrl = result.info.url; // Store the image URL
-    //     }
-    //   });
 
-    //   myWidget.open();
-    // },
     submitForm() {
       if (this.newContest.contestId == 0) {
         ContestsService.createNewContest(this.newContest)
