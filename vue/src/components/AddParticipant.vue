@@ -11,7 +11,7 @@
     <div class="mb-3">
     <button @click="defineWidget($event)">Upload Image</button>
     <!-- Display the uploaded image -->
-    <img id = "uploadedimage" v-if="newParticipant.participantImgUrl" :src="newParticipant.participantImgUrl" alt="Uploaded Image" />
+    <img id = "uploadedimage" v-if="newParticipant.participantImageUrl" :src="newParticipant.participantImageUrl" alt="Uploaded Image" />
   </div>
 
     <!-- Description Field -->
@@ -82,7 +82,7 @@ export default {
         (error, result) => {
           if (!error && result && result.event === "success") {
             console.log("Done! Here is the image info: ", result.info);
-            this.newParticipant.participantImgUrl = result.info.secure_url;
+            this.newParticipant.participantImageUrl = result.info.secure_url;
           }
         }
       ).open();
