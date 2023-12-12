@@ -25,7 +25,7 @@ public class JdbcParticipantDao implements ParticipantDao {
     public List<Participant> fetchListOfParticipantByContestId(int contestId) {
         List<Participant> participants = new ArrayList<>();
 
-        String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id " +
+        String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id, image_url " +
                      "FROM participants " +
                      "WHERE contest_id = ?;";
         try {
@@ -43,12 +43,12 @@ public class JdbcParticipantDao implements ParticipantDao {
     @Override
     public Participant createNewParticipant(Participant participant) {
         Participant participantToCreate = participant;
-        String sql = "INSERT INTO participants (participant_name, participant_description, member_count, score, contest_id) " +
-                "VALUES (?, ?, ?, ?, ?) " +
+        String sql = "INSERT INTO participants (participant_name, participant_description, member_count, score, contest_id, image_url) " +
+                "VALUES (?, ?, ?, ?, ?, ?) " +
                 "RETURNING participant_id";
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, participantToCreate.getParticipantName(), participantToCreate.getParticipantDescription(),
-                    participantToCreate.getMemberCount(), participantToCreate.getScore(), participantToCreate.getContestId());
+                    participantToCreate.getMemberCount(), participantToCreate.getScore(), participantToCreate.getContestId(), participant.getParticipantImageUrl());
             if (result.next()) {
                 participantToCreate.setParticipantId(result.getInt("participant_id"));
             }
@@ -61,12 +61,12 @@ public class JdbcParticipantDao implements ParticipantDao {
     @Override
     public Participant updateParticipant(Participant participant) {
         String sql = "UPDATE participants " +
-                "SET participant_name = ?, participant_description = ?, member_count = ?, score = ?, contest_id = ?" +
+                "SET participant_name = ?, participant_description = ?, member_count = ?, score = ?, contest_id = ?, image_url = ?"  +
                 "WHERE participant_id = ?";
         int rowCount = 0;
         try {
             rowCount = jdbcTemplate.update(sql, participant.getParticipantName(), participant.getParticipantDescription(),
-                    participant.getMemberCount(), participant.getScore(), participant.getContestId(), participant.getParticipantId());
+                    participant.getMemberCount(), participant.getScore(), participant.getContestId(), participant.getParticipantImageUrl(), participant.getParticipantId());
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
@@ -98,7 +98,7 @@ public class JdbcParticipantDao implements ParticipantDao {
     public Participant fetchParticipantById(int participantId) {
         Participant participant = null;
 
-        String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id " +
+        String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id, image_url " +
                 "FROM participants " +
                 "WHERE participant_id = ?";
         try {
@@ -161,6 +161,7 @@ public class JdbcParticipantDao implements ParticipantDao {
         participant.setMemberCount(rowSet.getInt("member_count"));
         participant.setScore(rowSet.getDouble("score"));
         participant.setContestId(rowSet.getInt("contest_id"));
+        participant.setParticipantImageUrl((rowSet.getString("image_url")));
         return participant;
     }
 
