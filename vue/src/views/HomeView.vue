@@ -6,8 +6,9 @@
     <figure id="logo-container" class="figure">
       <img id="logo" src="../assets/Gatherly_Logo.png" class="rounded mx-auto d-block" alt="...">
     </figure>
-
+    
   </div>
+  <router-view/>
   <div class="footer"><p>You must be authenticated to see this</p></div>
   <div class="home">  
   </div>

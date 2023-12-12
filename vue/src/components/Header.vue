@@ -6,30 +6,63 @@
                 <img class="logo" src="../assets/Gatherly_Logo.png" alt="Logo">
             </router-link>
             <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-            <router-link class="nav-link" v-bind:to="{ name: 'contests' }">Contests</router-link>
+            <router-link class="nav-link" v-bind:to="{ name: 'contests'}">Contests</router-link>
         </div>
         <div class="right-links">
             <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token === ''">Login</router-link>
             <router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="$store.state.token !== ''">Logout</router-link>
         </div>
     </div>
-    <breadcrumb-view/>
-    <!-- <div class="breadcrumb">
-        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Contests</li>
-            </ol>
-</nav>
-    </div> -->
+
+    <!-- <breadcrumbs-vue :routes="breadcrumbs"  /> -->
+
 </template>
 
 <script>
-import BreadcrumbView from '../views/BreadcrumbView.vue';
+import BreadcrumbsVue from './Breadcrumbs.vue';
+
+
 export default {
-    components: {
-        BreadcrumbView
-    }
+  components: {
+    // BreadcrumbsVue,
+  },
+//   computed: {
+//   breadcrumbs() {
+//     const matchedRoutes = this.$route.matched;
+//     const breadcrumbs = [];
+
+//     for (let i = 0; i < matchedRoutes.length; i++) {
+//       const route = matchedRoutes[i];
+
+//       if (route.meta && route.meta.breadcrumb) {
+//         breadcrumbs.push({
+//           to: route.path,
+//           label: route.meta.breadcrumb,
+//         });
+//       }
+
+//       // Check if there are parents and add a separator
+//       if (route.meta && route.meta.parent && i > 0) {
+//         const parentRoute = matchedRoutes.find(
+//           (r, index) => index < i && r.name === route.meta.parent
+//         );
+
+//         if (parentRoute) {
+//           breadcrumbs.push({
+//             separator: true,
+//           });
+
+//           breadcrumbs.push({
+//             to: parentRoute.path,
+//             label: parentRoute.meta.breadcrumb,
+//           });
+//         }
+//       }
+//     }
+
+//     return breadcrumbs;
+//   },
+//     }
 }
 </script>
 

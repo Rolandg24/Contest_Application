@@ -1,36 +1,34 @@
 <template>
-    <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li v-for="(crumb, index) in crumbs" :key="index" class="breadcrumb-item">
-        <router-link :to="crumb.link" v-if="index < crumbs.length - 1">{{ crumb.text }}</router-link>
-        <span v-else>{{ crumb.text }}</span>
-      </li>
-    </ol>
-  </nav>
+   
+
+
+  <div class="breadcrumbs">
+    <router-link v-for="(breadcrumb, index) in breadcrumbs" :key="index" :to="breadcrumb.to">
+      {{ breadcrumb.label }}
+    </router-link>
+  </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      crumbs: [],
-    };
+ export default {
+  props: {
+    routes: Array,
   },
-  watch: {
-    $route() {
-      this.updateCrumbs();
-    },
-  },
-  created() {
-    this.updateCrumbs();
-  },
-  methods: {
-    updateCrumbs() {
+  computed: {
+    breadcrumbs() {
       const matchedRoutes = this.$route.matched;
-      this.crumbs = matchedRoutes.map((route) => ({
-        text: route.meta && route.meta.breadcrumb ? route.meta.breadcrumb : route.name,
-        link: route.path,
-      }));
+      const breadcrumbs = [];
+
+      for (const route of matchedRoutes) {
+        if (route.meta && route.meta.breadcrumb) {
+          breadcrumbs.push({
+            to: route.path,
+            label: route.meta.breadcrumb,
+          });
+        }
+      }
+
+      return breadcrumbs;
     },
   },
 };
@@ -39,3 +37,6 @@ export default {
 <style>
 
 </style>
+
+
+
