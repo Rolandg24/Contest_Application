@@ -93,8 +93,7 @@ export default {
           this.newContest.contestImageUrl = this.contest.contestImageUrl;
 
         })
-    },
-  
+    }, 
     defineWidget(event) {
       event.preventDefault();
       const cloudName = "dmptbrbof";

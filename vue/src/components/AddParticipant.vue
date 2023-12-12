@@ -8,6 +8,12 @@
       <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="newParticipant.participantName" />
     </div>
 
+    <div class="mb-3">
+    <button @click="defineWidget($event)">Upload Image</button>
+    <!-- Display the uploaded image -->
+    <img id = "uploadedimage" v-if="newParticipant.participantImageUrl" :src="newParticipant.participantImageUrl" alt="Uploaded Image" />
+  </div>
+
     <!-- Description Field -->
     <div class="mb-3">
       <label for="inputDescription" class="form-label">Description</label>
@@ -64,7 +70,26 @@ export default {
                 .catch((error) => {
                     ErrorService.handleErrorResponse(error, "creating");
                 });
+        },
+        defineWidget(event) {
+      event.preventDefault();
+      const cloudName = "dmptbrbof";
+      const uploadPreset = "bo89ohnn";
+      this.myWidget = window.cloudinary.createUploadWidget(
+        {
+          cloudName: cloudName,
+          uploadPreset: uploadPreset,
+          // ... other options
+        },
+        (error, result) => {
+          if (!error && result && result.event === "success") {
+            console.log("Done! Here is the image info: ", result.info);
+            this.newParticipant.participantImageUrl = result.info.secure_url;
+          }
         }
+      ).open();
+    },
+
     },
 
 }
