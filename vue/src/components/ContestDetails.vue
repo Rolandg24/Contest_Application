@@ -10,7 +10,7 @@
 
         <!-- Contest Image Section -->
         <div class="contest-image">
-            <img src="../assets/1st_Draft_Logo.png" alt="Event Image">
+            <img :src="contest.contestImageUrl" class="card-img-top" alt="placeholder" />
         </div>
 
         <!-- Location Section -->
