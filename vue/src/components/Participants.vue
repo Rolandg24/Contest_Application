@@ -18,7 +18,7 @@
 <div id="participant-card" class="card mb-3" style="max-width: 540px;"  v-for="participant in filteredParticipants" v-bind:key="participant.participantId">
   <div class="row g-0">
     <div class="col-md-4">
-      <img src="../assets/1st_Draft_Logo.png" class="img-fluid rounded-start" alt="placeholder">
+      <img :src="participant.participantImageUrl" class="card-img-top" alt="placeholder" />
     </div>
     <div class="col-md-8">
       <div class="card-body">

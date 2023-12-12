@@ -46,7 +46,10 @@ export default {
 
     data(){
         return {
-            newParticipant: {contestId:this.$route.params.contestId },
+            newParticipant: {
+            contestId:this.$route.params.contestId,
+            participantImageUrl: '',
+            },
             contestId: this.$route.params.contestId
         }
     },
