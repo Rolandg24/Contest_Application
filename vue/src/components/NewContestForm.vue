@@ -92,20 +92,37 @@ export default {
 
         })
     },
-    openUploadWidget(event) {
+    openUploadWidget() {
       event.preventDefault();
-      const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'dmptbrbof', // Replace with your cloud name
-        uploadPreset: 'bo89ohnn' // Replace with your upload preset
-      }, (error, result) => {
-        if (!error && result && result.event === "success") {
-          console.log('Done! Here is the image info: ', result.info);
-          this.newContest.contestImageUrl = result.info.url; // Store the image URL
+      const widget = window.cloudinary.createUploadWidget(
+        {
+          cloud_name: "dmptbrbof", 
+          upload_preset: "bo89ohnn"
+        },
+        (error, result) => {
+          if (!error && result && result.event === "success") {
+            console.log("Done uploading ....". result.info);
+              //  document
+              // .getElementById("uploadedimage")
+              // .setAttribute("src", result.info.secure_url);
+          }
         }
-      });
-
-      myWidget.open();
+      ).open();
     },
+    // openUploadWidget(event) {
+    //   event.preventDefault();
+    //   const myWidget = cloudinary.createUploadWidget({
+    //     cloudName: 'dmptbrbof', // Replace with your cloud name
+    //     uploadPreset: 'bo89ohnn' // Replace with your upload preset
+    //   }, (error, result) => {
+    //     if (!error && result && result.event === "success") {
+    //       console.log('Done! Here is the image info: ', result.info);
+    //       this.newContest.contestImageUrl = result.info.url; // Store the image URL
+    //     }
+    //   });
+
+    //   myWidget.open();
+    // },
     submitForm() {
       if (this.newContest.contestId == 0) {
         ContestsService.createNewContest(this.newContest)

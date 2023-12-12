@@ -20,19 +20,29 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* position: fixed; */
+  width: 100vw;
 }
 html {
   background-image: url("./assets/Draft_HomePic.png");
 
 }
 
-#capstone-app {
+html, body, #capstone-app {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
 
+#capstone-app {
+  display: flex;
+  flex-direction: column;
 }
 
 body {
-background-color: whitesmoke;
-
+  background-color: whitesmoke;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
 }
 
 

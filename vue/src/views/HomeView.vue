@@ -8,8 +8,8 @@
     </figure>
     
   </div>
-  <router-view/>
-  <div class="footer"><p>You must be authenticated to see this</p></div>
+  <!-- <router-view/> -->
+  <!-- <div class="footer"><p>You must be authenticated to see this</p></div> -->
   <div class="home">  
   </div>
 </template>

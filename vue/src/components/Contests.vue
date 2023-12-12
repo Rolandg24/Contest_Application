@@ -4,8 +4,8 @@
 <div class="filter-container">
 <form class="d-flex" role="search">
   <div class="form-group">
-          <label class="filter-label" for="filter">Filter by:</label>
           <select v-model="selectedValue">
+            <option value="" disabled selected>Filter</option>
             <option class="option" v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
           </select>
         </div>
@@ -37,8 +37,6 @@
       </div>
     </div>  
   </div>
-  
-  <router-view/>
 </template>
 
 <script>
@@ -51,7 +49,6 @@ export default {
             contestFilter: '',
             selectedValue: '',
             options: [
-                { value: "", text: "" },
                 { value: "Name", text: "Name" },
                 { value: "Date", text: "Date" },
                 { value: "Location", text: "Location" },

@@ -2,8 +2,8 @@
 <!--SEARCH BAR-->
 <form class="d-flex" role="search">
   <div class="form-group">
-          <label for="salary">Filter by:</label>
           <select v-model="selectedValue">
+            <option value="" disabled selected>Filter</option>
             <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
           </select>
         </div>
@@ -50,7 +50,6 @@ export default {
             participantFilter: '',
             selectedValue: '',
             options: [
-                { value: "", text: "" },
                 { value: "Name", text: "Name" },
                 { value: "Description", text: "Description" },
                 { value: "Member Count", text: "Member Count" },
