@@ -11,17 +11,19 @@ public class Participant {
     private int memberCount;
     private double score;
     private int contestId;
+    private String participantImageUrl;
 
     //constructors
 
 
-    public Participant(int participantId, String participantName, String participantDescription, int numberCount, double score, int contestId) {
+    public Participant(int participantId, String participantName, String participantDescription, int numberCount, double score, int contestId, String participantImageUrl) {
         this.participantId = participantId;
         this.participantName = participantName;
         this.participantDescription = participantDescription;
         this.memberCount = numberCount;
         this.score = score;
         this.contestId = contestId;
+        this.participantImageUrl = participantImageUrl;
     }
     //default
     public Participant(){
@@ -75,5 +77,13 @@ public class Participant {
 
     public void setContestId(int contestId) {
         this.contestId = contestId;
+    }
+
+    public String getParticipantImageUrl() {
+        return participantImageUrl;
+    }
+
+    public void setParticipantImageUrl(String participantImageUrl) {
+        this.participantImageUrl = participantImageUrl;
     }
 }
