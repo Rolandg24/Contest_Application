@@ -8,6 +8,12 @@
       <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="newParticipant.participantName" />
     </div>
 
+ <div class="mb-3">
+    <button @click="defineWidget($event)">Upload Image</button>
+    <!-- Display the uploaded image -->
+    <img id = "uploadedimage" v-if="newParticipant.participantImageUrl" :src="newParticipant.participantImageUrl" alt="Uploaded Image" />
+  </div>
+
     <!-- Description Field -->
     <div class="mb-3">
       <label for="inputDescription" class="form-label">Description</label>
@@ -55,7 +61,8 @@ export default {
                 contestId: '',
             },
             contestId: this.$route.params.contestId,
-            participantId: this.$route.params.participantId
+            participantId: this.$route.params.participantId,
+            myWidget: {}
         }
     },
     methods: {
