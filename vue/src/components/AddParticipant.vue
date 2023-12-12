@@ -52,9 +52,11 @@ export default {
 
     data(){
         return {
-            newParticipant: {contestId:this.$route.params.contestId },
-            contestId: this.$route.params.contestId,
-            myWidget: {},
+            newParticipant: {
+            contestId:this.$route.params.contestId,
+            participantImageUrl: '',
+            },
+            contestId: this.$route.params.contestId
         }
     },
     methods: {
