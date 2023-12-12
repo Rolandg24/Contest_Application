@@ -13,7 +13,7 @@ VALUES
 INSERT INTO contests (contest_name, contest_description, contest_date_time, contest_location, category_id, image_url) 
 VALUES 
 ('Columbus Area Band Contest', 'The Columbus Area Band Contest is an exhilarating music competition celebrating the vibrant and diverse local band scene in Columbus, Ohio. This event brings together a wide array of musical talents, from emerging garage bands to more established groups, showcasing a variety of genres including rock, jazz, indie, and more. Participants will compete for the title of "Columbus''s Best Band," along with other exciting prizes. Each band will have a set time to perform their best pieces in front of an enthusiastic audience and a panel of esteemed judges from the music industry. In addition to the musical performances, the event will feature local food trucks, merchandise stalls, and interactive booths, making it a perfect outing for music lovers of all ages.',
- '2024-04-10', 'Columbus, OH', 1, null);
+ '2024-04-10', 'Columbus, OH', 1, 'https://res.cloudinary.com/dmptbrbof/image/upload/v1702395991/contests_app/gtfgiyvbmn4l3nr8aklb.png');
 
 INSERT INTO participants (participant_name, participant_description, member_count, score, contest_id, image_url) 
 VALUES 

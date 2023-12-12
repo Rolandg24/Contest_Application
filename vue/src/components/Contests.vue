@@ -21,7 +21,8 @@
     
     <div class="card" style="width: 25rem" v-for="contest in filteredContests"
       v-bind:key="contest.contestId">
-      <img src="../assets/1st_Draft_Logo.png" class="card-img-top" alt="placeholder" />
+      <img :src="contest.contestImageUrl" class="card-img-top" alt="placeholder" />
+
       <div class="card-body">
         <h3 class="card-title text-center" >{{ contest.contestName }}</h3>
         <h5 class="card-text text-center">Category: {{ contest.contestCategoryName }}</h5>
