@@ -1,5 +1,6 @@
 <template>
 <!--SEARCH BAR-->
+<h1>Participants</h1>
 <form class="d-flex" role="search">
   <div class="form-group">
           <select v-model="selectedValue">
@@ -27,8 +28,8 @@
         <p class="card-text"><small class="text-body-secondary">Member Count: {{ participant.memberCount }}</small></p>
       </div>
       <div class="edit-delete-btns">
-        <router-link class="btn btn-primary" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}">Edit</router-link>
-        <button class="btn btn-primary" @click="deleteParticipant(participant.participantId)">Delete</button>
+        <router-link class="btn btn-primary" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}" v-if="$store.state.token !== ''">Edit</router-link>
+        <button class="btn btn-primary" @click="deleteParticipant(participant.participantId)" v-if="$store.state.token !== ''">Delete</button>
       </div>
     </div>
   </div>
@@ -119,7 +120,7 @@ export default {
 
 .ParticipantContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     margin: 4px;
     border-radius: 5px;
     padding: 10px;

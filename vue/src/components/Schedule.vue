@@ -1,10 +1,11 @@
 <template>
-    <div class="schedule-header">
+    <!-- <div class="schedule-header">
         <h1>{{ this.contest.contestName }}</h1>
         <h4>{{ this.contest.dateAndTime }}</h4>
         <router-link :to="{ name: 'EditSchedule', params: { contestId: contest.contestId } }" class="btn btn-primary"  v-if="$store.state.token !== ''">Edit</router-link>
-    </div>
+    </div> -->
     <div class="schedule-container">
+        <h1>Schedule</h1>
         <table>
             <thead>
                 <tr>
@@ -69,7 +70,7 @@ export default {
 
 .schedule-container {
     text-align: center;
-    margin: auto;
+    /* margin: auto; */
     width: 20%;
     font-family: 'Lato', sans-serif;
 }

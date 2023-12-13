@@ -1,5 +1,5 @@
 <template>
-  <HeaderView/>
+  <HeaderView class="header-view"/>
   <!-- <breadcrumb-view /> -->
   <div id="capstone-app">
     <router-view />
@@ -20,29 +20,35 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* position: fixed; */
+  position: fixed;
   width: 100vw;
 }
 html {
   background-image: url("./assets/Draft_HomePic.png");
-
 }
 
-html, body, #capstone-app {
+/* html, body, #capstone-app {
   height: 100vh;
+  width: 100vw;
   margin: 0;
   padding: 0;
-}
+} */
 
-#capstone-app {
+/* #capstone-app {
   display: flex;
   flex-direction: column;
-}
+} */
 
-body {
+/* body {
   background-color: whitesmoke;
   margin: 0;
   font-family: 'Lato', sans-serif;
+} */
+
+.header-view {
+  position: sticky;
+  top: 0;
+  z-index: 100; /* Adjust the z-index as needed */
 }
 
 

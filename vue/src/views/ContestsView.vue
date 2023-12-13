@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+        <participants />
         <contests-vue />
     </div>
 </template>
@@ -8,7 +8,9 @@
 <script>
 
 import ContestsVue from '../components/Contests.vue';
+
 import ContestsService from '../services/ContestsService';
+import ParticipantsViewVue from './ParticipantsView.vue';
 export default {
     components: {
         ContestsVue
@@ -25,4 +27,6 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+
+</style>

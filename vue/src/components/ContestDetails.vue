@@ -29,9 +29,9 @@
         <div class="link-container">
             <div class="container text-center">
                 <div class="btns">
-                    <button class="btn btn-primary" v-on:click=" $router.push({ name: 'OverallScores', params: { contestId: contest.contestId }})">Scores</button> 
+                    <!-- <button class="btn btn-primary" v-on:click=" $router.push({ name: 'OverallScores', params: { contestId: contest.contestId }})">Scores</button> 
                     <button class="btn btn-primary" v-on:click=" $router.push({ name: 'participants', params: { contestId: contest.contestId }})">Participants</button>  
-                    <button class="btn btn-primary" v-on:click=" $router.push({ name: 'Schedule', params: { contestId: contest.contestId }})">Schedule</button>
+                    <button class="btn btn-primary" v-on:click=" $router.push({ name: 'Schedule', params: { contestId: contest.contestId }})">Schedule</button> -->
                     <button class="btn btn-primary" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" v-if="$store.state.token !== ''">Add Schedule</button>
                 </div>
             </div>
@@ -88,7 +88,7 @@ export default {
     font-family: Arial, sans-serif;
     max-width: 30%;
     max-height: 10%;
-    margin: auto;
+    /* margin: auto; */
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 

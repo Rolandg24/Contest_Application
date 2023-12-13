@@ -1,6 +1,6 @@
 <template>
-  <div class="header">
-  </div>
+  <!-- <div class="header">
+  </div> -->
   <div class="main-body">
     
     <figure id="logo-container" class="figure">
@@ -10,8 +10,8 @@
   </div>
   <!-- <router-view/> -->
   <!-- <div class="footer"><p>You must be authenticated to see this</p></div> -->
-  <div class="home">  
-  </div>
+  <!-- <div class="home">  
+  </div> -->
 </template>
 
 <script>
@@ -20,6 +20,11 @@ export default {
 </script>
 
 <style scoped>
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Add this line to hide overflow and prevent scrolling */
+}
 
 #logo {
   width: 50%
