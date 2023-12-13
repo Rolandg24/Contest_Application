@@ -38,25 +38,15 @@ export default {
 } */
 
 .contest-description-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-areas:
-    'participants contest-details contest-details schedule';
-  gap: 20px;
+  display: flex;
+  justify-content: space-between; 
 }
 
-.participants-container {
-  grid-area: participants;
+.contest-details-container{
+  margin: 0%;
 }
 
-.contest-details-container {
-  grid-area: contest-details;
-  grid-column: span 2; /* Adjust to span two columns */
-}
 
-.schedule-container {
-  grid-area: schedule;
-}
 
 @media screen and (max-width: 768px) {
   .contest-description-container {
