@@ -25,7 +25,7 @@ public class JdbcParticipantDao implements ParticipantDao {
     public List<Participant> fetchListOfParticipantByContestId(int contestId) {
         List<Participant> participants = new ArrayList<>();
 
-        String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id, image_url " +
+        String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id, image_url, votes " +
                      "FROM participants " +
                      "WHERE contest_id = ?;";
         try {
@@ -61,12 +61,12 @@ public class JdbcParticipantDao implements ParticipantDao {
     @Override
     public Participant updateParticipant(Participant participant) {
         String sql = "UPDATE participants " +
-                "SET participant_name = ?, participant_description = ?, member_count = ?, score = ?, contest_id = ?, image_url = ?"  +
+                "SET participant_name = ?, participant_description = ?, member_count = ?, score = ?, contest_id = ?, image_url = ?, votes = ?"  +
                 "WHERE participant_id = ?";
         int rowCount = 0;
         try {
             rowCount = jdbcTemplate.update(sql, participant.getParticipantName(), participant.getParticipantDescription(),
-                    participant.getMemberCount(), participant.getScore(), participant.getContestId(), participant.getParticipantImageUrl(), participant.getParticipantId());
+                    participant.getMemberCount(), participant.getScore(), participant.getContestId(), participant.getParticipantImageUrl(),  participant.getVotes(), participant.getParticipantId());
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to database or Server", e);
         }
@@ -98,7 +98,7 @@ public class JdbcParticipantDao implements ParticipantDao {
     public Participant fetchParticipantById(int participantId) {
         Participant participant = null;
 
-        String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id, image_url " +
+        String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id, image_url, votes " +
                 "FROM participants " +
                 "WHERE participant_id = ?";
         try {
@@ -110,6 +110,42 @@ public class JdbcParticipantDao implements ParticipantDao {
             throw new DaoException("Unable to connect to database or Server", e);
         }
         return participant;
+    }
+
+    @Override
+    public int fetchVotesByParticipantId(int participantId) {
+        int currentVotes = 0;
+        String sql = "SELECT votes FROM participants WHERE participant_id = ?";
+
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, participantId);
+            if (result.next()) {
+                currentVotes=result.getInt("votes");
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database or Server", e);
+        }
+        return currentVotes;
+
+    }
+
+    @Override
+    public int increaseVotesByOneByParticipantId(int participantId) {
+        int newVoteNumber = 0;
+        String sql = "UPDATE participants " +
+                "SET votes = ((select votes from participants where participant_id = ?) + 1) " +
+                "WHERE participant_id = ? " +
+                "RETURNING votes";
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, participantId, participantId);
+            if (result.next()) {
+               newVoteNumber =result.getInt("votes");
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database or Server", e);
+        }
+        return newVoteNumber;
+
     }
 
     @Override
@@ -153,6 +189,9 @@ public class JdbcParticipantDao implements ParticipantDao {
     }
 
 
+
+
+
     private Participant mapRowToParticipant(SqlRowSet rowSet) {
         Participant participant = new Participant();
         participant.setParticipantId(rowSet.getInt("participant_id"));
@@ -162,6 +201,7 @@ public class JdbcParticipantDao implements ParticipantDao {
         participant.setScore(rowSet.getDouble("score"));
         participant.setContestId(rowSet.getInt("contest_id"));
         participant.setParticipantImageUrl((rowSet.getString("image_url")));
+        participant.setVotes((rowSet.getInt("votes")));
         return participant;
     }
 

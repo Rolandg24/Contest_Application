@@ -119,4 +119,17 @@ public class ContestController {
     public Participant fetchParticipantById(@PathVariable int id) {
         return participantDao.fetchParticipantById(id);
     }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/participants/{id}/votes", method = RequestMethod.GET)
+    public int fetchVotesByParticipant(@PathVariable int id) {
+        return participantDao.fetchVotesByParticipantId(id);
+    }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/participants/{id}/votes/add", method = RequestMethod.PUT)
+    public int addOneVoteByParticipantId(@PathVariable int id) {
+        return participantDao.increaseVotesByOneByParticipantId(id);
+    }
+
 }

@@ -40,6 +40,7 @@ CREATE TABLE participants (
 	score DECIMAL,
 	contest_id INTEGER,
 	image_url varchar (1000),
+	votes INTEGER,
 	CONSTRAINT PK_participant_id PRIMARY KEY (participant_id),
 	FOREIGN KEY (contest_id) REFERENCES contests(contest_id)
 );
