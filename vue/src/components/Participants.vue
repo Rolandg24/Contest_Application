@@ -11,8 +11,8 @@
         </div>
         <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="participantFilter">
 </form>
-<div class="btn btn-primary" id="add-participant"  v-if="$store.state.token !== ''">
-  <router-link :to="{ name: 'AddParticipant' }" class="btn btn-primary" >Add Participant</router-link>
+<div class="btn btn-outline-primary" id="add-participant"  v-if="$store.state.token !== ''">
+  <router-link :to="{ name: 'AddParticipant' }">Add Participant</router-link>
 
 </div>
 <!-- IMAGE ON SIDE TEMPLATE --> 
@@ -29,8 +29,8 @@
             <p class="card-text"><small class="text-body-secondary">Member Count: {{ participant.memberCount }}</small></p>
           </div>
           <div class="edit-delete-btns">
-            <router-link class="btn btn-primary" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}" v-if="$store.state.token !== ''">Edit</router-link>
-            <button class="btn btn-primary" @click="deleteParticipant(participant.participantId)" v-if="$store.state.token !== ''">Delete</button>
+            <router-link class="btn btn-outline-warning" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}" v-if="$store.state.token !== ''">Edit</router-link>
+            <button class="btn btn-outline-danger"  @click="deleteParticipant(participant.participantId)" v-if="$store.state.token !== ''">Delete</button>
           </div>
         </div>
       </div>
