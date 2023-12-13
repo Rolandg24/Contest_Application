@@ -2,7 +2,6 @@
     <div id="nav">
         
         <div class="left-links">
-                <!-- Check if this is pushing the Home and COntest buttons over , router-link specifically -->
             <router-link  v-bind:to="{ name: 'home' }">
                 <img class="logo" src="../assets/Gatherly_Logo.png" alt="Logo">
             </router-link>

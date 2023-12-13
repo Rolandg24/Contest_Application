@@ -1,4 +1,5 @@
 <template>
+<div class="new-contest-container">
   <h1 class="new-contest-title">Add New Contest</h1>
   <form class="new-contest-form" v-on:submit.prevent="submitForm">
 
@@ -56,6 +57,7 @@
       <button type="reset" class="btn btn-outline-danger">Reset</button>
     </div>
   </form>
+</div>
 </template>
 
 <script>
@@ -144,6 +146,11 @@ export default {
 </script>
 
 <style scoped>
+.new-contest-container {
+  margin-top: 6%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
 .new-contest-form {
   font-family: Lato, sans-serif;
   margin-left: 15%;
