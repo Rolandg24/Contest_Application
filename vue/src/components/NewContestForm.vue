@@ -17,7 +17,7 @@
     </div> -->
     
     <div class="mb-3">
-    <button @click="defineWidget($event)">Upload Image</button>
+    <button class="btn btn-outline-secondary" @click="defineWidget($event)">Upload Image</button>
     <!-- Display the uploaded image -->
     <img id = "uploadedimage" v-if="newContest.contestImageUrl" :src="newContest.contestImageUrl" alt="Uploaded Image" />
   </div>
@@ -52,8 +52,8 @@
 
     <!-- Submit Button -->
     <div class="btn-container">
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <button type="reset" class="btn btn-primary">Reset</button>
+      <button type="submit" class="btn btn-outline-primary">Submit</button>
+      <button type="reset" class="btn btn-outline-danger">Reset</button>
     </div>
   </form>
 </template>
@@ -164,4 +164,6 @@ export default {
 .btn-container button {
   margin-right: 8px;
 }
+
+
 </style>

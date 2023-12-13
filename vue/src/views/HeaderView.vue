@@ -1,5 +1,5 @@
 <template>
-<HeaderVue />
+  <HeaderVue />
 </template>
 
 

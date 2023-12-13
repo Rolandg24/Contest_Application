@@ -73,10 +73,21 @@ export default {
     text-decoration: none; 
     background-color: #009EE2;
     display: flex;
+    position: fixed;
+    width: 100vw;
     align-items: center;
     padding: 10px;
+    padding-left: 20px;
+    padding-right: 40px;
+    
 }
-
+/* #nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+} */
 .nav-link:hover {
     color: gold;
     text-decoration: none;

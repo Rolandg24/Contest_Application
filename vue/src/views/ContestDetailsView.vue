@@ -1,5 +1,5 @@
 <template>
-    <div class="contest-description-container">
+    <div class="contest-description-container container my-6 mx-4" >
         <div class="participants-container">
             <participants />
         </div>

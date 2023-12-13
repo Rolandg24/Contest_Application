@@ -1,9 +1,10 @@
 <template>
+<div class="participants-container container">
 <!--SEARCH BAR-->
 <h1>Participants</h1>
 <form class="d-flex" role="search">
   <div class="form-group">
-          <select v-model="selectedValue">
+          <select class="form-select" v-model="selectedValue">
             <option value="" disabled selected>Filter</option>
             <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
           </select>
@@ -15,25 +16,26 @@
 
 </div>
 <!-- IMAGE ON SIDE TEMPLATE --> 
-<div class="ParticipantContainer">
-<div id="participant-card" class="card mb-3" style="max-width: 540px;"  v-for="participant in filteredParticipants" v-bind:key="participant.participantId">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img :src="participant.participantImageUrl" class="card-img-top" alt="placeholder" />
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h4 class="card-title">{{ participant.participantName }}</h4>
-        <p class="card-text">Description: {{ participant.participantDescription }}</p>
-        <p class="card-text"><small class="text-body-secondary">Member Count: {{ participant.memberCount }}</small></p>
-      </div>
-      <div class="edit-delete-btns">
-        <router-link class="btn btn-primary" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}" v-if="$store.state.token !== ''">Edit</router-link>
-        <button class="btn btn-primary" @click="deleteParticipant(participant.participantId)" v-if="$store.state.token !== ''">Delete</button>
+  <div class="ParticipantContainer">
+    <div id="participant-card" class="card mb-3" style="max-width: 540px;"  v-for="participant in filteredParticipants" v-bind:key="participant.participantId">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img :src="participant.participantImageUrl" class="participant-img card-img-top" alt="placeholder" />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h4 class="card-title">{{ participant.participantName }}</h4>
+            <p class="card-text">Description: {{ participant.participantDescription }}</p>
+            <p class="card-text"><small class="text-body-secondary">Member Count: {{ participant.memberCount }}</small></p>
+          </div>
+          <div class="edit-delete-btns">
+            <router-link class="btn btn-primary" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}" v-if="$store.state.token !== ''">Edit</router-link>
+            <button class="btn btn-primary" @click="deleteParticipant(participant.participantId)" v-if="$store.state.token !== ''">Delete</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 </template>
@@ -112,6 +114,9 @@ export default {
 </script>
 
 <style scoped>
+.participants-container {
+  margin-top: 12%;
+}
 .ParticipantInfo {
     justify-content: center;
     align-items: center;
@@ -140,16 +145,16 @@ export default {
 .form-group {
   padding-left: 15px;
 }
-.card{
+/* .card{
 
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-}
+} */
 
-.card:hover {
-    background-color: #a9e2fa; /* Color change on hover */
-    transform: scale(1.03); /* Slightly enlarges the row */
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1); /* Adds a subtle shadow for depth */
-}
+/* .card:hover {
+    background-color: #a9e2fa;
+    transform: scale(1.03); 
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1); 
+} */
 
 #add-participant {
   display: block;
@@ -164,6 +169,11 @@ export default {
   display: flex;
   gap: 5px;
   margin-bottom: 5px;;
+}
+
+.participant-img{
+  height: 100%;
+  object-fit: cover;
 }
 
 </style>

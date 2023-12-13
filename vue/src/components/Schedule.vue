@@ -73,6 +73,7 @@ export default {
     /* margin: auto; */
     width: 20%;
     font-family: 'Lato', sans-serif;
+    margin-top: 7%;
 }
 
 table {

@@ -1,43 +1,67 @@
 <template>
-
-  <!--SEARCH BAR-->
-<div class="filter-container">
-<form class="d-flex" role="search">
-  <div class="form-group">
-          <select v-model="selectedValue">
-            <option value="" disabled selected>Filter</option>
-            <option class="option" v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
-          </select>
-        </div>
-        <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="contestFilter">
-</form>
-</div>
-<div class="btn btn-primary" id="add-contest"  v-if="$store.state.token !== ''">
-  <router-link :to="{ name: 'NewContest' }" class="btn btn-primary">Add Contest</router-link>
-
-</div>
-
-  <div class="ContestInfo">
-    
-    <div class="card" style="width: 25rem" v-for="contest in filteredContests"
-      v-bind:key="contest.contestId">
-      <img :src="contest.contestImageUrl" class="card-img-top" alt="placeholder" />
-
-      <div class="card-body">
-        <h3 class="card-title text-center" >{{ contest.contestName }}</h3>
-        <h5 class="card-text text-center">Category: {{ contest.contestCategoryName }}</h5>
-        <p class="card-text">Location: {{ contest.contestLocation }} <br>Date: {{ contest.dateAndTime }}</p>
-        <div class="btn-container">
-            <a href="#" v-on:click="sendToDetailsView(contest.contestId)" class="btn btn-outline-primary">Details</a>
-        </div>
-            <div class="link-container">
-                <a href="#" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" class="btn btn-outline-success" v-if="$store.state.token !== ''">Add Schedule</a>
-                <router-link :to="{ name: 'UpdateContest', params: { contestId: contest.contestId } }" class="btn btn-outline-warning" v-if="$store.state.token !== ''">Edit Contest</router-link>
-                <a href="#" v-on:click="deleteContest(contest.contestId)" class="btn btn-outline-danger" v-if="$store.state.token !== ''">Delete</a>
-            </div>
-      </div>
-    </div>  
+<div class="contests-container">
+    <!--SEARCH BAR-->
+  <div class="filter-container">
+  <form class="d-flex" role="search">
+    <div class="form-group">
+            <select class="form-select" v-model="selectedValue">
+              <option value="" disabled selected>Filter</option>
+              <option class="option" v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
+            </select>
+          </div>
+          <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="contestFilter">
+  </form>
   </div>
+  <div class="btn btn-outline-primary" id="add-contest"  v-if="$store.state.token !== ''">
+    <router-link :to="{ name: 'NewContest' }" >Add Contest</router-link>
+
+  </div>
+
+    <!-- <div class="ContestInfo">
+      
+      <div class="card" style="width: 25rem" v-for="contest in filteredContests"
+        v-bind:key="contest.contestId">
+        <img :src="contest.contestImageUrl" class="card-img-top" alt="placeholder" />
+
+        <div class="card-body">
+          <h3 class="card-title text-center" >{{ contest.contestName }}</h3>
+          <h5 class="card-text text-center">Category: {{ contest.contestCategoryName }}</h5>
+          <p class="card-text">Location: {{ contest.contestLocation }} <br>Date: {{ contest.dateAndTime }}</p>
+          <div class="btn-container">
+              <a href="#" v-on:click="sendToDetailsView(contest.contestId)" class="btn btn-outline-primary">Details</a>
+          </div>
+              <div class="link-container">
+                  <a href="#" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" class="btn btn-outline-success" v-if="$store.state.token !== ''">Add Schedule</a>
+                  <router-link :to="{ name: 'UpdateContest', params: { contestId: contest.contestId } }" class="btn btn-outline-warning" v-if="$store.state.token !== ''">Edit Contest</router-link>
+                  <a href="#" v-on:click="deleteContest(contest.contestId)" class="btn btn-outline-danger" v-if="$store.state.token !== ''">Delete</a>
+              </div>
+        </div>
+      </div>  
+    </div> -->
+
+    <div class="row">
+      <div v-for="contest in filteredContests" :key="contest.contestId" class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img :src="contest.contestImageUrl" class="card-img-top custom-image" alt="placeholder">
+          <div class="card-body">
+            <h3 class="card-title text-center">{{ contest.contestName }}</h3>
+            <h5 class="card-text text-center">Category: {{ contest.contestCategoryName }}</h5>
+            <p class="card-text">Location: {{ contest.contestLocation }} <br>Date: {{ contest.dateAndTime }}</p>
+            <div class="btn-container">
+              <a href="#" @click="sendToDetailsView(contest.contestId)" class="btn btn-outline-primary">Details</a>
+            </div>
+            <div class="link-container">
+              <!-- Add other buttons as needed -->
+              <a href="#" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" class="btn btn-outline-success" v-if="$store.state.token !== ''">Add Schedule</a>
+                  <router-link :to="{ name: 'UpdateContest', params: { contestId: contest.contestId } }" class="btn btn-outline-warning" v-if="$store.state.token !== ''">Edit Contest</router-link>
+                  <a href="#" v-on:click="deleteContest(contest.contestId)" class="btn btn-outline-danger" v-if="$store.state.token !== ''">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
 </template>
 
 <script>
@@ -123,6 +147,9 @@ export default {
 </script>
 
 <style>
+.contests-container {
+  margin-top: 100px;
+}
 .ContestInfo {
   font-family: Lato, sans-serif;
   display: grid;
@@ -163,6 +190,7 @@ export default {
   padding-top: 1%;
   margin-left: 20%;
   margin-right: 20%;
+  margin-bottom: 1%;
 }
 
 #add-contest {
@@ -184,5 +212,10 @@ body {
 
 .options {
   font-family: Lato, sans-serif;
+}
+
+.custom-image {
+  height: 200px; /* Set your desired height */
+  object-fit: cover; /* Ensure the image covers the specified height */
 }
 </style>

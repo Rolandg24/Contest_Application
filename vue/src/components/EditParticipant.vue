@@ -49,25 +49,13 @@
         />
       </div>
 
-      <!-- Score -->
-      <div class="mb-3">
-        <label for="inputScore" class="form-label">Score</label>
-        <input
-          type="number"
-          class="form-control"
-          id="inputLocation"
-          placeholder="Enter score"
-          v-model="newParticipant.score"
-        />
-      </div>
-
-      <!-- Submit Button -->
-      <div class="btn-container">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="reset" class="btn btn-primary">Reset</button>
-      </div>
-    </form>
-  </div>
+    <!-- Submit Button -->
+    <div class="btn-container">
+      <button type="submit" class="btn btn-outline-primary">Submit</button>
+      <button type="reset" class="btn btn-outline-danger">Reset</button>
+    </div>
+  </form>
+</div>
 </template>
 
 <script>

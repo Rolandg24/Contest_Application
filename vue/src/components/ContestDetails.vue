@@ -21,7 +21,7 @@
 
         <!-- Description Edit Section -->
         <div class="description">
-            <h4>{{ contest.contestDescription }}</h4>
+            <p>{{ contest.contestDescription }}</p>
         </div>
         <br>
         <br>
@@ -91,7 +91,7 @@ export default {
     /* margin: auto; */
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
+    margin-top: 10%
 }
 
 .header {
