@@ -32,4 +32,19 @@ export default {
     display: flex;
     flex-direction: column;
 }
+
+@media screen and (max-width: 768px) {
+  .contest-description-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .participants-container {
+    order: 2; /* Change the order to 2 to move it below ContestDetails */
+  }
+
+  .contest-details-container {
+    order: 1; /* Change the order to 1 to move it above Participants */
+  }
+}
 </style>

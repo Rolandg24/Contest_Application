@@ -1,5 +1,6 @@
 <template>
 <div class="contests-container">
+  <h1 class="title">Contests</h1>  
     <!--SEARCH BAR-->
   <div class="filter-container">
   <form class="d-flex" role="search">
@@ -147,8 +148,14 @@ export default {
 </script>
 
 <style>
+.title{
+  text-align: center;
+  font-family: Lato, sans-serif;
+}
 .contests-container {
   margin-top: 100px;
+  margin-right: 5%;
+  margin-left: 5%;
 }
 .ContestInfo {
   font-family: Lato, sans-serif;
@@ -188,9 +195,10 @@ export default {
 
 .filter-container {
   padding-top: 1%;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 10%;
+  margin-right: 10%;
   margin-bottom: 1%;
+  
 }
 
 #add-contest {
@@ -217,5 +225,19 @@ body {
 .custom-image {
   height: 200px; /* Set your desired height */
   object-fit: cover; /* Ensure the image covers the specified height */
+}
+
+@media screen and (max-width: 768px) {
+  .filter-container {
+  padding-top: 1%;
+  margin-bottom: 1%;
+}
+
+.contests-container {
+  margin-top: 50px;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
 }
 </style>

@@ -3,10 +3,10 @@
   </div> -->
   <div class="main-body">
     
-    <figure id="logo-container" class="figure">
-      <img id="logo" src="../assets/Gatherly_Logo.png" class="rounded mx-auto d-block" alt="...">
+    <!-- <figure id="logo-container" class="figure">
+      <img id="logo" src="../assets/Gatherly_Logo2-removebg-preview.png" class="rounded mx-auto d-block" alt="...">
     </figure>
-    
+     -->
   </div>
   <!-- <router-view/> -->
   <!-- <div class="footer"><p>You must be authenticated to see this</p></div> -->
@@ -27,7 +27,7 @@ body {
 }
 
 #logo {
-  width: 50%
+  width: 100%
 }
 
 .home {
