@@ -21,7 +21,7 @@
 
         <!-- Description Edit Section -->
         <div class="description">
-            <p>{{ contest.contestDescription }}</p>
+            <p class="full-width-text">{{ contest.contestDescription }}</p>
         </div>
         <br>
         <br>
@@ -84,14 +84,29 @@ export default {
 </script>
   
 <style>
-.contest-details {
+.full-width-text {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+/* .contest-details {
     font-family: Lato, sans-serif;
     max-width: 30%;
     max-height: 10%;
-    /* margin: auto; */
+  
     padding: 20px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+
     margin-top: 10%
+} */
+
+.contest-details {
+  font-family: Lato, sans-serif;
+  /* Remove max-height or use a fixed value if needed */
+  max-width: 30%;
+  /* margin: auto; */
+  padding: 20px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  margin-top: 10%;
 }
 
 .header {
