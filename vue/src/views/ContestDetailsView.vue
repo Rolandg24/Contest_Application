@@ -3,8 +3,12 @@
         <div class="participants-container">
             <participants />
         </div>
-        <ContestDetails/>
-        <schedule />
+        <div class="contest-details-container">
+            <ContestDetails/>
+        </div>
+        <div class="schedule-container">
+            <schedule />
+        </div>
     </div>
 </template>
 
@@ -22,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.contest-description-container{
+/* .contest-description-container{
     display: flex;
     align-items: flex-start;
     justify-content: space-around;
@@ -31,8 +35,28 @@ export default {
 .participants-container {
     display: flex;
     flex-direction: column;
+} */
+
+.contest-description-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas:
+    'participants contest-details contest-details schedule';
+  gap: 20px;
 }
 
+.participants-container {
+  grid-area: participants;
+}
+
+.contest-details-container {
+  grid-area: contest-details;
+  grid-column: span 2; /* Adjust to span two columns */
+}
+
+.schedule-container {
+  grid-area: schedule;
+}
 @media screen and (max-width: 768px) {
   .contest-description-container {
     display: flex;
