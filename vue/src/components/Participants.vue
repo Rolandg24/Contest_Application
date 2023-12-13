@@ -27,8 +27,8 @@
         <p class="card-text"><small class="text-body-secondary">Member Count: {{ participant.memberCount }}</small></p>
       </div>
       <div class="edit-delete-btns">
-        <router-link class="btn btn-primary" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}">Edit</router-link>
-        <button class="btn btn-primary" @click="deleteParticipant(participant.participantId)">Delete</button>
+        <router-link class="btn btn-outline-primary" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}">Edit</router-link>
+        <button class="btn btn-outline-danger" @click="deleteParticipant(participant.participantId)">Delete</button>
       </div>
     </div>
   </div>
