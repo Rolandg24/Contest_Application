@@ -28,12 +28,12 @@
         <h5 class="card-text text-center">Category: {{ contest.contestCategoryName }}</h5>
         <p class="card-text">Location: {{ contest.contestLocation }} <br>Date: {{ contest.dateAndTime }}</p>
         <div class="btn-container">
-            <a href="#" v-on:click="sendToDetailsView(contest.contestId)" class="btn btn-primary">Details</a>
+            <a href="#" v-on:click="sendToDetailsView(contest.contestId)" class="btn btn-outline-primary">Details</a>
         </div>
             <div class="link-container">
-                <a href="#" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" class="btn btn-primary" v-if="$store.state.token !== ''">Add Schedule</a>
-                <router-link :to="{ name: 'UpdateContest', params: { contestId: contest.contestId } }" class="btn btn-primary" v-if="$store.state.token !== ''">Edit Contest</router-link>
-                <a href="#" v-on:click="deleteContest(contest.contestId)" class="btn btn-primary" v-if="$store.state.token !== ''">Delete</a>
+                <a href="#" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" class="btn btn-outline-success" v-if="$store.state.token !== ''">Add Schedule</a>
+                <router-link :to="{ name: 'UpdateContest', params: { contestId: contest.contestId } }" class="btn btn-outline-warning" v-if="$store.state.token !== ''">Edit Contest</router-link>
+                <a href="#" v-on:click="deleteContest(contest.contestId)" class="btn btn-outline-danger" v-if="$store.state.token !== ''">Delete</a>
             </div>
       </div>
     </div>  
@@ -149,11 +149,14 @@ export default {
 .btn-container {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .link-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .filter-container {
