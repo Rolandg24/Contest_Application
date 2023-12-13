@@ -19,7 +19,7 @@
     <div class="left-links">
       <!-- Logo and Home/Contest links -->
       <!-- <router-link v-bind:to="{ name: 'home' }"> -->
-        <img class="logo" src="../assets/Gatherly_Logo.png" alt="Logo">
+        <img class="logo" src="../assets/Gatherly_Logo2_HomeBtn.png" alt="Logo">
       <!-- </router-link> -->
       <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
       <router-link class="nav-link" v-bind:to="{ name: 'contests' }">Contests</router-link>
