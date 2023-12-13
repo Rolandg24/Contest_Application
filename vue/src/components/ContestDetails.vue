@@ -179,7 +179,8 @@ button {
     /* margin: auto; */
     padding: 15px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    margin-top: 20%
+    margin-top: 20%;
+    margin-left: 5%;
     }
 }
 </style>

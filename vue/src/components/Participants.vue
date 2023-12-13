@@ -176,5 +176,11 @@ export default {
   object-fit: cover;
 }
 
+@media screen and (max-width: 768px) {
+  .participants-container{
+    margin: auto;
+  }
+}
+
 </style>
 

@@ -114,4 +114,18 @@ tr:hover {
     font-family: 'Lato', sans-serif;
     /* Adds a subtle shadow for depth */
 }
+
+@media screen and (max-width: 768px) {
+    .schedule-container {
+    
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* Adjust the width as needed */
+  }
+
+  table {
+    margin-top: 1%;
+    margin-bottom: 15%;
+  }
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="contest-description-container container my-6 mx-4" >
+    <div class="contest-description-container" >
         <div class="participants-container">
             <participants />
         </div>
@@ -57,18 +57,25 @@ export default {
 .schedule-container {
   grid-area: schedule;
 }
+
 @media screen and (max-width: 768px) {
   .contest-description-container {
     display: flex;
     flex-direction: column;
+    margin: auto;
   }
 
   .participants-container {
-    order: 2; /* Change the order to 2 to move it below ContestDetails */
+    order: 2; /* Move it below ContestDetails */
   }
 
   .contest-details-container {
-    order: 1; /* Change the order to 1 to move it above Participants */
+    order: 1; /* Move it above Participants */
+    grid-column: span; /* Reset grid-column to span full width */
+  }
+
+  .schedule-container {
+    order: 3; /* Maintain the order for the schedule container */
   }
 }
 </style>
