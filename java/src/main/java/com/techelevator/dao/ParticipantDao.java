@@ -20,4 +20,8 @@ public interface ParticipantDao {
     public int deleteParticipant(int participantId);
 
     public Participant fetchParticipantById(int participantId);
+
+    public int fetchVotesByParticipantId(int participantId);
+
+    public int increaseVotesByOneByParticipantId(int participantId);
 }

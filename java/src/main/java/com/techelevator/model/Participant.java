@@ -12,7 +12,7 @@ public class Participant {
     private double score;
     private int contestId;
     private String participantImageUrl;
-
+    private int votes;
     //constructors
 
 
@@ -24,6 +24,7 @@ public class Participant {
         this.score = score;
         this.contestId = contestId;
         this.participantImageUrl = participantImageUrl;
+        this.votes = 0;
     }
     //default
     public Participant(){
@@ -85,5 +86,13 @@ public class Participant {
 
     public void setParticipantImageUrl(String participantImageUrl) {
         this.participantImageUrl = participantImageUrl;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 }
