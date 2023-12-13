@@ -218,4 +218,14 @@ body {
   height: 200px; /* Set your desired height */
   object-fit: cover; /* Ensure the image covers the specified height */
 }
+
+@media screen and (max-width: 768px) {
+    .left-links {
+    font-size: 1.1em;
+    }
+
+    .right-links { 
+     font-size: 1.1em; 
+}
+}
 </style>

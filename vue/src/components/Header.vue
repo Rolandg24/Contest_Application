@@ -1,5 +1,5 @@
 <template>
-    <div id="nav">
+    <!-- <div id="nav">
         
         <div class="left-links">
             <router-link  v-bind:to="{ name: 'home' }">
@@ -12,10 +12,24 @@
             <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token === ''">Login</router-link>
             <router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="$store.state.token !== ''">Logout</router-link>
         </div>
-    </div>
+    </div> -->
 
     <!-- <breadcrumbs-vue :routes="breadcrumbs"  /> -->
-
+    <div id="nav">
+    <div class="left-links">
+      <!-- Logo and Home/Contest links -->
+      <!-- <router-link v-bind:to="{ name: 'home' }"> -->
+        <img class="logo" src="../assets/Gatherly_Logo.png" alt="Logo">
+      <!-- </router-link> -->
+      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+      <router-link class="nav-link" v-bind:to="{ name: 'contests' }">Contests</router-link>
+    </div>
+    <div class="right-links">
+      <!-- Login/Logout link -->
+      <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token === ''">Login</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="$store.state.token !== ''">Logout</router-link>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -116,6 +130,16 @@ export default {
 .logo {
     max-width: 20%;
     border-radius: 7px;
-    margin-right: .5%;
+    margin-right: 4%;
+}
+
+@media screen and (max-width: 768px) {
+    .left-links {
+    font-size: .75em;
+    }
+
+    .right-links { 
+     font-size: .75em; 
+}
 }
 </style>
