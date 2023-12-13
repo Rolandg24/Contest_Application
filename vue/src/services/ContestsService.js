@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const http = axios.create({
-    baseURL: "http://localhost:9000"
+    baseURL: "https://contests-25a30e592cfc.herokuapp.com"
 })
 
 export default{
@@ -10,7 +10,7 @@ export default{
      * @returns a list of contests
      */
     fetchContests(){
-        return axios.get('/contests');
+        return http.get('/contests');
     },
 
     /**

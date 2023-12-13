@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+const http = axios.create({
+    baseURL: "https://contests-25a30e592cfc.herokuapp.com"
+})
+
 export default{
     /**
      * This function takes in a participant and returns a participant.
@@ -8,7 +12,7 @@ export default{
      * @returns the participant that was added
      */
     addParticipant(participant, contestId){
-        return axios.post(`/contests/${contestId}/participants/add`, participant);
+        return http.post(`/contests/${contestId}/participants/add`, participant);
     },
 
     /**
@@ -19,7 +23,7 @@ export default{
      * @returns participant
      */
     fetchParticipantById(participantId, contestId) {
-        return axios.get(`/participants/${participantId}`);
+        return http.get(`/participants/${participantId}`);
     },
 
     /**
@@ -30,11 +34,11 @@ export default{
      * @returns nothing
      */
     deleteParticipantById(participantId) {
-        return axios.delete(`/participants/${participantId}`);
+        return http.delete(`/participants/${participantId}`);
     },
 
     updateParticipantById(participant) {
-        return axios.put(`/participants/${participant.participantId}`, participant);
+        return http.put(`/participants/${participant.participantId}`, participant);
     }
 
 }
