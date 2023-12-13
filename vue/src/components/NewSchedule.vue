@@ -1,6 +1,6 @@
 <template>
     <div class="add-schedule-container">
-        <h1 class="add-schedule-title">Add Schedule</h1>
+        <h4 class="add-schedule-title">Add Schedule</h4>
         <form class="participant-info" v-on:submit.prevent="submitSchedule">
                 <div class="participant-container" v-for="(participant) in participants"
                     v-bind:key="participant.participantId">
@@ -117,7 +117,13 @@
         max-width: 125px;
     }
     
-    .add-schedule-container{
-        font-family: Lato, sans-serif;
-    }
+    .add-schedule-container {
+    font-family: Lato, sans-serif;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
     </style>

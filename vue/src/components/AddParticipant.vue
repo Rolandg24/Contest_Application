@@ -1,5 +1,5 @@
 <template>
- <div>
+ <div class="add-participant-container">
  <h1 class="new-contest-title">Add New Participant</h1>
   <form class="new-contest-form" v-on:submit.prevent="addParticipant">
     <!-- Name Field -->
@@ -9,10 +9,11 @@
     </div>
 
     <div class="mb-3">
-    <button class="btn btn-outline-secondary" @click="defineWidget($event)">Upload Image</button>
+    
     <!-- Display the uploaded image -->
     <img id = "uploadedimage" v-if="newParticipant.participantImageUrl" :src="newParticipant.participantImageUrl" alt="Uploaded Image" />
   </div>
+  <button class="btn btn-outline-secondary" @click="defineWidget($event)">Upload Image</button>
 
     <!-- Description Field -->
     <div class="mb-3">
@@ -96,5 +97,19 @@ export default {
 </script>
 
 <style>
+h1 {
+  text-align: center;
+  font-family: Lato, sans-serif;
+}
+.add-participant-container {
+  margin-top: 5%;
+  margin-left: 30%;
+  margin-right: 30%;
+}
 
+.btn-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1%;
+}
 </style>

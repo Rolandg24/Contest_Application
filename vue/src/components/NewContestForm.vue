@@ -16,12 +16,14 @@
       <label class="form-label" for="customFile">Contest Photo</label>
       <input type="file" class="form-control" id="customFile" />
     </div> -->
-    
+  
     <div class="mb-3">
-    <button class="btn btn-outline-secondary" @click="defineWidget($event)">Upload Image</button>
     <!-- Display the uploaded image -->
-    <img id = "uploadedimage" v-if="newContest.contestImageUrl" :src="newContest.contestImageUrl" alt="Uploaded Image" />
+    <img id="uploadedimage" v-if="newContest.contestImageUrl" :src="newContest.contestImageUrl" alt="Uploaded Image" />
+    
   </div>
+  <button class="btn btn-outline-secondary mt-2" @click="defineWidget($event)">Upload Image</button>
+
     
     <!-- Description Field -->
     <div class="mb-3">
@@ -146,7 +148,7 @@ export default {
 </script>
 
 <style scoped>
-.new-contest-container {
+/* .new-contest-container {
   margin-top: 6%;
   margin-left: 20%;
   margin-right: 20%;
@@ -170,6 +172,43 @@ export default {
 
 .btn-container button {
   margin-right: 8px;
+} */
+
+.new-contest-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6%;
+}
+
+.new-contest-form {
+  font-family: Lato, sans-serif;
+  margin: 0 15%;
+  width: 70%; /* Adjust width as needed */
+}
+
+.new-contest-title {
+  font-family: Lato, sans-serif;
+  text-align: center;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.btn-container button {
+  margin-right: 8px;
+}
+
+/* Adjust image size as needed */
+#uploadedimage {
+  width: 100%; /* Make the image fill its container */
+  max-width: 400px; /* Set a maximum width to avoid excessive scaling on larger screens */
+  height: auto; /* Maintain aspect ratio */
+  margin-top: 20px;
 }
 
 
