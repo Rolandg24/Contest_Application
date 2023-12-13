@@ -1,14 +1,10 @@
 <template>
     <div class="contest-description-container" >
-        <div class="participants-container">
-            <participants />
-        </div>
-        <div class="contest-details-container">
-            <ContestDetails/>
-        </div>
-        <div class="schedule-container">
-            <schedule />
-        </div>
+        
+            <participants class="participants" />
+            <ContestDetails class="contest-details"/>
+            <schedule class="schedule"/>
+        
     </div>
 </template>
 
@@ -52,20 +48,19 @@ export default {
   .contest-description-container {
     display: flex;
     flex-direction: column;
-    margin: auto;
+    justify-content: space-between;
+    align-content: flex-start;
   }
 
-  .participants-container {
-    order: 2; /* Move it below ContestDetails */
+  .participants {
+  
   }
 
-  .contest-details-container {
-    order: 1; /* Move it above Participants */
-    grid-column: span; /* Reset grid-column to span full width */
+  .contest-details {
   }
 
-  .schedule-container {
-    order: 3; /* Maintain the order for the schedule container */
+  .schedule {
+    
   }
 }
 </style>

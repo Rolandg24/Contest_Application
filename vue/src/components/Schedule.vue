@@ -73,13 +73,14 @@ export default {
     /* margin: auto; */
     width: 20%;
     font-family: 'Lato', sans-serif;
-    margin-top: 7%;
+    margin-top: 11%;
+    margin-right: 4%;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 20%;
 }
 
 th, td {

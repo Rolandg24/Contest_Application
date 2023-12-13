@@ -116,6 +116,7 @@ export default {
 <style scoped>
 .participants-container {
   margin-top: 12%;
+  width: 30%;
 }
 .ParticipantInfo {
     justify-content: center;
@@ -126,15 +127,14 @@ export default {
 .ParticipantContainer {
     display: grid;
     grid-template-columns: 1fr;
-    margin: 4px;
     border-radius: 5px;
     padding: 10px;
     background-color:white;
 }
 
 #participant-card {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 0%;
+    margin-right: 0%;
 }
 .d-flex{
   padding-top: 15px;
@@ -159,8 +159,6 @@ export default {
 #add-participant {
   display: block;
   width: 250px;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 10px;
   margin-bottom: 10px;
 }

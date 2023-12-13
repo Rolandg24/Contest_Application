@@ -102,11 +102,13 @@ export default {
 .contest-details {
   font-family: Lato, sans-serif;
   /* Remove max-height or use a fixed value if needed */
-  max-width: 30%;
+  width: 40%;
   /* margin: auto; */
   padding: 20px;
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
   margin-top: 10%;
+  margin-right: 1%;
+  margin-left: 1%;
 }
 
 .header {
