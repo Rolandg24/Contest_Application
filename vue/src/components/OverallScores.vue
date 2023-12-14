@@ -1,7 +1,7 @@
 <template>
   <div class="OverallScores">
     <div class="OverallScores-container">
-      <h1>{{ contest.contestName }} Overall Scores</h1>
+      <h1 class="title">{{ contest.contestName }} Overall Scores</h1>
       <a href="#" class="btn btn-primary" v-on:click="$router.push({ name: 'AddScore',params: { contestId: contest.contestId }})" v-if="$store.state.token !== ''">Add Score</a>
       <!-- <table>
         <thead>
@@ -68,6 +68,7 @@ export default {
 .OverallScores {
   font-family: Lato, sans-serif;
   text-align: center;
+  margin-top: 5%;
 }
 .OverallScores-container {
   text-align: center;
@@ -119,5 +120,19 @@ tr:hover {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     font-family: 'Lato', sans-serif;
     /* Adds a subtle shadow for depth */
+}
+
+@media screen and (max-width: 768px) {
+  .OverallScores {
+    font-family: Lato, sans-serif;
+    text-align: center;
+    margin-top: 15%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+
+  .title {
+    font-size: 14px; /* Specify the unit (e.g., pixels) */
+  }
 }
 </style>

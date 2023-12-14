@@ -21,6 +21,7 @@
             </tbody>
         </table>
         <button class="btn btn-outline-primary mt-2" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" v-if="$store.state.token !== ''">Add Schedule</button>
+        <button class="btn btn-outline-primary mt-2" v-on:click=" $router.push({ name: 'OverallScores', params: { contestId: contest.contestId }})">Scores</button>
     </div>
 </template>
 
