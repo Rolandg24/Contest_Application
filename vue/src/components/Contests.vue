@@ -14,7 +14,7 @@
   </form>
   </div>
   <div class="btn btn-outline-primary" id="add-contest"  v-if="$store.state.token !== ''">
-    <router-link :to="{ name: 'NewContest' }" >Add Contest</router-link>
+    <router-link class="add-router" :to="{ name: 'NewContest' }" >Add Contest</router-link>
 
   </div>
 
@@ -249,6 +249,14 @@ body {
 .custom-image {
   height: 200px; /* Set your desired height */
   object-fit: cover; /* Ensure the image covers the specified height */
+}
+
+.add-router {
+  text-decoration: none;
+}
+
+.add-router:hover {
+    color: white;
 }
 
 .popup {
