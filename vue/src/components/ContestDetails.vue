@@ -25,17 +25,6 @@
         </div>
         <br>
         <br>
-        <!-- Navigation Links Section -->
-        <div class="link-container">
-            <div class="container text-center">
-                <div class="btns">
-                    <!-- <button class="btn btn-primary" v-on:click=" $router.push({ name: 'OverallScores', params: { contestId: contest.contestId }})">Scores</button> 
-                    <button class="btn btn-primary" v-on:click=" $router.push({ name: 'participants', params: { contestId: contest.contestId }})">Participants</button>  
-                    <button class="btn btn-primary" v-on:click=" $router.push({ name: 'Schedule', params: { contestId: contest.contestId }})">Schedule</button> -->
-                    <button class="btn btn-outline-primary" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" v-if="$store.state.token !== ''">Add Schedule</button>
-                </div>
-            </div>
-        </div>
         <!-- Optionally, other sections as needed -->
     </div>
 </template>
@@ -89,15 +78,6 @@ export default {
   width: 100%;
   box-sizing: border-box;
 }
-/* .contest-details {
-    font-family: Lato, sans-serif;
-    max-width: 30%;
-    max-height: 10%;
-  
-    padding: 20px;
-
-    margin-top: 10%
-} */
 
 .contest-details {
   font-family: Lato, sans-serif;
@@ -106,7 +86,7 @@ export default {
   /* margin: auto; */
   padding: 20px;
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-  margin-top: 10%;
+  margin-top: 5%;
   margin-right: 1%;
   margin-left: 1%;
 }
@@ -175,6 +155,7 @@ button {
 
 @media screen and (max-width: 768px) {
     .contest-details {
+    margin-top: 10%;   
     margin-left: auto;
     margin-right: auto;
     width: 80%; /* Adjust the width as needed */

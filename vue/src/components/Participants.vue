@@ -29,11 +29,15 @@
             <p class="card-text"><small class="text-body-secondary">Member Count: {{ participant.memberCount }}</small></p>
           </div>
           <div class="edit-delete-btns">
+            <div class="container1">
             <router-link class="btn btn-outline-warning" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}" v-if="$store.state.token !== ''">Edit</router-link>
             <button class="btn btn-outline-danger"  @click="deleteParticipant(participant.participantId)" v-if="$store.state.token !== ''">Delete</button>
+          </div>
+            <div class="container2">
             <img class="thumbs-up-blue" src="../assets/thumbs-up-blue.png" alt="thumbs-up-blue" @click="vote(participant.participantId)" v-if="!isImageClicked"/>
             <img class="thumbs-up-gray" src="../assets/thumbs-up-gray.png" alt="thumbs-up-blue" v-if="isImageClicked"/>
-            <p>{{ participant.votes }}</p>
+            <p class="votes">{{ participant.votes }}</p>
+          </div>
           </div>
         </div>
       </div>
@@ -99,25 +103,30 @@ export default {
     }
     },
     computed: {
-      filteredParticipants() {
-      const participants = this.participants;
-      return participants.filter((participant) => {
-        if (this.selectedValue == 'Name') {
-        return this.participantFilter == ""
+  filteredParticipants() {
+    const participants = this.participants;
+    const filterText = this.participantFilter.toLowerCase(); // Convert input to lowercase
+
+    return participants.filter((participant) => {
+      if (this.selectedValue == 'Name') {
+        return filterText == ""
           ? true
-          : participant.participantName.includes(this.participantFilter);
-        }  else if(this.selectedValue == 'Member Count') {
-        return this.participantFilter == ""
+          : participant.participantName.toLowerCase().includes(filterText);
+      } else if (this.selectedValue == 'Member Count') {
+        return filterText == "" 
           ? true
-          : participant.memberCount === parseInt(this.participantFilter, 10);
-        } else if (this.selectedValue == 'Description') {
-        return this.participantFilter == ""
+          : participant.memberCount === parseInt(filterText, 10);
+      } else if (this.selectedValue == 'Description') {
+        return filterText == ""
           ? true
-          : participant.participantDescription.includes(this.participantFilter);
-        } else { return true}
-      });
-    },
-    },
+          : participant.participantDescription.toLowerCase().includes(filterText);
+      } else {
+        return true;
+      }
+    });
+  },
+},
+
     created(){
         // ContestsService.fetchParticipantsById(this.contestId).then((response) => {
         //     this.participants=response.data;
@@ -132,7 +141,7 @@ export default {
 
 <style scoped>
 .participants-container {
-  margin-top: 12%;
+  margin-top: 6%;
   width: 30%;
 }
 .ParticipantInfo {
@@ -189,13 +198,34 @@ export default {
 
 .edit-delete-btns{
   display: flex;
-  gap: 5px;
-  margin-bottom: 5px;;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-left: 10px;
 }
 
 .participant-img{
   height: 100%;
   object-fit: cover;
+}
+.container1 {
+  display: flex;
+  gap: 10px;
+  margin-right: 10px;
+  align-items: center;
+  font-family: Lato, sans-serif;
+}
+.container2 {
+  display: flex;
+  gap: 10px;
+  margin-right: 10px;
+  align-items: center;
+  font-family: Lato, sans-serif;
+}
+
+.votes {
+  margin: 0px;
+  
 }
 
 @media screen and (max-width: 768px) {

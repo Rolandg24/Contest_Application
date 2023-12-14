@@ -20,6 +20,7 @@
                 </tr>
             </tbody>
         </table>
+        <button class="btn btn-outline-primary mt-2" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" v-if="$store.state.token !== ''">Add Schedule</button>
     </div>
 </template>
 
@@ -73,7 +74,7 @@ export default {
     /* margin: auto; */
     width: 20%;
     font-family: 'Lato', sans-serif;
-    margin-top: 11%;
+    margin-top: 6%;
     margin-right: 4%;
 }
 

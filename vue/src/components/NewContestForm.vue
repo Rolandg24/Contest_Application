@@ -1,12 +1,12 @@
 <template>
 <div class="new-contest-container">
-  <h1 class="new-contest-title">Add New Contest</h1>
+  <h1 class="new-contest-title">Contest Information</h1>
   <form class="new-contest-form" v-on:submit.prevent="submitForm">
 
     <!-- Name Field -->
     <div class="mb-3">
       <label for="inputName" class="form-label">Name</label>
-      <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="newContest.contestName" />
+      <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="newContest.contestName" required/>
     </div>
 
     <!-- <div class="mb-3">
@@ -19,7 +19,7 @@
   
     <div class="mb-3">
     <!-- Display the uploaded image -->
-    <img id="uploadedimage" v-if="newContest.contestImageUrl" :src="newContest.contestImageUrl" alt="Uploaded Image" />
+    <img id="uploadedimage" v-if="newContest.contestImageUrl" :src="newContest.contestImageUrl" alt="Uploaded Image" required/>
     
   </div>
   <button class="btn btn-outline-secondary mt-2" @click="defineWidget($event)">Upload Image</button>
@@ -29,29 +29,28 @@
     <div class="mb-3">
       <label for="inputDescription" class="form-label">Description</label>
       <textarea class="form-control" id="inputDescription" rows="3" placeholder="Enter description"
-        v-model="newContest.contestDescription"></textarea>
+        v-model="newContest.contestDescription" required></textarea>
     </div>
 
     <!-- Date and Time Field -->
     <div class="mb-3">
       <label for="inputLocation" class="form-label">Date</label>
       <input type="date" class="form-control" id="inputLocation" placeholder="Enter date"
-        v-model="newContest.dateAndTime" />
+        v-model="newContest.dateAndTime" required/>
     </div>
 
     <!-- Location Field -->
     <div class="mb-3">
       <label for="inputLocation" class="form-label">Location</label>
       <input type="text" class="form-control" id="inputLocation" placeholder="Enter location"
-        v-model="newContest.contestLocation" />
+        v-model="newContest.contestLocation" required/>
     </div>
 
     <!-- Category Field -->
-    <div class="mb-3">
-      <label for="inputLocation" class="form-label">Category</label>
-      <input type="text" class="form-control" id="inputLocation" placeholder="Enter Category"
-        v-model="newContest.contestCategoryName" />
-    </div>
+    <select class="form-select" v-model="newContest.contestCategoryName">
+        <option value="" disabled selected>Category</option>
+        <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value" required>{{option.value}}</option>
+      </select>
 
     <!-- Submit Button -->
     <div class="btn-container">
@@ -80,8 +79,15 @@ export default {
         contestImageUrl: ''
       },
       myWidget: {},
-
-    };
+      selectedValue: '',
+      options: [
+          { value: "Band", text: "Band" },
+          { value: "Sports", text: "Sports" },
+          { value: "Academic", text: "Academic" },
+          { value: "Coding", text: "Coding" },
+          { value: "Startup Pitches", text: "Startup Pitches" },
+        ],
+};
   },
   methods: {
     getContest(id) {
@@ -179,7 +185,9 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 6%;
+  margin-top: 5%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 .new-contest-form {
