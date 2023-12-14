@@ -20,9 +20,11 @@
                 </tr>
             </tbody>
         </table>
+        <div class="btns">
         <button class="btn btn-outline-primary mt-2" v-on:click=" $router.push({ name: 'AddSchedule', params: { contestId: contest.contestId }})" v-if="$store.state.token !== ''">Add Schedule</button>
         <button class="btn btn-outline-primary mt-2" v-on:click=" $router.push({ name: 'OverallScores', params: { contestId: contest.contestId }})">Scores</button>
     </div>
+   </div>
 </template>
 
 <script>
@@ -65,6 +67,9 @@ export default {
 </script>
 
 <style scoped>
+.btns {
+    gap: 5px;
+}
 .schedule-header {
     text-align: center;
     font-family: 'Lato', sans-serif;

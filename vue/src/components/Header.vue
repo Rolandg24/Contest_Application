@@ -94,6 +94,10 @@ export default {
     padding-right: 40px;
     
 }
+
+.right-links .nav-link {
+  color:  #009EE2;
+}
 /* #nav {
   display: flex;
   justify-content: center;
