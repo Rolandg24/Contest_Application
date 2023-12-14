@@ -22,17 +22,6 @@ export default {
 </script>
 
 <style scoped>
-/* .contest-description-container{
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-around;
-}
-
-.participants-container {
-    display: flex;
-    flex-direction: column;
-} */
-
 .contest-description-container {
   display: flex;
   justify-content: space-between; 

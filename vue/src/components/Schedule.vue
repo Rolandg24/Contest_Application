@@ -74,7 +74,7 @@ export default {
     /* margin: auto; */
     width: 20%;
     font-family: 'Lato', sans-serif;
-    margin-top: 11%;
+    margin-top: 6%;
     margin-right: 4%;
 }
 

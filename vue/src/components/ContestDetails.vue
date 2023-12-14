@@ -78,15 +78,6 @@ export default {
   width: 100%;
   box-sizing: border-box;
 }
-/* .contest-details {
-    font-family: Lato, sans-serif;
-    max-width: 30%;
-    max-height: 10%;
-  
-    padding: 20px;
-
-    margin-top: 10%
-} */
 
 .contest-details {
   font-family: Lato, sans-serif;
@@ -95,7 +86,7 @@ export default {
   /* margin: auto; */
   padding: 20px;
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-  margin-top: 10%;
+  margin-top: 5%;
   margin-right: 1%;
   margin-left: 1%;
 }
@@ -164,6 +155,7 @@ button {
 
 @media screen and (max-width: 768px) {
     .contest-details {
+    margin-top: 10%;   
     margin-left: auto;
     margin-right: auto;
     width: 80%; /* Adjust the width as needed */
