@@ -35,7 +35,7 @@ CREATE TABLE contests (
 CREATE TABLE participants (
 	participant_id SERIAL,
 	participant_name varchar(100) NOT NULL,
-	participant_description varchar(300),
+	participant_description varchar(3000),
 	member_count INTEGER,
 	score DECIMAL,
 	contest_id INTEGER,
