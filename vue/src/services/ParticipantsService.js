@@ -39,6 +39,14 @@ export default{
 
     updateParticipantById(participant) {
         return http.put(`/participants/${participant.participantId}`, participant);
+    },
+
+    fetchParticipantVotes(participantId) {
+        return http.get(`/participants/${participantId}/votes`);
+    },
+
+    addVote(participantId) {
+        return http.get(`/participants/${participantId}/votes/add`);
     }
 
 }

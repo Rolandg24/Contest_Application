@@ -31,6 +31,9 @@
           <div class="edit-delete-btns">
             <router-link class="btn btn-outline-warning" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}" v-if="$store.state.token !== ''">Edit</router-link>
             <button class="btn btn-outline-danger"  @click="deleteParticipant(participant.participantId)" v-if="$store.state.token !== ''">Delete</button>
+            <img class="thumbs-up-blue" src="../assets/thumbs-up-blue.png" alt="thumbs-up-blue" />
+            <i  @click="vote(participant.participantId)" class="bi bi-hand-thumbs-up"></i>
+            <p>{{ participant.participantVotes }}</p>
           </div>
         </div>
       </div>
@@ -80,6 +83,10 @@ export default {
         this.participants = response.data;
       });
     },
+    vote(id) {
+      ParticipantsService.addVote(id);
+      this.fetchParticipants();
+    }
     },
     computed: {
       filteredParticipants() {
