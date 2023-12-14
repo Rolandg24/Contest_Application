@@ -174,10 +174,17 @@ export default {
 } */
 
 #add-participant {
-  display: block;
-  width: 250px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+    display: block;
+    justify-content: center; /* Centers the button horizontally */
+    align-items: center; /* Centers the button vertically (if needed) */
+    width: 50%; /* Ensures the container takes the full width of its parent */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 110px;
+    margin-right: 30px;
+}
+#add-participant:hover a {
+    color: white;
 }
 
 .edit-delete-btns{
