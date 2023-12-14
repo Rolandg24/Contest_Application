@@ -1,6 +1,6 @@
 <template>
 <div class="new-contest-container">
-  <h1 class="new-contest-title">Add New Contest</h1>
+  <h1 class="new-contest-title">Contest Information</h1>
   <form class="new-contest-form" v-on:submit.prevent="submitForm">
 
     <!-- Name Field -->
@@ -185,7 +185,9 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 6%;
+  margin-top: 5%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 .new-contest-form {
