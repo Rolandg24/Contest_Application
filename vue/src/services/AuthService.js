@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const http = axios.create({
-  baseURL: "https://contests-25a30e592cfc.herokuapp.com"
+  baseURL: "http://localhost:9000"
 })
 
 export default {

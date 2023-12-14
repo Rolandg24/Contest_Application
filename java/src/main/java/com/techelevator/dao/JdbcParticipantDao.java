@@ -100,7 +100,7 @@ public class JdbcParticipantDao implements ParticipantDao {
 
         String sql = "SELECT participant_id, participant_name, participant_description, member_count, score, contest_id, image_url, votes " +
                 "FROM participants " +
-                "WHERE participant_id = ?";
+                "WHERE participant_id = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, participantId);
             if (results.next()) {

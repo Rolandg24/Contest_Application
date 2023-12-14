@@ -30,7 +30,7 @@ export function createStore(currentToken, currentUser) {
         state.contests = data;
       },
        SET_PARTICIPANTS(state, data) {
-        state.participants = data;
+        state.participants = state.participants = data.sort((a, b) => a.participantId - b.participantId);
       }
     },
   });

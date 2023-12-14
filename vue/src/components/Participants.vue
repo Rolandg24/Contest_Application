@@ -31,9 +31,9 @@
           <div class="edit-delete-btns">
             <router-link class="btn btn-outline-warning" :to= "{ name: 'EditParticipant', params: {participantId: participant.participantId }}" v-if="$store.state.token !== ''">Edit</router-link>
             <button class="btn btn-outline-danger"  @click="deleteParticipant(participant.participantId)" v-if="$store.state.token !== ''">Delete</button>
-            <img class="thumbs-up-blue" src="../assets/thumbs-up-blue.png" alt="thumbs-up-blue" />
-            <i  @click="vote(participant.participantId)" class="bi bi-hand-thumbs-up"></i>
-            <p>{{ participant.participantVotes }}</p>
+            <img class="thumbs-up-blue" src="../assets/thumbs-up-blue.png" alt="thumbs-up-blue" @click="vote(participant.participantId)" v-if="!isImageClicked"/>
+            <img class="thumbs-up-gray" src="../assets/thumbs-up-gray.png" alt="thumbs-up-blue" v-if="isImageClicked"/>
+            <p>{{ participant.votes }}</p>
           </div>
         </div>
       </div>
@@ -61,6 +61,7 @@ export default {
                 { value: "Member Count", text: "Member Count" },
               ],
             selectedParticipantId: '',
+            isImageClicked: false,
         }
     },
     methods: {
@@ -84,8 +85,17 @@ export default {
       });
     },
     vote(id) {
-      ParticipantsService.addVote(id);
-      this.fetchParticipants();
+      console.log('click');
+      this.isImageClicked = true;
+      console.log(this.isImageClicked);
+      ParticipantsService.addVote(id).then(response => {
+        console.log("got response" + response)
+        this.fetchParticipants();
+      })
+      .catch((error) =>
+            ErrorService.handleErrorResponse(error, "voting")
+          );
+      
     }
     },
     computed: {
