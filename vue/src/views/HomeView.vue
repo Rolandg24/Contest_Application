@@ -5,7 +5,7 @@
     
     <router-link :to="{ name: 'contests' }">
       <figure id="logo-container" class="figure">
-        <img id="logo" src="../assets/Gatherly_Logo.png" class="rounded mx-auto d-block" alt="...">
+        <img id="logo" src="../assets/Gatherly_Logo2_HomeBtn.png" class="rounded mx-auto d-block" alt="...">
       </figure>
     </router-link>
     
