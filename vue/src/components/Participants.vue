@@ -103,25 +103,30 @@ export default {
     }
     },
     computed: {
-      filteredParticipants() {
-      const participants = this.participants;
-      return participants.filter((participant) => {
-        if (this.selectedValue == 'Name') {
-        return this.participantFilter == ""
+  filteredParticipants() {
+    const participants = this.participants;
+    const filterText = this.participantFilter.toLowerCase(); // Convert input to lowercase
+
+    return participants.filter((participant) => {
+      if (this.selectedValue == 'Name') {
+        return filterText == ""
           ? true
-          : participant.participantName.includes(this.participantFilter);
-        }  else if(this.selectedValue == 'Member Count') {
-        return this.participantFilter == ""
+          : participant.participantName.toLowerCase().includes(filterText);
+      } else if (this.selectedValue == 'Member Count') {
+        return filterText == "" 
           ? true
-          : participant.memberCount === parseInt(this.participantFilter, 10);
-        } else if (this.selectedValue == 'Description') {
-        return this.participantFilter == ""
+          : participant.memberCount === parseInt(filterText, 10);
+      } else if (this.selectedValue == 'Description') {
+        return filterText == ""
           ? true
-          : participant.participantDescription.includes(this.participantFilter);
-        } else { return true}
-      });
-    },
-    },
+          : participant.participantDescription.toLowerCase().includes(filterText);
+      } else {
+        return true;
+      }
+    });
+  },
+},
+
     created(){
         // ContestsService.fetchParticipantsById(this.contestId).then((response) => {
         //     this.participants=response.data;
