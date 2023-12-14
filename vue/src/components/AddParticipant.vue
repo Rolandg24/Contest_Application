@@ -5,13 +5,13 @@
     <!-- Name Field -->
     <div class="mb-3">
       <label for="inputName" class="form-label">Name</label>
-      <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="newParticipant.participantName" />
+      <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="newParticipant.participantName" required/>
     </div>
 
     <div class="mb-3">
     
     <!-- Display the uploaded image -->
-    <img id = "uploadedimage" v-if="newParticipant.participantImageUrl" :src="newParticipant.participantImageUrl" alt="Uploaded Image" />
+    <img id = "uploadedimage" v-if="newParticipant.participantImageUrl" :src="newParticipant.participantImageUrl" alt="Uploaded Image" required/>
   </div>
   <button class="btn btn-outline-secondary" @click="defineWidget($event)">Upload Image</button>
 
@@ -19,21 +19,21 @@
     <div class="mb-3">
       <label for="inputDescription" class="form-label">Description</label>
       <textarea class="form-control" id="inputDescription" rows="3" placeholder="Enter description"
-        v-model="newParticipant.participantDescription"></textarea>
+        v-model="newParticipant.participantDescription" required></textarea>
     </div>
 
     <!-- Member Count -->
     <div class="mb-3">
       <label for="inputMemberCount" class="form-label">Member Count</label>
       <input type="number" class="form-control" id="inputLocation" placeholder="Enter member count"
-        v-model="newParticipant.memberCount" />
+        v-model="newParticipant.memberCount" required/>
     </div>
 
     <!-- Score -->
     <div class="mb-3">
       <label for="inputScore" class="form-label">Score</label>
       <input type="number" class="form-control" id="inputLocation" placeholder="Enter score"
-        v-model="newParticipant.score"/>
+        v-model="newParticipant.score" required/>
     </div>
 
     <!-- Submit Button -->

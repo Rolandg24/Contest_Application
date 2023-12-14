@@ -11,6 +11,7 @@
           id="inputName"
           placeholder="Enter name"
           v-model="newParticipant.participantName"
+          required
         />
       </div>
 
@@ -22,6 +23,7 @@
           :src="newParticipant.participantImageUrl"
           alt="Uploaded Image"
           class="uploaded-image"
+          required
         />
         
       </div>
@@ -36,6 +38,7 @@
           rows="3"
           placeholder="Enter description"
           v-model="newParticipant.participantDescription"
+          required
         ></textarea>
       </div>
 
@@ -48,6 +51,7 @@
           id="inputLocation"
           placeholder="Enter member count"
           v-model="newParticipant.memberCount"
+          required
         />
       </div>
 
