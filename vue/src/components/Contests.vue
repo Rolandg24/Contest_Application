@@ -61,8 +61,17 @@
         </div>
       </div>
     </div>
-
 </div>
+
+
+ <!-- Pop-up confirmation message -->
+ <div v-if="showConfirmation">
+      <div class="popup">
+        <p>Are you sure you want to leave? Reloading the page may cause unwanted errors.</p>
+        <button @click="cancelLeave">Stay</button>
+        <button @click="confirmLeave">Leave</button>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -80,6 +89,7 @@ export default {
                 { value: "Location", text: "Location" },
                 { value: "Category", text: "Category" },
               ],
+        showConfirmation: false,
         }
     },
     computed: {
@@ -139,7 +149,24 @@ export default {
     },
     sendToDetailsView(contestId) {
       this.$router.push({name: 'ContestDetails', params: {contestId}})
-    }
+    },
+    confirmLeave() {
+      // Handle leaving the page (e.g., navigate to another route or perform cleanup)
+      // ...
+      this.showConfirmation = false;
+    },
+    cancelLeave() {
+      this.showConfirmation = false;
+    },
+    showConfirmationMessage(event) {
+      event.returnValue = "Are you sure you want to leave?";
+    },
+  },
+  mounted() {
+    window.addEventListener("beforeunload", this.showConfirmationMessage);
+  },
+  beforeUnmount() {
+    window.removeEventListener("beforeunload", this.showConfirmationMessage);
   },
 };
 </script>
@@ -224,6 +251,15 @@ body {
   object-fit: cover; /* Ensure the image covers the specified height */
 }
 
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
 @media screen and (max-width: 768px) {
   .filter-container {
   padding-top: 1%;
