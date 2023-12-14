@@ -12,7 +12,7 @@
         <input class="form-control me-2" type="search" placeholder="Filter" aria-label="Search" v-model="participantFilter">
 </form>
 <div class="btn btn-outline-primary" id="add-participant"  v-if="$store.state.token !== ''">
-  <router-link :to="{ name: 'AddParticipant' }">Add Participant</router-link>
+  <router-link class="add-link" :to="{ name: 'AddParticipant' }">Add Participant</router-link>
 
 </div>
 <!-- IMAGE ON SIDE TEMPLATE --> 
@@ -192,6 +192,11 @@ export default {
     margin-left: 110px;
     margin-right: 30px;
 }
+
+.add-link {
+  text-decoration: none;
+}
+
 #add-participant:hover a {
     color: white;
 }

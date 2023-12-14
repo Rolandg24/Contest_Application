@@ -8,7 +8,7 @@
                     <input type="time" class="form-control" id="inputLocation" v-model="participant.timeSlot" />
                 </div>
                 <div class="d-flex justify-content-center pt-2 pb-2">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-outline-primary mt-2">Submit</button>
                 </div>
         </form>
     </div>
