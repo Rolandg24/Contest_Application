@@ -175,14 +175,13 @@ button {
 
 @media screen and (max-width: 768px) {
     .contest-details {
-    font-family: Lato, sans-serif;
-    max-width: 90%;
-    max-height: 10%;
-    /* margin: auto; */
-    padding: 15px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    margin-top: 20%;
-    margin-left: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* Adjust the width as needed */
+    }
+
+    .link-container {
+        flex-direction: column;
     }
 }
 </style>

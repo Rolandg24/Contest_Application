@@ -193,7 +193,9 @@ export default {
 
 @media screen and (max-width: 768px) {
   .participants-container{
-    margin: auto;
+    /* margin-left: 10%;
+    margin-right: auto; */
+    width: 100%; /* Adjust the width as needed */
   }
 }
 

@@ -53,14 +53,15 @@ export default {
   }
 
   .participants {
-  
+    order: 2;
   }
 
   .contest-details {
+    order: 1;
   }
 
   .schedule {
-    
+    order: 3;
   }
 }
 </style>
