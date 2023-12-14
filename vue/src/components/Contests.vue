@@ -234,6 +234,10 @@ export default {
   margin-bottom: 10px;
 }
 
+#add-contest:hover a {
+  color: white;
+}
+
 body {
   background-color: white;
 }
@@ -253,10 +257,6 @@ body {
 
 .add-router {
   text-decoration: none;
-}
-
-.add-router:hover {
-    color: white;
 }
 
 .popup {
