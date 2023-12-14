@@ -83,29 +83,26 @@ export default {
         }
     },
     computed: {
-      filteredContests() {
-        const contests = this.contests;
-        return contests.filter((contest) => {
-          if (this.selectedValue == 'Name') {
-          return this.contestFilter == ""
-            ? true
-            : contest.contestName.includes(this.contestFilter);
-          }  else if(this.selectedValue == 'Date') {
-          return this.contestFilter == ""
-            ? true
-            : contest.dateAndTime.includes(this.contestFilter);
-          } else if (this.selectedValue == 'Location') {
-          return this.contestFilter == ""
-            ? true
-            : contest.contestLocation.includes(this.contestFilter);
-          } else if (this.selectedValue == 'Category') {
-          return this.contestFilter == ""
-            ? true
-            : contest.contestCategoryName.includes(this.contestFilter);
-          }else { return true}
-        });
-      },
-    },
+  filteredContests() {
+    const contests = this.contests;
+    const filterText = this.contestFilter.toLowerCase();
+
+    return contests.filter((contest) => {
+      if (this.selectedValue == 'Name') {
+        return filterText == "" ? true : contest.contestName.toLowerCase().includes(filterText);
+      } else if (this.selectedValue == 'Date') {
+        return filterText == "" ? true : contest.dateAndTime.toLowerCase().includes(filterText);
+      } else if (this.selectedValue == 'Location') {
+        return filterText == "" ? true : contest.contestLocation.toLowerCase().includes(filterText);
+      } else if (this.selectedValue == 'Category') {
+        return filterText == "" ? true : contest.contestCategoryName.toLowerCase().includes(filterText);
+      } else {
+        return true;
+      }
+    });
+  },
+},
+
   created() {
     this.fetchContests();
   },
