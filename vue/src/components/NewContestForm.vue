@@ -47,11 +47,10 @@
     </div>
 
     <!-- Category Field -->
-    <div class="mb-3">
-      <label for="inputLocation" class="form-label">Category</label>
-      <input type="text" class="form-control" id="inputLocation" placeholder="Enter Category"
-        v-model="newContest.contestCategoryName" />
-    </div>
+    <select class="form-select" v-model="newContest.contestCategoryName">
+        <option value="" disabled selected>Category</option>
+        <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">{{option.value}}</option>
+      </select>
 
     <!-- Submit Button -->
     <div class="btn-container">
@@ -80,8 +79,15 @@ export default {
         contestImageUrl: ''
       },
       myWidget: {},
-
-    };
+      selectedValue: '',
+      options: [
+          { value: "Band", text: "Band" },
+          { value: "Sports", text: "Sports" },
+          { value: "Academic", text: "Academic" },
+          { value: "Coding", text: "Coding" },
+          { value: "Startup Pitches", text: "Startup Pitches" },
+        ],
+};
   },
   methods: {
     getContest(id) {
